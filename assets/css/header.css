@@ -1,0 +1,87 @@
+/* 全体のリセット */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1%;
+  background: url("../img/p0522_l 6.png");
+  color: #fff;
+}
+
+.header a {
+  text-decoration: none;
+  font-family: "Sawarabi Mincho", serif;
+  color: black;
+  font-size: 23px;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  writing-mode: horizontal-tb
+}
+
+.nav a {
+  font-size: 85%;
+  padding: 1%;
+  gap: 7%;  
+  align-items: center;
+  display: inline-block;
+  text-align: center;
+  letter-spacing: 0.2em;
+}
+
+/* 1つ目：レストランベルンドルフ */
+.nav a:nth-child(1)::after {
+  content: "\Aベルンドルフ";
+  white-space: pre;
+}
+
+/* 3つ目：ホテルベルンドルフ */
+.nav a:nth-child(3)::after {
+  content: "\Aベルンドルフ";
+  white-space: pre;
+}
+
+.nav a:nth-child(4),
+.nav a:nth-child(5) {
+  display: inline;       /* inlineに戻すと改行されない */
+  white-space: nowrap;   /* 絶対に折り返さない */
+}
+/* 
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 25px;
+  cursor: pointer;
+}
+
+/* 各行（丸＋バー）を横並びに */
+/* .line {
+  display: flex;
+  align-items: center;
+  gap: 4%; /* 丸とバーの間隔 */
+
+/* 小さい丸 */
+/* .dot {
+  width: 6px;
+  height: 6px;
+  background-color: #000000;
+  border-radius: 50%;
+}
+
+/* 三本線 */
+/* .bar {
+  display: block;
+  width: 25px;
+  height: 4px;
+  background-color: #000000;
+  border-radius: 2px;
+} */
