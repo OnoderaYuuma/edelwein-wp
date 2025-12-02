@@ -192,27 +192,27 @@ body {
 /* 下側に淡い色の帯 */
 .news-card-footer {
     height: 16px;
-    background: #dff7fa;  /* 画像の例に似た淡い水色 */
+    background: #dff7fa; 
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
 
 /* カードごとに色変更 */
-.card1 .news-card-footer {
-    background: #dff7fa; /* 水色 */
+/* .card1 .news-card-footer {
+    background: #dff7fa;
 }
 
 .card2 .news-card-footer {
-    background: #ffcae3; /* オレンジ系 */
+    background: #ffcae3; 
 }
 
 .card3 .news-card-footer {
-    background: #fffdb4; /* 紫系 */
+    background: #fffdb4;
 }
 
 .card4 .news-card-footer {
-    background: #fffdb4; /* 緑系 */
-}
+    background: #fffdb4; 
+} */
 
 body {
   font-family: "Sawarabi Mincho", serif;

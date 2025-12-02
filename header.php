@@ -17,10 +17,10 @@
     <header class="header">
         <h1><a href="<?php echo esc_url(home_url('/')); ?>"><?php bloginfo('name'); ?></a></h1>
         <nav class="nav">
-            <a href="<?php echo esc_url(home_url('/restaurant')); ?>">レストラン</a>
-            <a href="<?php echo esc_url(home_url('/glass')); ?>">ガラス体験工房<wbr>森のくに</a>
-            <a href="<?php echo esc_url(home_url('/hotel')); ?>">ホテル</a>
-            <a href="<?php echo esc_url(home_url('/news')); ?>">お知らせ</a>
-            <a href="<?php echo esc_url(home_url('/contact')); ?>">お問い合わせ</a>
+            <a href="<?php echo esc_url(home_url('/restaurantPage')); ?>">レストラン</a>
+            <a href="<?php echo esc_url(home_url('/glassPage')); ?>">ガラス体験工房<wbr>森のくに</a>
+            <a href="<?php echo esc_url(home_url('/hotelPage')); ?>">ホテル</a>
+            <a href="<?php echo esc_url(home_url('/noticePage')); ?>">お知らせ</a>
+            <a href="<?php echo esc_url(home_url('/contactPage')); ?>">お問い合わせ</a>
         </nav>
     </header>
