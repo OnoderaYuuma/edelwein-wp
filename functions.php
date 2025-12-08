@@ -8,29 +8,22 @@ function edelwein_theme_setup() {
 add_action('after_setup_theme', 'edelwein_theme_setup');
 function edelwein_enqueue_scripts() {
     wp_enqueue_script('jquery');
-    
 
+    // Google Fonts
     wp_enqueue_style(
         'google-fonts', 
         'https://fonts.googleapis.com/css2?family=Jacques+Francois&family=Sawarabi+Mincho&display=swap', 
         [], 
         null
     );
-    wp_enqueue_style(
-        'main-style', 
-        get_stylesheet_uri()
-    );
 
     wp_enqueue_style(
-        'header-css', 
-        get_template_directory_uri() . '/assets/css/header.css', 
+        'main-style', 
+        get_template_directory_uri() . '/assets/css/style.css',
         [], 
+        filemtime(get_template_directory() . '/assets/css/style.css') 
     );
-    wp_enqueue_style(
-        'index-css', 
-        get_template_directory_uri() . '/assets/css/index.css', 
-        [], 
-    );
+    
 }
 add_action('wp_enqueue_scripts', 'edelwein_enqueue_scripts');
 

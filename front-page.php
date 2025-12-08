@@ -8,9 +8,9 @@
             </div>
 
             <div class="morino-kuni-link">
-                <a href="<?php echo esc_url(home_url('/glassPage')); ?>">ガラス工房森のくに</a>
-                <a href="<?php echo esc_url(home_url('/restaurantPage')); ?>">レストランベルンドルフ</a>
-                <a href="<?php echo esc_url(home_url('/hotelPage')); ?>">ホテルベルンドルフ</a>
+                <a href="<?php echo esc_url(home_url('/glasspage')); ?>">ガラス工房森のくに</a>
+                <a href="<?php echo esc_url(home_url('/restaurantpage')); ?>">レストランベルンドルフ</a>
+                <a href="<?php echo esc_url(home_url('/hotelpage')); ?>">ホテルベルンドルフ</a>
             </div>
         </div>
     </section>
@@ -42,16 +42,16 @@
                             $sub_query->the_post();
                     ?>
                             <?php
-                                $categories = get_the_category();
-                                $category_slug = !empty($categories) ? $categories[0]->slug : '';
-                                $footer_colors = [
-                                    'edelwein-support' => '#b8a36c7c',
-                                    'glass' => '#C4F6FA',
-                                    'hotel' => '#fff71b7a',
-                                    'restaurant' => '#c12b7179',
-                                    'others' => '#1a535c7c',
-                                ];
-                                $footer_color = isset($footer_colors[$category_slug]) ? $footer_colors[$category_slug] : '#333333';
+                            $categories = get_the_category();
+                            $category_slug = !empty($categories) ? $categories[0]->slug : '';
+                            $footer_colors = [
+                                'edelwein-support' => '#b8a36c7c',
+                                'glass' => '#C4F6FA',
+                                'hotel' => '#fff71b7a',
+                                'restaurant' => '#c12b7179',
+                                'others' => '#1a535c7c',
+                            ];
+                            $footer_color = isset($footer_colors[$category_slug]) ? $footer_colors[$category_slug] : '#333333';
                             ?>
                             <a href="<?php the_permalink(); ?>" class="news-card">
                                 <?php if (has_post_thumbnail()) : ?>
@@ -107,24 +107,23 @@
             <div class="purpose__contents">
 
                 <div class="purpose__item purpose__item--glass">
-                    <a class="purpose__link" href="<?php echo esc_url(home_url('/glassPage')); ?>">
+                    <a class="purpose__link" href="<?php echo esc_url(home_url('/glasspage')); ?>">
                         <img class="purpose__image_glass" src="<?php echo get_template_directory_uri(); ?>/assets/img/index/創作.png" alt="創作体験">
                     </a>
-                    <a class="purpose__label" href="<?php echo esc_url(home_url('/glassPage')); ?>">ガラス工房森のくに</a>
+                    <a class="purpose__label" href="<?php echo esc_url(home_url('/glasspage')); ?>">ガラス工房森のくに</a>
                 </div>
-
                 <div class="purpose__item purpose__item--restaurant">
-                    <a class="purpose__link" href="<?php echo esc_url(home_url('/restaurantPage')); ?>">
+                    <a class="purpose__link" href="<?php echo esc_url(home_url('/restaurantpage')); ?>">
                         <img class="purpose__image_restaurant" src="<?php echo get_template_directory_uri(); ?>/assets/img/index/食事.png" alt="レストラン">
                     </a>
-                    <a class="purpose__label" href="<?php echo esc_url(home_url('/restaurantPage')); ?>">レストラン ベルンドルフ</a>
+                    <a class="purpose__label" href="<?php echo esc_url(home_url('/restaurantpage')); ?>">レストラン ベルンドルフ</a>
                 </div>
 
                 <div class="purpose__item purpose__item--hotel">
-                    <a class="purpose__link" href="<?php echo esc_url(home_url('/hotelPage')); ?>">
+                    <a class="purpose__link" href="<?php echo esc_url(home_url('/hotelpage')); ?>">
                         <img class="purpose__image purpose_image_hotel" src="<?php echo get_template_directory_uri(); ?>/assets/img/index/宿泊.png" alt="ホテル">
                     </a>
-                    <a class="purpose__label" href="<?php echo esc_url(home_url('/hotelPage')); ?>">ホテル ベルンドルフ</a>
+                    <a class="purpose__label" href="<?php echo esc_url(home_url('/hotelpage')); ?>">ホテル ベルンドルフ</a>
                 </div>
 
             </div>
