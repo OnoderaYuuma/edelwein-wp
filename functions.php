@@ -6,7 +6,16 @@ function edelwein_theme_setup() {
     register_nav_menu('main-menu', 'メインメニュー');
 }
 add_action('after_setup_theme', 'edelwein_theme_setup');
+
 function edelwein_enqueue_scripts() {
+    // リセットCSS (destyle.css) を先に読み込む
+    wp_enqueue_style(
+        'destyle', 
+        'https://cdn.jsdelivr.net/npm/destyle.css@4.0.1/destyle.min.css', 
+        [], 
+        null
+    );
+
     wp_enqueue_script('jquery');
 
     // Google Fonts
@@ -17,35 +26,12 @@ function edelwein_enqueue_scripts() {
         null
     );
 
+    // メインスタイルシート
     wp_enqueue_style(
         'main-style', 
         get_template_directory_uri() . '/assets/css/style.css',
-        [], 
+        ['destyle'], // destyleに依存させる
         filemtime(get_template_directory() . '/assets/css/style.css') 
     );
-    
 }
 add_action('wp_enqueue_scripts', 'edelwein_enqueue_scripts');
-
-// function edelwein_category_card_footer_color() {
-//     if (is_single() && in_category('')) {
-//         $categories = get_the_category();
-//         if (!empty($categories)) {
-//             $category = $categories[0];
-//             $category_slug = $category->slug;
-            
-//             $colors = [
-//                 'edelwein-support' => '#B8A36C',
-//                 'glass' => '#C4F6FA',
-//                 'hotel' => '#FFF61B',
-//                 'restaurant' => '#C12B72',
-//                 'others' => '#1A535C',
-//             ];
-            
-//             $color = $colors[$category_slug] ?? '#333333';
-            
-//             echo '<style>.news-card-footer { background-color: ' . esc_attr($color) . '; }</style>';
-//         }
-//     }
-// }
-// add_action('wp_head', 'edelwein_category_card_footer_color');

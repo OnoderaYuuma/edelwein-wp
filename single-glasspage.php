@@ -39,6 +39,7 @@ get_header();
                     $news_args = [
                         'post_type'      => 'post',
                         'posts_per_page' => 4,
+                        'category_name'  => 'glass',
                     ];
                     $news_query = new WP_Query($news_args);
 
@@ -131,7 +132,7 @@ get_header();
         </div>
     </section>
 
-    <a href="https://example.com" target="_blank">
+    <a href="https://morinokuni.base.shop/" target="_blank">
         <img src="<?php echo get_template_directory_uri(); ?>/assets/img/glass/shopping.png" class="shop-banner" alt="ショッピング">
     </a>
 
