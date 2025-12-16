@@ -1,5 +1,5 @@
 <?php
-get_header(); 
+get_header();
 ?>
 
 <main id="glass">
@@ -13,7 +13,8 @@ get_header();
 
             <div class="morino-kuni-link">
                 <h1>自分で創るきらめく思い出
-                <br>体験してみませんか</h1>
+                    <br>体験してみませんか
+                </h1>
             </div>
         </div>
     </section>
@@ -36,17 +37,20 @@ get_header();
             <div class="news-right">
                 <div class="news-list">
                     <?php
+                    // ★修正箇所：orderby と order を追加
                     $news_args = [
                         'post_type'      => 'post',
                         'posts_per_page' => 4,
                         'category_name'  => 'glass',
+                        'orderby'        => 'date', // 日付順
+                        'order'          => 'DESC'  // 新しい順
                     ];
                     $news_query = new WP_Query($news_args);
 
                     if ($news_query->have_posts()):
                         while ($news_query->have_posts()):
                             $news_query->the_post();
-                            
+
                             // カテゴリーと色の設定
                             $categories = get_the_category();
                             $category_slug = !empty($categories) ? $categories[0]->slug : '';
@@ -59,30 +63,30 @@ get_header();
                             ];
                             $footer_color = isset($footer_colors[$category_slug]) ? $footer_colors[$category_slug] : '#333333';
                     ?>
-                        <a href="<?php the_permalink(); ?>" class="news-card">
-                            <?php if (has_post_thumbnail()) : ?>
-                                <?php the_post_thumbnail('medium'); ?>
-                            <?php else : ?>
-                                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/top/noimage.png" alt="No Image">
-                            <?php endif; ?>
+                            <a href="<?php the_permalink(); ?>" class="news-card">
+                                <?php if (has_post_thumbnail()) : ?>
+                                    <?php the_post_thumbnail('medium'); ?>
+                                <?php else : ?>
+                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/img/top/noimage.png" alt="No Image">
+                                <?php endif; ?>
 
-                            <div class="news-card-content">
-                                <h3><?php the_title(); ?></h3>
-                                <p>
-                                    <?php
-                                    if (! empty($categories)) {
-                                        echo esc_html($categories[0]->name);
-                                    }
-                                    ?>
-                                </p>
-                            </div>
-                            <div class="news-card-footer" style="background-color: <?php echo esc_attr($footer_color); ?>;"></div>
-                        </a>
-                    <?php
+                                <div class="news-card-content">
+                                    <h3><?php the_title(); ?></h3>
+                                    <p>
+                                        <?php
+                                        if (! empty($categories)) {
+                                            echo esc_html($categories[0]->name);
+                                        }
+                                        ?>
+                                    </p>
+                                </div>
+                                <div class="news-card-footer" style="background-color: <?php echo esc_attr($footer_color); ?>;"></div>
+                            </a>
+                        <?php
                         endwhile;
                         wp_reset_postdata();
                     else:
-                    ?>
+                        ?>
                         <p>現在、最新情報はありません。</p>
                     <?php endif; ?>
                 </div>
@@ -161,21 +165,21 @@ get_header();
             </div>
         </div>
     </section>
-    
+
     <section>
         <div class="blownglass">
-            <div class="blownglass_contents">    
+            <div class="blownglass_contents">
                 <p class="glass-title">◆　グラス・一輪挿し・小鉢・ぐい吞み類・モールドロックグラス</p><br>
                 <p class="glass-detail">1200℃の窯から巻き取ったガラスを、竿を回しながら吹きます。木のコテで底になる部分を平らにします。<br>
-                   竿から切離して、口を広げて出来上がりです。</p><br>
-                    <div class="glass">
-                        <p class="glass-time">制作時間：20分程度<br>
-                           体験料　：4500円<br>
-                           対象年齢：中学3年生～<br>
-                        </p>
-                        <img class="glass_image" src="<?php echo get_template_directory_uri(); ?>/assets/img/glass/グラス.png" alt="グラス">
-                    </div>
-                    
+                    竿から切離して、口を広げて出来上がりです。</p><br>
+                <div class="glass">
+                    <p class="glass-time">制作時間：20分程度<br>
+                        体験料　：4500円<br>
+                        対象年齢：中学3年生～<br>
+                    </p>
+                    <img class="glass_image" src="<?php echo get_template_directory_uri(); ?>/assets/img/glass/グラス.png" alt="グラス">
+                </div>
+
                 <p class="glass-title">◆　ミニグラス</p><br>
                 <p class="glass-detail">小学3年生から体験できるメニュー。手のひらサイズのグラスですが、本格的な吹きガラス制作を体験できます</p><br>
                 <div class="mini-glass">
@@ -190,15 +194,15 @@ get_header();
                 <p class="glass-detail">ガラスをぷぅーっと吹いてからそこを平らにし、切離して出来上がりです。簡単な工程なので、小学生にお勧めです。</p><br>
                 <div class="single-flower-vase">
                     <p class="glass-time">制作時間：20分程度<br>
-                       体験料　：2500円<br>
-                       対象年齢：小学生～
+                        体験料　：2500円<br>
+                        対象年齢：小学生～
                     </p>
                     <img class="single-flower-vase__image" src="<?php echo get_template_directory_uri(); ?>/assets/img/glass/ミニ一輪挿し.png" alt="ミニ一輪挿し">
                 </div>
 
                 <p class="glass-title">◆　箸置き</p><br>
                 <p class="glass-detail">切り落とされたガラスを、道具でぎゅーっと押します。小さなお子様におすすめです。<br>
-                   お一人当たり、4個の箸置きをつくることができます。
+                    お一人当たり、4個の箸置きをつくることができます。
                 </p><br>
                 <div class="chopstick-rest">
                     <p class="glass-time">制作時間：15分程度<br>
@@ -262,7 +266,7 @@ get_header();
                     千の花を意味するミルフィオリをアクセントにしながら、美しく、表情豊かなガラス体験ができます。<br>
                     あなただけの素敵なデザインを作ってみませんか。<br>
                     出張体験も承っております。詳しくは<a href="#" class="more-info-link">こちら</a><br>
-                 ※電気炉で焼成しますので、お渡しまでい時間がかかります。(1週間～2週間程度)<br>
+                    ※電気炉で焼成しますので、お渡しまでい時間がかかります。(1週間～2週間程度)<br>
                 </p>
                 <div class="fusing-info-block">
                     <p class="fusing-details">種類　　：デザートスプーン　アクセサリー　他　※団体向け4種類<br>
@@ -338,8 +342,17 @@ get_header();
         <h2 class="section-title">受注生産</h2>
     </section>
 
+    <section class="heading sandblast">
+        <div class="title-block">
+            <h3 class="title-main">サンドブラスト</h3>
+            <div class="arrow-line">
+                <div class="diamond"></div>
+                <div class="line"></div>
+            </div>
+        </div>
+    </section>
+
     <section>
-        <h1 class="sandblast-title">サンドブラスト</h1>
         <div class="sandblast-content">
             <div class="sandblast-details">
                 <p>名前や日付等、オリジナルデザインのガラスを制作します。<br>
@@ -357,8 +370,17 @@ get_header();
         </div>
     </section>
 
+    <section class="heading blown">
+        <div class="title-block">
+            <h3 class="title-main">吹きガラス</h3>
+            <div class="arrow-line">
+                <div class="diamond"></div>
+                <div class="line"></div>
+            </div>
+        </div>
+    </section>
+
     <section class="blownglass-boxs">
-        <h1 class="blownglass-title">吹きガラス</h1>
         <div class="glassblowing-wrapper">
             <div class="glassblowing-content">
                 <p>引き出物や記念品等、ご注文承ります。</p>
@@ -376,5 +398,5 @@ get_header();
     <img class="info-deco-image2" src="<?php echo get_template_directory_uri(); ?>/assets/img/glass/透明ビー玉.png" alt="">
 
 </main>
-    
+
 <?php get_footer(); ?>
