@@ -1,11 +1,10 @@
 <?php get_header(); ?>
 
-    <main class="article">
+    <main id="single-article">
         <div class="borders">
             <hr><hr>
         </div>
-        <!-- 一覧へのパスが不安 -->
-        <a href="<?php echo esc_url(get_template_directory_uri()); ?>/../../../" class="back-to-list"><span class="back-color">&lt;&lt;</span>一覧に戻る</a>
+        <a href="<?php echo esc_url(get_template_directory_uri()); ?>/../../../archive" class="back-to-list"><span class="back-color">&lt;&lt;</span>一覧に戻る</a>
 
         <?php
             if(have_posts()) :
@@ -17,7 +16,13 @@
         <article id="single-<?php the_ID(); ?>" <?php post_class(); ?>>
             <!-- 画像の表示 -->
             <div>
-                 <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/restaurant/restaurant.png" alt="画像" class="article-img"><br>
+                <?php 
+                if (has_post_thumbnail()) {
+                    $thumbnail_url = get_the_post_thumbnail_url();
+                ?>
+                    <img src="<?php echo esc_url($thumbnail_url); ?>" alt="記事サムネイル画像" class="article-img">
+                <?php }; ?>
+
             </div>
             <div class="article-content">
                 <div class="content-flex">
@@ -37,47 +42,108 @@
                  </div>
             </div>
             
-            <div class="content-meta">
-                <div class="borders">
-                    <hr><hr>
-                </div>
-                <?php
-                    // 日付の表示と月別アーカイブの表示
-                    $year = get_the_date("Y");
-                    $month = get_the_date("m");
-                    // 月別アーカイブのリンクURLを取得
-                    $archiveURL = get_month_link($year, $month);
-                ?>
-                <a href="<?php echo $archiveURL; ?>">
-                    <time date-time="<?php echo get_the_date("Y-m-d"); ?>">
-                    <?php echo get_the_date(); ?>
-                    </time>
-                </a>
+            <div class="borders">
+                <hr><hr>
             </div>
+                
+            <!-- 次の記事・前の記事へのリンクを表示 -->
             <div class="navbar">
-                <!-- 次の記事・前の記事へのリンクを表示 -->
+                <?php
+                $prev_post = get_previous_post(); 
+
+                if ( !empty($prev_post) ) :
+                    $prev_post_url = get_permalink($prev_post->ID);
+                ?>
                 <div class="navPrev">
-                    <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/restaurant/front-link.png" alt="前へ" class="links"><br>
+                    <!-- <<の表示 -->
+                    <a href=<?php echo esc_url($prev_post_url); ?>>
+                        <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/restaurant/front-link.png" alt="前へ" class="links"><br>
+                    </a>
                     <div>
                         <p>前のお知らせ</p>
                         <div class="box-color">
                             <div class="box">
-                                <?php previous_post_link("%link"); ?>
+                                <?php if(!empty($prev_post)): ?>
+                                    <a href="<?php echo get_permalink($prev_post->ID); ?>">
+                                    <?php echo get_the_post_thumbnail($prev_post->ID, 'thumbnail', array(
+                                        'class' => 'nav_thumbnail',
+                                    )); ?>
+                                    </a>
+                                <?php else: ?>
+                                    <img src img src="<?php echo get_template_directory_uri(); ?>/assets/img/top/noimage.png" alt="No Image">
+                                <?php endif; ?>
+
+                                <div class="box-title">
+                                    <?php 
+                                    previous_post_link("%link");
+                                    ?>
+                                    <div class="nav_category">
+                                        <?php
+                                        $categorys = get_the_category($prev_post->ID);
+                                        foreach ($categorys as $category) {
+                                            echo '<br><a href="'.get_category_link($category->term_id).'" class="nav_category_text">';
+                                            echo esc_html($category->name);
+                                            echo '</a>';
+                                        }
+                                        ?>
+                                    </div>
+                                    <div class="nav_time">
+                                        <?php echo get_the_time('Y-m-d', $prev_post->ID); ?>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <?php endif ?>
+
+                <?php
+                $next_post = get_next_post(); 
+                if ( !empty($next_post) ) :
+                    $next_post_url = get_permalink($next_post->ID);
+                ?>
                 <div class="navNext">
-                    <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/restaurant/next-link.png" alt="次へ" class="links"><br>
+                    <!-- >>の表示 -->
+                    <a href=<?php echo esc_url($next_post_url); ?>>
+                        <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/restaurant/next-link.png" alt="次へ" class="links"><br>
+                    </a>
                     <div>
                         <p class="next-text">次のお知らせ</p>
                         <div class="box-color">
                             <div class="box">
-                                <?php next_post_link("%link"); ?>
+                                 <?php if(!empty($next_post)): ?>
+                                    <a href="<?php echo get_permalink($next_post->ID); ?>">
+                                    <?php echo get_the_post_thumbnail($next_post->ID, 'thumbnail', array(
+                                        'class' => 'nav_thumbnail',
+                                    )); ?>
+                                    </a>
+                                <?php else: ?>
+                                    <img src img src="<?php echo get_template_directory_uri(); ?>/assets/img/top/noimage.png" alt="No Image">
+                                <?php endif; ?>
+
+                                <div class="box-title">
+                                    <?php 
+                                    next_post_link("%link");
+                                    ?>
+                                    <div class="nav_category">
+                                        <?php
+                                        $categorys = get_the_category($next_post->ID);
+                                        foreach ($categorys as $category) {
+                                            echo '<br><a href="'.get_category_link($category->term_id).'" class="nav_category_text">';
+                                            echo esc_html($category->name);
+                                            echo '</a>';
+                                        }
+                                        ?>
+                                    </div>
+                                    <div class="nav_time">
+                                        <?php echo get_the_time('Y-m-d', $next_post->ID); ?>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <?php endif ?>
             </div>
         </article>
         <?php endwhile; ?>
