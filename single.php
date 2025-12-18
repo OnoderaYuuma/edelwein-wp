@@ -4,7 +4,7 @@
         <div class="borders">
             <hr><hr>
         </div>
-        <a href="<?php echo esc_url(get_template_directory_uri()); ?>/../../../archive" class="back-to-list"><span class="back-color">&lt;&lt;</span>一覧に戻る</a>
+        <a href="<?php echo esc_url(get_template_directory_uri()); ?>/../../../news" class="back-to-list"><span class="back-color">&lt;&lt;</span>一覧に戻る</a>
 
         <?php
             if(have_posts()) :
@@ -47,14 +47,14 @@
             </div>
                 
             <!-- 次の記事・前の記事へのリンクを表示 -->
-            <div class="navbar">
+            <nav class="navbar">
                 <?php
                 $prev_post = get_previous_post(); 
 
                 if ( !empty($prev_post) ) :
                     $prev_post_url = get_permalink($prev_post->ID);
                 ?>
-                <div class="navPrev">
+                <nav class="navPrev">
                     <!-- <<の表示 -->
                     <a href=<?php echo esc_url($prev_post_url); ?>>
                         <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/restaurant/front-link.png" alt="前へ" class="links"><br>
@@ -94,7 +94,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </nav>
                 <?php endif ?>
 
                 <?php
@@ -102,7 +102,7 @@
                 if ( !empty($next_post) ) :
                     $next_post_url = get_permalink($next_post->ID);
                 ?>
-                <div class="navNext">
+                <nav class="navNext">
                     <!-- >>の表示 -->
                     <a href=<?php echo esc_url($next_post_url); ?>>
                         <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/restaurant/next-link.png" alt="次へ" class="links"><br>
@@ -142,9 +142,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </nav>
                 <?php endif ?>
-            </div>
+            </nav>
         </article>
         <?php endwhile; ?>
         <?php endif; ?>

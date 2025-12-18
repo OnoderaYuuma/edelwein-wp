@@ -1,0 +1,758 @@
+@charset "UTF-8";
+
+/* ==========================================================================
+   1. リセット & ベース設定 (Base)
+   ========================================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow-x: hidden;
+  font-family: "Sawarabi Mincho", serif;
+  font-weight: 400;
+  font-style: normal;
+  /* パスは環境に合わせて調整してください */
+  background: url("../img/top/background.png");
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: bottom;
+}
+
+/* ==========================================================================
+   2. ヘッダー & ナビゲーション (Header & Nav)
+   ========================================================================== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1%;
+  /* パスは環境に合わせて調整してください */
+  background: url("../img/top/p0522_l 6.png");
+  background-size: cover; 
+  color: #fff;
+}
+
+.header a {
+  font-family: "Sawarabi Mincho", serif;
+  color: black;
+  font-size: 23px;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  writing-mode: horizontal-tb;
+}
+
+.nav a {
+  font-size: 85%;
+  padding: 1%;
+  gap: 7%;
+  align-items: center;
+  display: inline-block;
+  text-align: center;
+  letter-spacing: 0.2em;
+}
+
+/* ナビゲーション個別の調整 */
+.nav a:nth-child(1)::after {
+  content: "\Aベルンドルフ";
+  white-space: pre;
+}
+
+.nav a:nth-child(3)::after {
+  content: "\Aベルンドルフ";
+  white-space: pre;
+}
+
+.nav a:nth-child(4),
+.nav a:nth-child(5) {
+  display: inline;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   3. 共通コンポーネント (Common Components)
+   ========================================================================== */
+
+/* --- セクションタイトル --- */
+.section-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  font-weight: bold;
+  font-size: 26px;
+  text-align: center;
+  padding: 5% 0;
+  line-height: 1.5;
+}
+
+.section-title::before,
+.section-title::after {
+  content: "";
+  flex-grow: 1;
+  border-top: 5px double #B8A36C;
+}
+
+/* --- 区切り線 --- */
+.section-line {
+  width: 100%;
+  display: block;
+}
+
+/* --- 飾り枠 (Frame) --- */
+.frame-group {
+    pointer-events: none;
+}
+.frame {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+}
+
+/* --- ショッピングバナー --- */
+.shop-banner {
+  display: block;
+  margin: 20px auto;
+  width: 75%;
+  height: auto;
+}
+
+/* ==========================================================================
+   4. 共通セクションレイアウト (Common Sections)
+   ========================================================================== */
+
+/* --- メインビジュアル (Morino-kuni Class) --- */
+.morino-kuni {
+  display: grid;
+  width: 100%;
+  height: 80vh; /* デフォルト(トップページ) */
+  min-height: 600px;
+  position: relative; 
+  background-size: cover;
+  background-position: center;
+}
+
+.morino-kuni-bg {
+  grid-area: 1 / 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.morino-kuni-content {
+  position: absolute;
+  top: 20%;
+  left: 5%;
+  right: 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  color: #fff;
+  z-index: 10;
+}
+
+.morino-kuni-title {
+  font-size: 24px;
+  font-family: "Jacques Francois", serif;
+  font-weight: 400;
+  font-style: normal;
+  margin-top: 3%;
+  margin-left: 4%;
+}
+
+.morino-kuni-link {
+  font-family: "Sawarabi Mincho", serif;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.morino-kuni-address {
+  margin-top: 4%;
+  margin-bottom: 4%;
+  font-size: 16px;
+  font-family: "Sawarabi Mincho", serif;
+  color: #333;
+  text-align: center;
+}
+
+/* --- ニュースセクション (News) --- */
+.news-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+.news-box {
+  background: #ffffff;
+  width: 94%;
+  padding: 4% 3%;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  border: 1px solid #B8A36C;
+}
+
+.news-left {
+  width: 20%;
+  padding-top: 4%;
+  padding-left: 2%;
+}
+
+.news-title {
+  font-size: 36px;
+  font-family: "Sawarabi Mincho", serif;
+  margin-bottom: 20%;
+}
+
+.news-btn {
+  display: inline-block;
+  padding: 4.5% 10.5%;
+  border: 1px solid #B8A36C;
+  border-radius: 20px;
+  text-decoration: none;
+  color: #333;
+  background: #fff;
+  font-size: 17px;
+}
+
+.news-btn:hover {
+  background: #f5f5f5;
+}
+
+.news-right {
+  width: 80%;
+}
+
+.news-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* PCは4列 */
+  gap: 16px;
+}
+
+.news-card {
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: 0.2s;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.news-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.news-card-content {
+  flex-grow: 1;
+  padding: 3% 4% 4%;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.news-card h3 {
+  font-size: 14px;
+  margin-bottom: 2%;
+  margin-top: 6%;
+  margin-left: 7%;
+}
+
+.news-card p {
+  font-size: 12px;
+  color: #555;
+  margin-top: 19%;
+  text-align: right;
+  margin-right: 10%;
+}
+
+.news-card-footer {
+  height: 16px;
+  background: #dff7fa;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+/* --- イントロダクション (Intro) --- */
+.intro-section {
+  width: 100%;
+  padding: 50px 0;
+}
+
+.intro-wrapper {
+  display: flex;
+  gap: 40px;
+}
+
+.intro-left {
+  width: 60%;
+}
+
+.intro-img {
+  width: 70%;
+  max-width: 100%;
+  height: auto;
+  margin-left: 5%;
+}
+
+.intro-paragraph p {
+  font-family: "Sawarabi Mincho", serif;
+  font-size: 20px;
+  margin-left: 5%;
+  margin-top: 3%;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.25);
+  line-height: 2;
+}
+
+.intro-paragraph a,
+.intro-text-link {
+    color: #880A45;
+    text-decoration: none;
+}
+
+.right-copy-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 35%;
+}
+
+.glass-ball {
+  width: 105%;
+  height: auto;
+  margin-top: -25%;
+}
+
+.copy-text {
+  width: 70%;
+  height: auto;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+  margin-top: -16%;
+  margin-bottom: 10%;
+}
+
+.copy-triangle {
+  width: 88%;
+  height: auto;
+  margin-top: -95%;
+}
+
+/* ==========================================================================
+   5. トップページ専用 (Top Page)
+   ========================================================================== */
+
+/* メインビジュアル背景 */
+body.home .morino-kuni {
+    background-image: url("../img/top/top.png");
+}
+
+/* メインビジュアルリンク (トップ専用デザイン) */
+body.home .morino-kuni-link {
+    border-right: 2px solid black;
+    margin-top: 27%;
+    margin-bottom: 5%;
+    margin-right: 3%;
+    gap: 8%;
+    background-color: rgb(255, 255, 255, 0.45);
+    padding: 1% 3%;
+}
+body.home .morino-kuni-link a {
+    color: black;
+    padding: 6%;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+body.home .morino-kuni-link a:hover {
+    color: #000000;
+    font-size: 20px;
+}
+
+/* タイトル文字サイズ調整 */
+body.home .morino-kuni-title h1 {
+    font-size: 45px;
+    line-height: 1.2;
+    letter-spacing: 0.05em;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+/* 目的で探す */
+.purpose {
+  background-color: #fff;
+  border: 2px double #B8A36C;
+  margin-bottom: 10%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  padding: 1%;
+}
+
+.purpose__contents {
+  display: flex;
+  margin: 0 1%;
+}
+
+.purpose__item {
+  flex: 1;
+  text-align: center;
+}
+.purpose__item--restaurant {
+  margin-left: 1.3%;
+  margin-right: 1%;
+}
+
+.purpose__link { display: block; }
+
+.purpose_image_hotel { width: 101.5%; margin-bottom: 10%; }
+.purpose__image_glass { width: 101.2%; margin-bottom: 10%; }
+.purpose__image_restaurant { width: 100%; margin-bottom: 10%; }
+
+.purpose__label {
+  display: block;
+  margin-top: -5%;
+  text-decoration: none;
+  color: #000;
+}
+
+/* Instagram & 装飾 */
+.insta-section .section-title {
+  margin-bottom: 3%;
+  line-height: 1.5;
+}
+
+.insta-section__img {
+  display: block;
+  margin: 0 auto;
+  width: 60%;
+}
+
+.grape {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: -10%;
+  padding: 0 5%;
+}
+.grape__img--fruit { width: 20%; transform: translateY(-40%); }
+.grape__img--leaf { width: 25%; transform: translateY(-60%); }
+
+
+/* ==========================================================================
+   6. ガラスページ専用 (#glass)
+   ========================================================================== */
+
+/* メインビジュアル調整 */
+#glass .morino-kuni {
+    height: 100%;
+    min-height: auto;
+    overflow: hidden;
+    position: static;
+}
+#glass .morino-kuni-content {
+    grid-area: 1 / 1;
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 4% 5%;
+}
+#glass .morino-kuni-title p {
+    font-size: 24px;
+    margin: 0 0 12px 0;
+}
+#glass .morino-kuni-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+#glass .morino-kuni-link h1 {
+    font-size: 62px;
+    margin: 0;
+    font-family: "Sawarabi Mincho", serif;
+    text-align: center;
+    line-height: 1.2;
+}
+
+/* Intro調整 */
+#glass .intro-paragraph a {
+    color: #00B3FF;
+}
+
+/* ニュースカード調整 */
+#glass .news-card {
+  width: auto;
+}
+/* カードフッター色分け */
+#glass .card1 .news-card-footer,
+#glass .card2 .news-card-footer,
+#glass .card3 .news-card-footer,
+#glass .card4 .news-card-footer {
+  background: #dff7fa; 
+}
+
+/* 体験メニュー見出し */
+#glass .heading .title-block { width: 100%; margin: 2% 0; }
+#glass .heading .title-block h3 { font-size: 220%; text-align: left; margin-left: 12%; }
+#glass .heading .arrow-line { display: flex; align-items: center; width: 100%; margin-left: 9%; }
+#glass .heading .diamond { width: 2%; aspect-ratio: 1 / 1; transform: rotate(45deg); }
+#glass .heading .line { width: 30%; height: 0.5vw; }
+
+.heading.blown .diamond, .heading.blown .line { background: #C4F6FA; }
+.heading.sandblast .diamond, .heading.sandblast .line { background: #FFCFB5; }
+.heading.glass-fusing-heading .diamond, .heading.glass-fusing-heading .line { background: #B4FFB7; }
+.heading.tombo-heading .diamond, .heading.tombo-heading .line { background: #F0C3FF; }
+
+/* コンテンツBOX共通 */
+#glass .blownglass, #glass .sandblasting, #glass .fusing, 
+#glass .tombodama, #glass .sandblast-content, #glass .glassblowing-wrapper {
+  width: 85%;
+  background-color: #fff;
+  border: 2px solid #B8A36C;
+  margin-bottom: 10%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  padding: 1%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 各体験のレイアウト詳細 */
+#glass .glass, #glass .mini-glass, #glass .single-flower-vase { display: flex; }
+#glass .glass-title { font-size: 18px; margin-bottom: 0.5em; font-weight: bold; }
+#glass .glass_image { margin-left: auto; width: 30%; margin-top: -5%; }
+#glass .mini-glass_image { margin-left: auto; width: 25%; }
+#glass .single-flower-vase__image { margin-left: auto; width: 15%; }
+
+#glass .chopstick-rest { display: flex; margin-bottom: 3%; }
+#glass .chopstick-rest_image1 { width: 18%; margin-left: 45%; margin-top: -3%; }
+#glass .chopstick-rest_image2 { width: 18%; margin-left: 2%; margin-top: -3%; }
+
+#glass .sandblasting-remarks { display: flex; margin-top: 3%; }
+#glass .sandblasting-image1 { width: 17%; margin-left: 4%; margin-top: -5%; margin-bottom: 3%; }
+#glass .sandblasting-image2 { width: 17%; margin-left: 2%; margin-top: -5%; margin-bottom: 3%; }
+#glass #sandblasting-time { white-space: nowrap; margin-top: 2%; margin-left: 5%; line-height: 2; }
+
+#glass .fusing-info-block { display: flex; margin-top: 3%; }
+#glass .fusing-image1 { width: 18%; margin-left: 15%; margin-top: -7%; margin-bottom: 2%; }
+#glass .fusing-image2 { width: 18%; margin-left: 2%; margin-top: -7%; margin-bottom: 2%; }
+
+#glass .tombodama-info { display: flex; line-height: 2; margin-top: 3%; }
+#glass .tombodama-images1 { width: 17%; margin-left: 40%; margin-top: -9%; margin-bottom: 2%; }
+#glass .tombodama-images2 { width: 17%; margin-left: 2%; margin-top: -9%; margin-bottom: 2%; }
+
+#glass .reservation-notice { display: flex; margin-left: 9%; margin-top: -7%; line-height: 1.5; }
+#glass .info-deco-image1 { width: 30%; margin-left: 18%; }
+
+#glass .sandblast-info-item { display: flex; line-height: 2; margin-top: 3%; }
+#glass .sandblast-image { width: 25%; margin-left: 25%; margin-bottom: 2%; margin-top: -7%; }
+
+#glass .glassblowing-details { display: flex; line-height: 2; margin-top: 3%; }
+#glass .glassblowing-image { width: 25%; margin-left: 25%; margin-bottom: 2%; margin-top: -5%; }
+
+#glass .info-deco-image2 { width: 25%; margin-top: -11%; margin-left: 2%; }
+
+
+/* ==========================================================================
+   7. レストランページ専用 (#restaurant)
+   ========================================================================== */
+
+/* メインビジュアル調整 */
+#restaurant .morino-kuni {
+    height: 100%;
+    min-height: auto;
+    overflow: hidden;
+    position: static;
+}
+#restaurant .morino-kuni-content {
+    grid-area: 1 / 1;
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 4% 5%;
+}
+#restaurant .morino-kuni-title p {
+    font-size: 24px;
+    margin: 0 0 12px 0;
+    margin-bottom: 16%;
+}
+#restaurant .morino-kuni-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+#restaurant .morino-kuni-link h1 {
+    font-size: 62px;
+    margin: 0;
+    font-family: "Sawarabi Mincho", serif;
+    text-align: center;
+    line-height: 1.2;
+}
+#restaurant .morino-kuni-address {
+    font-size: 20px;
+    line-height: 2.0;
+    padding-left: 3%;
+}
+
+/* イントロ調整 */
+#restaurant .glass-ball {
+    width: 40%;
+    margin-top: -10%;
+    margin-left: 50%;
+}
+#restaurant .copy-text {
+    width: 80%;
+    margin-top: -65%;
+}
+#restaurant .copy-triangle {
+    margin-top: -135%;
+}
+
+/* メニューレイアウト */
+#restaurant .menu-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10%;
+  margin: 5% 5%;
+}
+
+#restaurant .menu-item { text-align: center; }
+#restaurant .menu-item .cooking { width: 70%; object-fit: cover; border-radius: 50%; }
+#restaurant .menu-text { text-align: center; margin-top: 10px; }
+
+#restaurant .menu-title--2gyo { margin-top: 8.5%; margin-bottom: 8.5%; min-height: 3em; display: flex; align-items: center; justify-content: center; }
+#restaurant .menu-title--3gyo { margin-top: 2.5%; margin-bottom: 2.5%; min-height: 4.5em; display: flex; align-items: center; justify-content: center; }
+#restaurant .menu-name { margin-top: 2.5%; font-weight: bold; font-size: 1.1rem; }
+#restaurant .menu-price { font-weight: bold; margin-top: 5px; }
+
+#restaurant #set-info, #restaurant #side-info {
+  text-align: right; margin-right: 10%; color: #666; font-size: 0.9em; margin-top: -20px; margin-bottom: 30px;
+}
+
+/* ワイン区切り線 */
+#restaurant #wine-line-section {
+  display: flex; align-items: center; justify-content: center; position: relative; margin: 60px 0;
+}
+#restaurant .wine-icon-wrapper { z-index: 2; background: #fff; padding: 0 10px; }
+#restaurant .wine-glass-icon { width: 40px; }
+#restaurant .middle-lines { position: absolute; width: 60%; height: 20px; z-index: 1; }
+#restaurant .middle-lines::before, #restaurant .middle-lines::after {
+  content: ""; position: absolute; left: 0; right: 0; height: 1px; background-color: #c2a661;
+}
+#restaurant .middle-lines::before { top: 6px; }
+#restaurant .middle-lines::after { bottom: 6px; }
+
+/* カレー・パスタ */
+#restaurant .menu-container {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  margin-bottom: 40px; margin-left: 8%; margin-right: 8%; margin-top: 5%; gap: 30px;
+}
+#restaurant .menu-box { text-align: center; display: flex; flex-direction: column; align-items: center; }
+#restaurant .menu-title--two-lines { margin-top: 5%; margin-bottom: 8%; min-height: 3em; display: flex; align-items: center; justify-content: center; }
+#restaurant .double-line { border-top: 1px solid #c8ab75; border-bottom: 1px solid #c8ab75; height: 8px; margin: 40px 10%; }
+
+/* ワインリスト */
+#restaurant .wine-header-section { text-align: center; margin-bottom: 20px; }
+#restaurant .wine-header { display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 3%; }
+#restaurant #wine-title { font-size: 40px; color: #63173B; border-bottom: 1px solid #333; }
+#restaurant .wine-icon-small { width: 40px; height: auto; }
+
+#restaurant .wine-list-section, #restaurant .drink-section {
+  width: 90%; background-color: #fff; border: 2px solid #B8A36C;
+  margin: 0 auto 10%; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); padding: 3%;
+}
+#restaurant .wine-contents { font-size: 16px; margin: 3% 5%; }
+#restaurant .wine-item { display: grid; grid-template-columns: 70% 30%; align-items: start; margin-bottom: 30px; border-bottom: 1px dotted #ccc; padding-bottom: 15px; }
+#restaurant .wine-text { display: flex; flex-direction: column; justify-content: center; }
+#restaurant .wine-name { font-size: 1.2rem; font-weight: bold; margin: 0; margin-bottom: 5px; }
+#restaurant .wine-description { margin-left: 1rem; font-size: 0.9rem; color: #666; }
+#restaurant .wine-price { font-size: 16px; text-align: right; font-weight: bold; }
+#restaurant .price-bottle { display: block; }
+
+/* ドリンク */
+#restaurant .drink-header-section { text-align: center; margin-top: -20px; margin-bottom: 30px; }
+#restaurant .drink-header { display: inline-block; border-bottom: 2px solid #333; }
+#restaurant #drink-title { font-size: 40px; margin: 0; }
+#restaurant .drink-contents { font-size: 16px; margin: 3% 5%; position: relative; }
+#restaurant .drink-item { display: grid; grid-template-columns: 70% 30%; align-items: baseline; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+#restaurant .drink-name { font-size: 1.2rem; font-weight: bold; }
+#restaurant .drink-price { font-size: 1.2rem; text-align: right; }
+#restaurant .drink-image { position: absolute; right: 0; bottom: 0; width: 15%; opacity: 0.3; pointer-events: none; }
+
+
+/* ==========================================================================
+   8. レスポンシブ (Mobile)
+   ========================================================================== */
+@media screen and (max-width: 768px) {
+  /* Header */
+  .header { flex-direction: column; }
+  .nav { flex-wrap: wrap; justify-content: center; margin-top: 10px; }
+  .nav a { margin: 5px; font-size: 0.8rem; }
+  
+  /* Top Page Title */
+  body.home .morino-kuni-title h1 { font-size: 36px; }
+
+  /* News (Common) */
+  .news-box { flex-direction: column; }
+  .news-left { width: 100%; padding: 0 0 20px; text-align: center; }
+  .news-right { width: 100%; }
+  .news-list { grid-template-columns: repeat(2, 1fr); } /* スマホは2列 */
+  .news-card { margin-bottom: 10px; }
+
+  /* Glass Page */
+  #glass .intro-wrapper { flex-direction: column; }
+  #glass .intro-left, #glass .right-copy-wrapper { width: 100%; }
+  #glass .blownglass, #glass .sandblasting, #glass .fusing, #glass .tombodama { width: 95%; }
+  #glass .glass, #glass .mini-glass, #glass .single-flower-vase, #glass .chopstick-rest {
+    flex-direction: column; align-items: center;
+  }
+  #glass .glass_image, #glass .mini-glass_image { margin: 20px auto; width: 60%; }
+
+  /* Restaurant Page */
+  #restaurant .intro-wrapper { flex-direction: column; }
+  #restaurant .intro-left { width: 100%; }
+  #restaurant .right-copy-wrapper { width: 100%; margin-top: 50px; }
+
+  #restaurant .menu-row, #restaurant .menu-container {
+    grid-template-columns: 1fr; gap: 40px;
+  }
+  #restaurant .wine-item, #restaurant .drink-item {
+    grid-template-columns: 1fr; gap: 5px;
+  }
+  #restaurant .wine-price, #restaurant .drink-price {
+    text-align: left; margin-left: 1rem;
+  }
+  #restaurant .drink-image { width: 30%; bottom: -20px; }
+}
