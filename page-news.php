@@ -106,8 +106,6 @@
         </div>
 
         <hr><hr>
-
-
             <!-- ページネーション -->
                 
             <div class="pagination">
@@ -134,9 +132,7 @@
                     ));
                 }
                 wp_reset_postdata();
-                
                 ?>
-              
             </div>
 
     </main>
