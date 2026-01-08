@@ -14,7 +14,6 @@ html, body {
   font-family: "Sawarabi Mincho", serif;
   font-weight: 400;
   font-style: normal;
-  /* パスは環境に合わせて調整してください */
   background: url("../img/top/background.png");
 }
 
@@ -38,8 +37,7 @@ img {
   justify-content: space-between;
   align-items: center;
   padding: 1%;
-  /* パスは環境に合わせて調整してください */
-  background: url("../img/top/p0522_l 6.png");
+  background: url("../img/p0522_l 6.png");
   background-size: cover; 
   color: #fff;
 }
@@ -66,7 +64,7 @@ img {
   letter-spacing: 0.2em;
 }
 
-/* ナビゲーション個別の調整 */
+/* ナビゲーション個別調整 */
 .nav a:nth-child(1)::after {
   content: "\Aベルンドルフ";
   white-space: pre;
@@ -721,10 +719,7 @@ body.home .morino-kuni-title h1 {
   .nav { flex-wrap: wrap; justify-content: center; margin-top: 10px; }
   .nav a { margin: 5px; font-size: 0.8rem; }
   
-  /* Top Page Title */
-  body.home .morino-kuni-title h1 { font-size: 36px; }
-
-  /* News (Common) */
+  /* Top Page News */
   .news-box { flex-direction: column; }
   .news-left { width: 100%; padding: 0 0 20px; text-align: center; }
   .news-right { width: 100%; }
@@ -755,4 +750,158 @@ body.home .morino-kuni-title h1 {
     text-align: left; margin-left: 1rem;
   }
   #restaurant .drink-image { width: 30%; bottom: -20px; }
+}
+
+/* =========================================
+   9. エディター用調整 (必須)
+   ========================================= */
+
+/* ★修正箇所：!important を追加
+   エディターで設定した文字色を、リンクや太字にも【強制的に】適用します 
+*/
+.has-text-color strong,
+.has-text-color b,
+.has-text-color em,
+.has-text-color i,
+.has-text-color a {
+    color: inherit !important;
+}
+
+/* intro-paragraph 内では、インラインスタイルの色を優先 */
+.intro-paragraph .has-text-color,
+.intro-paragraph .has-text-color strong,
+.intro-paragraph .has-text-color b,
+.intro-paragraph .has-text-color em,
+.intro-paragraph .has-text-color i,
+.intro-paragraph .has-text-color a {
+    /* インラインスタイル（style="color: ..."）を尊重するため、color を指定しない */
+    /* インラインスタイルは !important よりも優先度が高い */
+    color: unset !important;
+}
+
+/* エディターの画像配置（回り込み）を反映させる */
+.alignleft {
+    float: left;
+    margin-right: 1.5em;
+    margin-bottom: 1em;
+    max-width: 50%;
+}
+.alignright {
+    float: right;
+    margin-left: 1.5em;
+    margin-bottom: 1em;
+    max-width: 50%;
+}
+.aligncenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1em;
+    clear: both;
+}
+
+/* スマホ表示時の回り込み解除 */
+@media screen and (max-width: 768px) {
+    .alignleft,
+    .alignright {
+        float: none;
+        display: block;
+        margin: 0 auto 1em;
+        max-width: 100%;
+    }
+}
+
+/* =========================================
+   10. ブロックエディター横並び修正
+   （カラム・ギャラリー・メディアとテキスト用）
+   ========================================= */
+
+/* --- カラムブロック (.wp-block-columns) --- */
+/* カラムを横並びにする */
+.wp-block-columns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2em; /* カラム間の余白 */
+    margin-bottom: 1.5em;
+}
+
+/* 個々のカラム */
+.wp-block-column {
+    flex-grow: 1;
+    min-width: 0; /* はみ出し防止 */
+}
+
+/* カラム内の画像が枠を超えないようにする */
+.wp-block-column img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+/* --- ギャラリーブロック (.wp-block-gallery) --- */
+.wp-block-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 0 -0.5em 1.5em; /* 左右の余白調整 */
+}
+
+.wp-block-gallery .wp-block-image {
+    margin: 0 0.5em 1em;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* ギャラリー画像のサイズ調整 */
+.wp-block-gallery .wp-block-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+/* --- メディアとテキスト (.wp-block-media-text) --- */
+/* 画像の横に文章が来るレイアウト */
+.wp-block-media-text {
+    display: grid;
+    grid-template-columns: 50% 1fr; /* 画像50% : 文章残り */
+    gap: 30px;
+    align-items: center; /* 垂直方向中央揃え */
+    margin-bottom: 1.5em;
+}
+
+.wp-block-media-text__media img {
+    width: 100%;
+    height: auto;
+    vertical-align: bottom;
+}
+
+
+/* --- スマホ表示時の調整（縦並びに戻す） --- */
+@media screen and (max-width: 768px) {
+    /* カラムを縦積みに */
+    .wp-block-columns {
+        display: block;
+    }
+    .wp-block-column {
+        width: 100% !important;
+        margin-bottom: 20px;
+        margin-left: 0 !important;
+    }
+
+    /* メディアとテキストを縦積みに */
+    .wp-block-media-text {
+        display: block;
+    }
+    .wp-block-media-text__media {
+        margin-bottom: 15px;
+    }
+    
+    /* ギャラリーはスマホでも2列維持（お好みで width:100% に変更可） */
+    .wp-block-gallery .wp-block-image {
+        width: calc(50% - 1em); 
+    }
 }
