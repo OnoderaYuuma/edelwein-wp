@@ -1197,3 +1197,141 @@ body.page-template-page-banquet_plan {
         margin: 20px auto 0;
     }
 }
+/* ==========================================================================
+   12. お問い合わせページ専用 (#contact)
+   ========================================================================== */
+
+/* 背景設定 */
+body.page-template-page-contactpage {
+  /* 他ページと同じ背景画像を使用 */
+  background-image: url("assets/img/top/background.png"); 
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center center;
+}
+/* タイトルエリア（修正版） */
+#contact .main__ttl {
+  font-family: "Sawarabi Mincho", serif;
+  font-size: 40px;
+  color: #63173B;
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  
+  /* --- 変更箇所ここから --- */
+  border-bottom: 5px double #B8A36C; /* 二重線・色は共通カラーのゴールド系に変更 */
+  width: 100%; /* 横幅いっぱいに */
+  max-width: none; /* 幅制限を解除 */
+  /* --- 変更箇所ここまで --- */
+  
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* コンテンツ幅 */
+.contact-container {
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto 100px;
+  font-family: "Sawarabi Mincho", serif;
+}
+
+/* 導入文 */
+.contact-intro {
+  text-align: center;
+  margin-bottom: 60px;
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+/* フォームの各行 */
+.form-row {
+  margin-bottom: 30px;
+}
+
+/* ラベル（項目名） */
+.form-row label {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+/* 必須バッジ */
+.required-badge {
+  background-color: #FF1A1A; /* 鮮やかな赤 */
+  color: #fff;
+  font-size: 12px;
+  padding: 4px 10px;
+  margin-left: 15px;
+  font-weight: normal;
+}
+
+/* 入力フィールド共通 */
+.wpcf7-text,
+.wpcf7-textarea,
+.wpcf7-select {
+  width: 100%;
+  padding: 15px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  box-sizing: border-box;
+  font-family: "Sawarabi Mincho", serif;
+}
+
+/* テキストエリアの高さ調整 */
+.wpcf7-textarea {
+  height: 300px; /* 画像に合わせて高めに */
+}
+
+/* 送信ボタンエリア */
+.form-submit-area {
+  text-align: center;
+  margin-top: 60px;
+}
+
+/* 送信ボタン */
+.wpcf7-submit {
+  background-color: #FCDE6D; /* 画像の黄色/ゴールド */
+  color: #333;
+  border: none;
+  padding: 15px 80px;
+  font-size: 18px;
+  font-weight: normal;
+  cursor: pointer;
+  transition: opacity 0.3s;
+  border-radius: 4px;
+}
+
+.wpcf7-submit:hover {
+  opacity: 0.8;
+}
+
+/* エラーメッセージ等の調整 (Contact Form 7用) */
+.wpcf7-not-valid-tip {
+  font-size: 14px;
+  color: #FF1A1A;
+  margin-top: 5px;
+}
+
+/* スマホ対応 */
+@media screen and (max-width: 768px) {
+  #contact .main__ttl {
+    font-size: 28px;
+    margin-top: 40px;
+  }
+  .contact-intro {
+    font-size: 14px;
+    text-align: left;
+  }
+  .form-row label {
+    font-size: 16px;
+  }
+  .wpcf7-submit {
+    width: 100%;
+    padding: 15px 0;
+  }
+}
