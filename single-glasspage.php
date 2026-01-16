@@ -36,8 +36,8 @@ get_header();
                         'post_type'      => 'post',
                         'posts_per_page' => 4,
                         'category_name'  => 'glass',
-                        'orderby'        => 'date', 
-                        'order'          => 'DESC' 
+                        'orderby'        => 'date',
+                        'order'          => 'DESC'
                     ];
                     $news_query = new WP_Query($news_args);
 
@@ -85,9 +85,9 @@ get_header();
         <div class="intro-wrapper">
             <div class="intro-left">
                 <img src="<?php echo get_template_directory_uri(); ?>/assets/img/glass/ガラス体験工房様子.png" class="intro-img" alt="工房の様子">
-                
+
                 <div class="intro-paragraph">
-                    <?php 
+                    <?php
                     if (have_posts()) :
                         while (have_posts()) : the_post();
                             the_content();
@@ -123,7 +123,7 @@ get_header();
         <h2 class="section-title">体験メニュー</h2>
     </section>
 
-    <?php 
+    <?php
     $args_exp = array(
         'post_type'      => 'glass_menu',
         'tax_query'      => array(
@@ -154,64 +154,62 @@ get_header();
         'tombo'     => 'tombodama',
     ];
 
-    if ($query_exp->have_posts()): 
+    if ($query_exp->have_posts()):
         while ($query_exp->have_posts()): $query_exp->the_post();
-            
+
             $slug = get_post_field('post_name', get_the_ID());
-            
+
             // クラス名の取得（なければデフォルト）
             $header_class  = isset($header_style_map[$slug]) ? $header_style_map[$slug] : 'blown';
             $section_class = isset($section_style_map[$slug]) ? $section_style_map[$slug] : 'blownglass';
     ?>
-        <section class="heading <?php echo esc_attr($header_class); ?>">
-            <div class="title-block">
-                <h3 class="title-main"><?php the_title(); ?></h3>
-                <div class="arrow-line">
-                    <div class="diamond"></div>
-                    <div class="line"></div>
+            <section class="heading <?php echo esc_attr($header_class); ?>">
+                <div class="title-block">
+                    <h3 class="title-main"><?php the_title(); ?></h3>
+                    <div class="arrow-line">
+                        <div class="diamond"></div>
+                        <div class="line"></div>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section>
-            <div class="<?php echo esc_attr($section_class); ?>">
-                <div class="glass-menu-body">
-                    <?php the_content(); ?>
+            <section>
+                <div class="<?php echo esc_attr($section_class); ?>">
+                    <div class="glass-menu-body">
+                        <?php the_content(); ?>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-    <?php 
+    <?php
         endwhile;
         wp_reset_postdata();
-    endif; 
+    endif;
     ?>
-
     <section>
         <div class="reservation-notice-wrapper">
-            <?php 
-            // スラッグ 'reservation-info' の記事を取得して表示
-            $args_notice = array(
-                'post_type'      => 'glass_menu',
-                'name'           => 'reservation-info', // スラッグ指定
-                'posts_per_page' => 1
-            );
-            $query_notice = new WP_Query($args_notice);
+            <div class="reservation-content">
+                <?php
+                // スラッグ 'reservation-info' の記事を取得して表示
+                $args_notice = array(
+                    'post_type'      => 'glass_menu',
+                    'name'           => 'reservation-info', // スラッグ指定
+                    'posts_per_page' => 1
+                );
+                $query_notice = new WP_Query($args_notice);
 
-            if ($query_notice->have_posts()) :
-                while ($query_notice->have_posts()) : $query_notice->the_post();
-                    ?>
-                    <div class="reservation-content">
-                        <?php the_content(); // エディターの内容をそのまま出力 ?>
-                    </div>
-                    <?php
-                endwhile;
-                wp_reset_postdata();
-            else:
-            ?>
-                <p>現在、注意事項はありません。</p>
-            <?php endif; ?>
-            
+                if ($query_notice->have_posts()) :
+                    while ($query_notice->have_posts()) : $query_notice->the_post();
+                        // エディターの内容をそのまま出力
+                        the_content();
+                    endwhile;
+                    wp_reset_postdata();
+                else:
+                ?>
+                    <p>現在、注意事項はありません。</p>
+                <?php endif; ?>
+            </div>
+
             <img class="info-deco-image1" src="<?php echo get_template_directory_uri(); ?>/assets/img/glass/透過ビー玉 2.png" alt="">
         </div>
     </section>
@@ -220,7 +218,7 @@ get_header();
         <h2 class="section-title">受注生産</h2>
     </section>
 
-    <?php 
+    <?php
     $args_order = array(
         'post_type'      => 'glass_menu',
         'tax_query'      => array(
@@ -245,34 +243,34 @@ get_header();
         'blown-order'     => 'glassblowing-wrapper',
     ];
 
-    if ($query_order->have_posts()): 
+    if ($query_order->have_posts()):
         while ($query_order->have_posts()): $query_order->the_post();
             $slug = get_post_field('post_name', get_the_ID());
             $header_class  = isset($order_header_map[$slug]) ? $order_header_map[$slug] : 'blown';
             $section_class = isset($order_section_map[$slug]) ? $order_section_map[$slug] : 'glassblowing-wrapper';
     ?>
-        <section class="heading <?php echo esc_attr($header_class); ?>">
-            <div class="title-block">
-                <h3 class="title-main"><?php the_title(); ?></h3>
-                <div class="arrow-line">
-                    <div class="diamond"></div>
-                    <div class="line"></div>
+            <section class="heading <?php echo esc_attr($header_class); ?>">
+                <div class="title-block">
+                    <h3 class="title-main"><?php the_title(); ?></h3>
+                    <div class="arrow-line">
+                        <div class="diamond"></div>
+                        <div class="line"></div>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section class="<?php echo ($slug === 'blown-order') ? 'blownglass-boxs' : ''; ?>">
-            <div class="<?php echo esc_attr($section_class); ?>">
-                <div class="glass-menu-body">
-                    <?php the_content(); ?>
+            <section class="<?php echo ($slug === 'blown-order') ? 'blownglass-boxs' : ''; ?>">
+                <div class="<?php echo esc_attr($section_class); ?>">
+                    <div class="glass-menu-body">
+                        <?php the_content(); ?>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-    <?php 
+    <?php
         endwhile;
         wp_reset_postdata();
-    endif; 
+    endif;
     ?>
 
     <img class="info-deco-image2" src="<?php echo get_template_directory_uri(); ?>/assets/img/glass/透明ビー玉.png" alt="">
