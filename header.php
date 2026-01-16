@@ -21,6 +21,6 @@
             <a href="<?php echo esc_url(home_url('/glasspage/top')); ?>">ガラス体験工房<wbr>森のくに</a>
             <a href="<?php echo esc_url(home_url('/hotelpage/top')); ?>">ホテル</a>
             <a href="<?php echo esc_url(home_url('/noticepage/top')); ?>">お知らせ</a>
-            <a href="<?php echo esc_url(home_url('/contactpage/top')); ?>">お問い合わせ</a>
+            <a href="<?php echo esc_url(home_url('/contactpage')); ?>">お問い合わせ</a>
         </nav>
     </header>
