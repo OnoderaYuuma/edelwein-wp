@@ -366,7 +366,7 @@ img {
 
 /* メインビジュアル背景 */
 body.home .morino-kuni {
-    background-image: url("assets/img/top/top.png");
+    background-image: url("../img/top/top.png");
 }
 
 /* メインビジュアルリンク (トップ専用デザイン) */
