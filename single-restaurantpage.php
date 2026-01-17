@@ -148,6 +148,7 @@ get_header();
                 $img_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
                 if (!$img_url) $img_url = get_template_directory_uri() . '/assets/img/restaurant/料理.png';
                 $price = get_field('price', get_the_ID());
+                $info  = get_field('info', get_the_ID()); // ★注釈取得
 
                 if ($count % 3 === 0):
         ?>
@@ -160,6 +161,9 @@ get_header();
                             <p class="menu-title--2gyo"><?php echo nl2br(get_the_title()); ?></p>
                             <?php if ($price): ?>
                                 <p class="menu-price">￥<?php echo esc_html($price); ?>円</p>
+                            <?php endif; ?>
+                            <?php if ($info): ?>
+                                <p class="menu-info"><?php echo nl2br(esc_html($info)); ?></p>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -181,7 +185,6 @@ get_header();
             <p style="text-align:center; margin-bottom: 40px;">現在メニューの準備中です。</p>
         <?php endif; ?>
 
-        <p id="set-info" class="info-text">※ライス、スープ、サラダ付き</p>
     </section>
 
     <section id="wine-line-section">
@@ -212,6 +215,7 @@ get_header();
                 $img_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
                 if (!$img_url) $img_url = get_template_directory_uri() . '/assets/img/restaurant/料理.png';
                 $price = get_field('price', get_the_ID());
+                $info  = get_field('info', get_the_ID()); // ★注釈取得
 
                 if ($count % 3 === 0):
         ?>
@@ -224,6 +228,9 @@ get_header();
                             <p class="menu-title--2gyo"><?php echo nl2br(get_the_title()); ?></p>
                             <?php if ($price): ?>
                                 <p class="menu-price">￥<?php echo esc_html($price); ?>円</p>
+                            <?php endif; ?>
+                            <?php if ($info): ?>
+                                <p class="menu-info"><?php echo nl2br(esc_html($info)); ?></p>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -245,7 +252,6 @@ get_header();
             <p style="text-align:center; margin-bottom: 40px;">現在準備中です。</p>
         <?php endif; ?>
 
-        <p id="side-info" class="info-text">※スープ、サラダ付き</p>
         <div class="double-line"></div>
     </section>
 
@@ -280,6 +286,7 @@ get_header();
                     $description = get_field('description', get_the_ID());
                     $p_glass     = get_field('price_glass', get_the_ID());
                     $p_bottle    = get_field('price_bottle', get_the_ID());
+                    $info        = get_field('info', get_the_ID()); // ★注釈取得
             ?>
                     <div class="wine-item">
                         <div class="wine-text">
@@ -294,6 +301,9 @@ get_header();
                             <?php endif; ?>
                             <?php if ($p_bottle): ?>
                                 <p class="price-bottle">ボトル　￥<?php echo esc_html($p_bottle); ?></p>
+                            <?php endif; ?>
+                            <?php if ($info): ?>
+                                <p class="menu-info menu-info--wine"><?php echo nl2br(esc_html($info)); ?></p>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -336,12 +346,18 @@ get_header();
                     while ($query_drink->have_posts()): $query_drink->the_post();
 
                         $price = get_field('price', get_the_ID());
+                        $info  = get_field('info', get_the_ID()); // ★注釈取得
                 ?>
                         <div class="drink-item">
                             <p class="drink-name">・<?php the_title(); ?></p>
-                            <?php if ($price): ?>
-                                <p class="drink-price">￥<?php echo esc_html($price); ?></p>
-                            <?php endif; ?>
+                            <div class="drink-price-wrapper">
+                                <?php if ($price): ?>
+                                    <p class="drink-price">￥<?php echo esc_html($price); ?></p>
+                                <?php endif; ?>
+                                <?php if ($info): ?>
+                                    <p class="menu-info menu-info--drink"><?php echo nl2br(esc_html($info)); ?></p>
+                                <?php endif; ?>
+                            </div>
                         </div>
                     <?php
                     endwhile;

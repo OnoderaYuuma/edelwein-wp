@@ -52,13 +52,12 @@ img {
   display: flex;
   align-items: center;
   writing-mode: horizontal-tb;
+  gap: 30px; 
 }
 
 .nav a {
   font-size: 85%;
-  padding: 1%;
-  gap: 7%;
-  align-items: center;
+  padding: 5px 0;
   display: inline-block;
   text-align: center;
   letter-spacing: 0.2em;
@@ -79,6 +78,18 @@ img {
 .nav a:nth-child(5) {
   display: inline;
   white-space: nowrap;
+}
+
+/* --- ヘッダー・ナビのスマホ対応 --- */
+@media screen and (max-width: 768px) {
+  .header { flex-direction: column; }
+  .nav { 
+      flex-wrap: wrap; 
+      justify-content: center; 
+      margin-top: 10px;
+      gap: 15px; /* スマホ時は間隔を狭める */
+  }
+  .nav a { margin: 5px; font-size: 0.8rem; }
 }
 
 /* ==========================================================================
@@ -291,6 +302,15 @@ img {
   border-bottom-right-radius: 10px;
 }
 
+/* --- ニュースセクションのスマホ対応 --- */
+@media screen and (max-width: 768px) {
+  .news-box { flex-direction: column; }
+  .news-left { width: 100%; padding: 0 0 20px; text-align: center; }
+  .news-right { width: 100%; }
+  .news-list { grid-template-columns: repeat(2, 1fr); } /* スマホは2列 */
+  .news-card { margin-bottom: 10px; }
+}
+
 /* --- イントロダクション (Intro) --- */
 .intro-section {
   width: 100%;
@@ -360,8 +380,150 @@ img {
 }
 #restaurant .copy-triangle { margin-top: -135%; }
 
+/* =========================================
+   5. エディター用調整 (Global Editor Styles)
+   ========================================= */
+
+/* エディターで設定した文字色を、リンクや太字にも【強制的に】適用 */
+.has-text-color strong,
+.has-text-color b,
+.has-text-color em,
+.has-text-color i,
+.has-text-color a {
+    color: inherit !important;
+}
+
+/* エディターの画像配置（回り込み）を反映させる */
+.alignleft {
+    float: left;
+    margin-right: 1.5em;
+    margin-bottom: 1em;
+    max-width: 50%;
+}
+.alignright {
+    float: right;
+    margin-left: 1.5em;
+    margin-bottom: 1em;
+    max-width: 50%;
+}
+.aligncenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1em;
+    clear: both;
+}
+
+/* スマホ表示時の回り込み解除 */
+@media screen and (max-width: 768px) {
+    .alignleft,
+    .alignright {
+        float: none;
+        display: block;
+        margin: 0 auto 1em;
+        max-width: 100%;
+    }
+}
+
+/* =========================================
+   6. ブロックエディター横並び修正
+   （サイズ・比率統一版）
+   ========================================= */
+
+/* --- カラムブロック (.wp-block-columns) --- */
+.wp-block-columns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2em;
+    margin-bottom: 1.5em;
+    align-items: stretch; /* 高さを揃える */
+}
+.wp-block-column {
+    flex-grow: 1;
+    min-width: 0;
+}
+
+/* カラム内の画像エリア調整 */
+.wp-block-column .wp-block-image {
+    height: 100%;
+    margin-bottom: 0;
+}
+
+/* ★画像を強制的に同じ比率・サイズにする設定★ */
+.wp-block-column img {
+    width: 100%;
+    height: 100%;          /* 親要素いっぱいに広げる */
+    aspect-ratio: 3 / 2;   /* 【重要】縦横比を固定（3:2） */
+    object-fit: cover;     /* 枠からはみ出る部分をトリミングして埋める */
+    border-radius: 4px;    /* 角を少し丸くする */
+}
+
+/* --- ギャラリーブロック (.wp-block-gallery) --- */
+.wp-block-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 0 -0.5em 1.5em;
+}
+.wp-block-gallery .wp-block-image {
+    margin: 0 0.5em 1em;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* ギャラリー画像も同様に揃える */
+.wp-block-gallery .wp-block-image img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 3 / 2;   /* 比率を統一 */
+    object-fit: cover;
+    display: block;
+    border-radius: 4px;
+}
+
+/* --- メディアとテキスト (.wp-block-media-text) --- */
+.wp-block-media-text {
+    display: grid;
+    grid-template-columns: 50% 1fr;
+    gap: 30px;
+    align-items: center;
+    margin-bottom: 1.5em;
+}
+
+/* メディアとテキストの画像調整 */
+.wp-block-media-text__media img {
+    width: 100%;
+    height: 100%;
+    max-height: 400px;     /* 高くなりすぎないように制限 */
+    aspect-ratio: 3 / 2;   /* 比率を統一 */
+    object-fit: cover;
+    vertical-align: bottom;
+    border-radius: 4px;
+}
+
+/* ブロックエディターのスマホ対応 */
+@media screen and (max-width: 768px) {
+    .wp-block-columns { display: block; }
+    .wp-block-column { width: 100% !important; margin-bottom: 20px; margin-left: 0 !important; }
+    
+    /* スマホではトリミングを解除して全体を見せる（お好みで削除可） */
+    .wp-block-column img,
+    .wp-block-gallery .wp-block-image img,
+    .wp-block-media-text__media img {
+        height: auto;
+        aspect-ratio: auto; 
+    }
+
+    .wp-block-media-text { display: block; }
+    .wp-block-media-text__media { margin-bottom: 15px; }
+    .wp-block-gallery .wp-block-image { width: calc(50% - 1em); }
+}
+
 /* ==========================================================================
-   5. トップページ専用 (Top Page)
+   7. トップページ専用 (Top Page)
    ========================================================================== */
 
 /* メインビジュアル背景 */
@@ -458,7 +620,7 @@ body.home .morino-kuni-title h1 {
 
 
 /* ==========================================================================
-   6. ガラスページ専用 (#glass)
+   8. ガラスページ専用 (#glass)
    ========================================================================== */
 
 /* メインビジュアル調整 */
@@ -549,18 +711,43 @@ body.home .morino-kuni-title h1 {
     margin-bottom: 1em;
 }
 
-/* 予約注意事項用ラッパー */
+/* 予約注意事項 */
 .reservation-notice-wrapper {
     position: relative;
     width: 85%;
     margin: 0 auto 50px;
-    padding: 2%;
-    font-size: 15px;
+    padding: 30px 40px; /* 内側の余白 */
+    font-size: 16px;
     line-height: 1.8;
 }
 .reservation-content {
     width: 75%; /* 画像を避けるために幅を制限 */
 }
+
+/* リスト（箇条書き）のデザイン */
+.reservation-content ul {
+    list-style: none; /* デフォルトの・を消す */
+    padding-left: 0;
+    margin: 0;
+}
+.reservation-content ul li {
+    position: relative;
+    padding-left: 1.5em; /* ★の分だけインデント */
+    margin-bottom: 0.5em;
+}
+.reservation-content ul li::before {
+    content: "★";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #000; /* ★の色 */
+}
+/* リンクの色（青色） */
+.reservation-content a {
+    color: #0000FF;
+    text-decoration: underline;
+}
+
 .info-deco-image1 { 
     position: absolute; 
     bottom: 10px; 
@@ -570,9 +757,41 @@ body.home .morino-kuni-title h1 {
 }
 .info-deco-image2 { width: 25%; margin-top: -11%; margin-left: 2%; }
 
+/* --- ガラスページのスマホ対応 --- */
+@media screen and (max-width: 768px) {
+    /* イントロダクション */
+    #glass .intro-wrapper { flex-direction: column; }
+    #glass .intro-left, #glass .right-copy-wrapper { width: 100%; }
+    
+    /* コンテンツBOX */
+    #glass .blownglass, #glass .sandblasting, #glass .fusing, #glass .tombodama { width: 95%; }
+    
+    /* 予約注意事項 */
+    .reservation-notice-wrapper {
+        padding: 20px;
+        width: 95%;
+    }
+    .reservation-content {
+        width: 100%;
+    }
+    /* スマホでは画像を下に配置 */
+    .info-deco-image1 {
+        position: static;
+        display: block;
+        width: 40%;
+        margin: 20px auto 0;
+    }
+    
+    /* 各種画像レイアウト */
+    #glass .glass, #glass .mini-glass, #glass .single-flower-vase, #glass .chopstick-rest {
+        flex-direction: column; align-items: center;
+    }
+    #glass .glass_image, #glass .mini-glass_image { margin: 20px auto; width: 60%; }
+}
+
 
 /* ==========================================================================
-   7. レストランページ専用 (#restaurant)
+   9. レストランページ専用 (#restaurant)
    ========================================================================== */
 
 /* メインビジュアル調整 */
@@ -628,48 +847,30 @@ body.home .morino-kuni-title h1 {
   gap: 10%;
   margin: 5% 5%;
 }
-/* =========================================
-   レストランページ バナーエリア修正
-   ========================================= */
 
+/* バナーエリア */
 .restaurant-banners-wrapper {
     display: flex;
     justify-content: center;
-    gap: 20px; /* バナー間の隙間 */
+    gap: 20px;
     width: 90%;
     max-width: 1200px;
-    margin: 40px auto; /* 上下の余白 */
+    margin: 40px auto;
 }
-
 .restaurant-banner-link {
     display: block;
-    width: 48%; /* 2枚並ぶように幅調整 */
+    width: 48%;
     transition: opacity 0.3s ease;
 }
-
 .restaurant-banner-link:hover {
-    opacity: 0.8; /* ホバー時に少し薄くする */
+    opacity: 0.8;
 }
-
 .restaurant-banner-link img {
     width: 100%;
     height: auto;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* 軽く影をつける */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-/* スマホ対応 */
-@media screen and (max-width: 768px) {
-    .restaurant-banners-wrapper {
-        flex-direction: column; /* 縦並びにする */
-        align-items: center;
-        gap: 20px;
-    }
-
-    .restaurant-banner-link {
-        width: 100%; /* 幅いっぱいに */
-        max-width: 500px;
-    }
-}
 #restaurant .menu-item { text-align: center; }
 #restaurant .menu-item .cooking { width: 70%; object-fit: cover; border-radius: 50%; }
 #restaurant .menu-text { text-align: center; margin-top: 10px; }
@@ -678,6 +879,14 @@ body.home .morino-kuni-title h1 {
 #restaurant .menu-title--3gyo { margin-top: 2.5%; margin-bottom: 2.5%; min-height: 4.5em; display: flex; align-items: center; justify-content: center; }
 #restaurant .menu-name { margin-top: 2.5%; font-weight: bold; font-size: 1.1rem; }
 #restaurant .menu-price { font-weight: bold; margin-top: 5px; }
+
+/* メニュー注釈 (info) スタイル */
+.menu-info {
+    font-size: 0.85em; /* 価格より少し小さく */
+    color: #3f3f3f;       /* グレーっぽく */
+    margin-top: 5px;
+    line-height: 1.4;
+}
 
 #restaurant #set-info, #restaurant #side-info {
   text-align: right; margin-right: 10%; color: #666; font-size: 0.9em; margin-top: -20px; margin-bottom: 30px;
@@ -722,6 +931,7 @@ body.home .morino-kuni-title h1 {
 #restaurant .wine-description { margin-left: 1rem; font-size: 0.9rem; color: #666; }
 #restaurant .wine-price { font-size: 16px; text-align: right; font-weight: bold; }
 #restaurant .price-bottle { display: block; }
+.menu-info--wine { text-align: right; }
 
 /* ドリンク */
 #restaurant .drink-header-section { text-align: center; margin-top: -20px; margin-bottom: 30px; }
@@ -733,37 +943,19 @@ body.home .morino-kuni-title h1 {
 #restaurant .drink-price { font-size: 1.2rem; text-align: right; }
 #restaurant .drink-image { position: absolute; right: 0; bottom: 0; width: 15%; opacity: 0.3; pointer-events: none; }
 
+/* ドリンクの注釈調整 */
+.drink-item { align-items: flex-start; }
+.drink-price-wrapper { text-align: right; }
+.menu-info--drink { margin-top: 2px; }
 
-/* ==========================================================================
-   8. レスポンシブ (Mobile)
-   ========================================================================== */
+/* --- レストランページのスマホ対応 --- */
 @media screen and (max-width: 768px) {
-  /* Header */
-  .header { flex-direction: column; }
-  .nav { flex-wrap: wrap; justify-content: center; margin-top: 10px; }
-  .nav a { margin: 5px; font-size: 0.8rem; }
-  
-  /* Top Page News */
-  .news-box { flex-direction: column; }
-  .news-left { width: 100%; padding: 0 0 20px; text-align: center; }
-  .news-right { width: 100%; }
-  .news-list { grid-template-columns: repeat(2, 1fr); } /* スマホは2列 */
-  .news-card { margin-bottom: 10px; }
-
-  /* Glass Page */
-  #glass .intro-wrapper { flex-direction: column; }
-  #glass .intro-left, #glass .right-copy-wrapper { width: 100%; }
-  #glass .blownglass, #glass .sandblasting, #glass .fusing, #glass .tombodama { width: 95%; }
-  #glass .glass, #glass .mini-glass, #glass .single-flower-vase, #glass .chopstick-rest {
-    flex-direction: column; align-items: center;
-  }
-  #glass .glass_image, #glass .mini-glass_image { margin: 20px auto; width: 60%; }
-
-  /* Restaurant Page */
+  /* イントロダクション */
   #restaurant .intro-wrapper { flex-direction: column; }
   #restaurant .intro-left { width: 100%; }
   #restaurant .right-copy-wrapper { width: 100%; margin-top: 50px; }
 
+  /* メニューグリッド */
   #restaurant .menu-row, #restaurant .menu-container {
     grid-template-columns: 1fr; gap: 40px;
   }
@@ -774,114 +966,23 @@ body.home .morino-kuni-title h1 {
     text-align: left; margin-left: 1rem;
   }
   #restaurant .drink-image { width: 30%; bottom: -20px; }
-}
 
-/* =========================================
-   9. エディター用調整 (必須)
-   ========================================= */
+  /* バナー */
+  .restaurant-banners-wrapper {
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+  }
+  .restaurant-banner-link {
+      width: 100%;
+      max-width: 500px;
+  }
 
-/* エディターで設定した文字色を、リンクや太字にも【強制的に】適用 */
-.has-text-color strong,
-.has-text-color b,
-.has-text-color em,
-.has-text-color i,
-.has-text-color a {
-    color: inherit !important;
-}
-
-/* エディターの画像配置（回り込み）を反映させる */
-.alignleft {
-    float: left;
-    margin-right: 1.5em;
-    margin-bottom: 1em;
-    max-width: 50%;
-}
-.alignright {
-    float: right;
-    margin-left: 1.5em;
-    margin-bottom: 1em;
-    max-width: 50%;
-}
-.aligncenter {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 1em;
-    clear: both;
-}
-
-/* スマホ表示時の回り込み解除 */
-@media screen and (max-width: 768px) {
-    .alignleft,
-    .alignright {
-        float: none;
-        display: block;
-        margin: 0 auto 1em;
-        max-width: 100%;
-    }
-}
-
-/* =========================================
-   10. ブロックエディター横並び修正
-   ========================================= */
-
-/* --- カラムブロック (.wp-block-columns) --- */
-.wp-block-columns {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2em;
-    margin-bottom: 1.5em;
-}
-.wp-block-column {
-    flex-grow: 1;
-    min-width: 0;
-}
-.wp-block-column img {
-    max-width: 100%;
-    height: auto;
-}
-
-/* --- ギャラリーブロック (.wp-block-gallery) --- */
-.wp-block-gallery {
-    display: flex;
-    flex-wrap: wrap;
-    list-style: none;
-    padding: 0;
-    margin: 0 -0.5em 1.5em;
-}
-.wp-block-gallery .wp-block-image {
-    margin: 0 0.5em 1em;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-.wp-block-gallery .wp-block-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-/* --- メディアとテキスト (.wp-block-media-text) --- */
-.wp-block-media-text {
-    display: grid;
-    grid-template-columns: 50% 1fr;
-    gap: 30px;
-    align-items: center;
-    margin-bottom: 1.5em;
-}
-.wp-block-media-text__media img {
-    width: 100%;
-    height: auto;
-    vertical-align: bottom;
-}
-
-@media screen and (max-width: 768px) {
-    .wp-block-columns { display: block; }
-    .wp-block-column { width: 100% !important; margin-bottom: 20px; margin-left: 0 !important; }
-    .wp-block-media-text { display: block; }
-    .wp-block-media-text__media { margin-bottom: 15px; }
-    .wp-block-gallery .wp-block-image { width: calc(50% - 1em); }
+  /* 注釈・情報 */
+  .menu-info--wine,
+  .drink-price-wrapper {
+      text-align: left;
+  }
 }
 
 /* ==========================================================================
@@ -919,12 +1020,12 @@ body.page-template-page-banquet_plan {
 }
 
 #banquet_plan .main__ttl::before {
-  background-image: url("../img/banquet_plan/ttl_left.png");
+  background-image: url("assets/img/banquet_plan/ttl_left.png");
   margin-right: 30px;
 }
 
 #banquet_plan .main__ttl::after {
-  background-image: url("../img/banquet_plan/ttl_right.png");
+  background-image: url("assets/img/banquet_plan/ttl_right.png");
   margin-left: 30px;
 }
 
@@ -1107,7 +1208,7 @@ body.page-template-page-banquet_plan {
   font-size: 32px;
 }
 
-/* スマホ対応（簡易） */
+/* --- 宴会プランのスマホ対応 --- */
 @media screen and (max-width: 768px) {
   #banquet_plan .main__ttl {
     font-size: 32px;
@@ -1133,70 +1234,7 @@ body.page-template-page-banquet_plan {
     gap: 10px;
   }
 }
-/* =========================================
-   予約注意事項のスタイル調整
-   ========================================= */
 
-/* 枠組みの調整 */
-.reservation-notice-wrapper {
-    position: relative;
-    width: 85%;
-    margin: 0 auto 50px;
-    padding: 30px 40px; /* 内側の余白を広めに */
-    font-size: 16px;
-    line-height: 1.8;
-}
-
-/* 本文エリア（画像と被らないように幅指定） */
-.reservation-content {
-    width: 70%;
-}
-
-/* --- リスト（箇条書き）のデザイン --- */
-/* エディターで「リスト」ブロックを使うと ul li が出力されます */
-.reservation-content ul {
-    list-style: none; /* デフォルトの・を消す */
-    padding-left: 0;
-    margin: 0;
-}
-
-.reservation-content ul li {
-    position: relative;
-    padding-left: 1.5em; /* ★の分だけインデント */
-    margin-bottom: 0.5em;
-}
-
-.reservation-content ul li::before {
-    content: "★";
-    position: absolute;
-    left: 0;
-    top: 0;
-    color: #000; /* ★の色（必要なら変更可） */
-}
-
-/* リンクの色（青色） */
-.reservation-content a {
-    color: #0000FF;
-    text-decoration: underline;
-}
-
-/* スマホ対応 */
-@media screen and (max-width: 768px) {
-    .reservation-notice-wrapper {
-        padding: 20px;
-        width: 95%;
-    }
-    .reservation-content {
-        width: 100%;
-    }
-    /* スマホでは画像を下に配置 */
-    .info-deco-image1 {
-        position: static;
-        display: block;
-        width: 40%;
-        margin: 20px auto 0;
-    }
-}
 /* ==========================================================================
    12. お問い合わせページ専用 (#contact)
    ========================================================================== */
@@ -1204,7 +1242,7 @@ body.page-template-page-banquet_plan {
 /* 背景設定 */
 body.page-template-page-contactpage {
   /* 他ページと同じ背景画像を使用 */
-  background-image: url("assets/img/top/background.png"); 
+  background-image: url("../img/top/background.png"); 
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -1220,11 +1258,9 @@ body.page-template-page-contactpage {
   margin-bottom: 40px;
   padding-bottom: 20px;
   
-  /* --- 変更箇所ここから --- */
   border-bottom: 5px double #B8A36C; /* 二重線・色は共通カラーのゴールド系に変更 */
   width: 100%; /* 横幅いっぱいに */
   max-width: none; /* 幅制限を解除 */
-  /* --- 変更箇所ここまで --- */
   
   margin-left: 0;
   margin-right: 0;
@@ -1317,7 +1353,7 @@ body.page-template-page-contactpage {
   margin-top: 5px;
 }
 
-/* スマホ対応 */
+/* --- お問い合わせページのスマホ対応 --- */
 @media screen and (max-width: 768px) {
   #contact .main__ttl {
     font-size: 28px;
@@ -1334,4 +1370,37 @@ body.page-template-page-contactpage {
     width: 100%;
     padding: 15px 0;
   }
+}
+
+/* ==========================================================================
+   13. ページ上部へ戻るボタン (Page Top Button)
+   ========================================================================== */
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    opacity: 0;            /* 初期状態は非表示 */
+    pointer-events: none;  /* クリック無効化 */
+    transition: opacity 0.3s ease;
+    width: 60px;           /* ボタンのサイズ */
+    height: auto;
+}
+
+.back-to-top.is-visible {
+    opacity: 1;            /* 表示 */
+    pointer-events: auto;  /* クリック有効化 */
+    cursor: pointer;
+}
+
+.back-to-top img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 50%; /* 丸くする場合 */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.back-to-top:hover {
+    opacity: 0.8;
 }
