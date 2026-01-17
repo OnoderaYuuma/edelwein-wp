@@ -85,7 +85,6 @@ get_header();
         <div class="intro-wrapper">
             <div class="intro-left">
                 <img src="<?php echo get_template_directory_uri(); ?>/assets/img/glass/ガラス体験工房様子.png" class="intro-img" alt="工房の様子">
-
                 <div class="intro-paragraph">
                     <?php
                     if (have_posts()) :
@@ -119,6 +118,18 @@ get_header();
         </div>
     </section>
 
+    <?php
+    // ▼ スタイルのリスト定義（投稿順にこれを割り当てます）
+    // [見出しクラス, 枠線クラス]
+    $style_list = [
+        ['blown',                'blownglass'],   // 1番目: 青
+        ['sandblast',            'sandblasting'], // 2番目: オレンジ
+        ['glass-fusing-heading', 'fusing'],       // 3番目: 緑
+        ['tombo-heading',        'tombodama'],    // 4番目: 紫
+    ];
+    $style_count = count($style_list);
+    ?>
+
     <section class="search-section">
         <h2 class="section-title">体験メニュー</h2>
     </section>
@@ -130,38 +141,23 @@ get_header();
             array(
                 'taxonomy' => 'glass_category',
                 'field'    => 'slug',
-                'terms'    => 'experience',
+                'terms'    => 'experience', // 体験メニュー
             ),
         ),
         'posts_per_page' => -1,
-        'orderby'        => 'menu_order',
+        'orderby'        => 'menu_order', // 管理画面の並び順
         'order'          => 'ASC'
     );
     $query_exp = new WP_Query($args_exp);
 
-    // 見出しの色対応表
-    $header_style_map = [
-        'blown'     => 'blown',
-        'sandblast' => 'sandblast',
-        'fusing'    => 'glass-fusing-heading',
-        'tombo'     => 'tombo-heading',
-    ];
-    // 枠線のスタイル対応表
-    $section_style_map = [
-        'blown'     => 'blownglass',
-        'sandblast' => 'sandblasting',
-        'fusing'    => 'fusing',
-        'tombo'     => 'tombodama',
-    ];
-
     if ($query_exp->have_posts()):
+        $i = 0; // カウンター初期化
         while ($query_exp->have_posts()): $query_exp->the_post();
-
-            $slug = get_post_field('post_name', get_the_ID());
-
-            // クラス名の取得（なければデフォルト）
-            $header_class  = isset($header_style_map[$slug]) ? $header_style_map[$slug] : 'blown';
-            $section_class = isset($section_style_map[$slug]) ? $section_style_map[$slug] : 'blownglass';
+            
+            // カウンターを使ってスタイルを取得（4で割った余りを使うことでループさせる）
+            $current_style = $style_list[$i % $style_count];
+            $header_class  = $current_style[0];
+            $section_class = $current_style[1];
     ?>
             <section class="heading <?php echo esc_attr($header_class); ?>">
                 <div class="title-block">
@@ -182,25 +178,25 @@ get_header();
             </section>
 
     <?php
+            $i++; // カウンターを進める
         endwhile;
         wp_reset_postdata();
     endif;
     ?>
+
     <section>
         <div class="reservation-notice-wrapper">
             <div class="reservation-content">
                 <?php
-                // スラッグ 'reservation-info' の記事を取得して表示
                 $args_notice = array(
                     'post_type'      => 'glass_menu',
-                    'name'           => 'reservation-info', // スラッグ指定
+                    'name'           => 'reservation-info', 
                     'posts_per_page' => 1
                 );
                 $query_notice = new WP_Query($args_notice);
 
                 if ($query_notice->have_posts()) :
                     while ($query_notice->have_posts()) : $query_notice->the_post();
-                        // エディターの内容をそのまま出力
                         the_content();
                     endwhile;
                     wp_reset_postdata();
@@ -225,7 +221,7 @@ get_header();
             array(
                 'taxonomy' => 'glass_category',
                 'field'    => 'slug',
-                'terms'    => 'order',
+                'terms'    => 'order', // 受注生産
             ),
         ),
         'posts_per_page' => -1,
@@ -234,20 +230,14 @@ get_header();
     );
     $query_order = new WP_Query($args_order);
 
-    $order_header_map = [
-        'sandblast-order' => 'sandblast',
-        'blown-order'     => 'blown',
-    ];
-    $order_section_map = [
-        'sandblast-order' => 'sandblast-content',
-        'blown-order'     => 'glassblowing-wrapper',
-    ];
-
     if ($query_order->have_posts()):
+        $i = 0; // カウンターリセット（受注生産も1色目からスタート）
         while ($query_order->have_posts()): $query_order->the_post();
-            $slug = get_post_field('post_name', get_the_ID());
-            $header_class  = isset($order_header_map[$slug]) ? $order_header_map[$slug] : 'blown';
-            $section_class = isset($order_section_map[$slug]) ? $order_section_map[$slug] : 'glassblowing-wrapper';
+            
+            // スタイル割り当てロジック
+            $current_style = $style_list[$i % $style_count];
+            $header_class  = $current_style[0];
+            $section_class = $current_style[1];
     ?>
             <section class="heading <?php echo esc_attr($header_class); ?>">
                 <div class="title-block">
@@ -259,7 +249,7 @@ get_header();
                 </div>
             </section>
 
-            <section class="<?php echo ($slug === 'blown-order') ? 'blownglass-boxs' : ''; ?>">
+            <section>
                 <div class="<?php echo esc_attr($section_class); ?>">
                     <div class="glass-menu-body">
                         <?php the_content(); ?>
@@ -268,6 +258,7 @@ get_header();
             </section>
 
     <?php
+            $i++;
         endwhile;
         wp_reset_postdata();
     endif;
