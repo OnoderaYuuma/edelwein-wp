@@ -1,0 +1,328 @@
+/* ==========================================================================
+   　　フッター
+   ========================================================================== */
+
+body {
+    font-family: 'Sawarabi Mincho', serif;
+}
+
+.footer {
+    background-image: url("../img/footer/footer_bg.png");
+    background-size: cover;
+    background-position: top;
+}
+
+.footer_title {
+    color: #63173B;
+    font-size: 48px;
+    text-align: center;
+    padding-top: 340px;
+    margin-bottom: 60px;
+    font-family: 'Sawarabi Mincho', serif;
+}
+
+/************************************
+    Footer Company Section
+*************************************/
+.footer_company {
+    width: 70%;
+    /* 横％指定にする */
+    padding: 5px 20px 3% 20px;
+    margin: 0 auto 40px auto;
+    background-color: rgba(255, 255, 255, 0.56);
+    border-radius: 10px;
+}
+
+.footer_company_title {
+    font-size: 24px;
+    color: black;
+    margin: 10px 0;
+    font-family: 'Sawarabi Mincho', serif;
+}
+
+.footer_company_content {
+    display: flex;
+    gap: 5%;
+}
+
+
+.footer_company_content_imgdiv {
+    width: 45%;
+    height: 100%;
+    position: relative;
+    z-index: 10;
+}
+
+.footer_company_content_imgdiv::after {
+    content: "-";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    color: lightgray;
+    background-color: lightgray;
+    display: block;
+    border-radius: 10px;
+    bottom: -10px;
+    left: 10px;
+    z-index: -1;
+}
+
+.footer_company_content_imgdiv_img {
+    width: 100%;
+    border-radius: 10px;
+    display: block;
+}
+
+.footer_company_content_textdiv {
+    width: 50%;
+}
+.footer_company_content_textdiv-flex {
+    display: flex;
+    gap: 5%;
+}
+
+.footer_company_content_textdiv p {
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+.footer_company_content_textdiv_button {
+    display: block flex;
+    text-align: center;
+    margin: 80px 0 0 auto;
+    width: 130px;
+    padding: 8px 10px;
+    background-color: #fff;
+    border: 2px solid #B8A36C;
+    color: #000;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.footer_company_content_textdiv_button_img {
+    width: 15px;
+    height: 15px;
+    margin-left: 5px;
+    /* vertical-align: middle; */
+}
+
+/************************************
+    Footer Map Section
+*************************************/
+.footer_map {
+    width: 70%;
+    padding: 20px 2% 1% 2%;
+    margin: 0 auto 40px auto;
+    background-color: rgba(255, 255, 255, 0.56);
+    border-radius: 10px;
+}
+
+.footer_map_mapdiv {
+    display: flex;
+    width: 100%;
+}
+
+.footer_map_mapdiv_text {
+    height: 270px;
+    /* width: 25%; */
+}
+
+.footer_map_mapdiv_map{
+    position: relative;
+    z-index: 10;
+    width: 75%;
+    height: 270px;
+    margin: 0 2%;
+}
+
+.footer_map_mapdiv_map::after {
+    content: "-";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    color: lightgray;
+    background-color: lightgray;
+    display: block;
+    border-radius: 10px;
+    bottom: -10px;
+    left: 10px;
+    z-index: -1;
+}
+
+.footer_map_mapdiv_map iframe {
+    border-radius: 10px;
+}
+
+.footer_map_mapdiv_text {
+    display: flex;
+    padding: 15% 0;
+    width: 20%;
+}
+
+.footer_map_mapdiv_text_icon {
+    width: 30px;
+    height: 30px;
+    /* margin-right: 10px; */
+    /* vertical-align: middle; */
+}
+
+.footer_map_mapdiv_text p {
+    margin : 0;
+}
+
+.footer_map_mapdiv_text_span {
+    font-size: 24px;
+}
+
+.footer_map_text {
+    width: 100%;
+    font-size: 20px;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 0;
+    line-height: 2;
+}
+
+/************************************
+    Footer Contact Section
+*************************************/
+.footer_contact {
+    width: 70%;
+    margin: 0 auto 40px auto;
+    border: #A5A081 1px solid;
+    padding: 10px 2%;
+}
+
+.footer_contact_title {
+    font-size: 32px;
+    text-align: center;
+}
+
+.footer_contact_content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
+    gap: 2%;
+}
+
+.footer_contact_content_company{
+    line-height: 1.8;
+    width: 40%;
+    margin: 20px 4%;
+    white-space: nowrap;
+}
+
+.footer_contact_content_company_title {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.footer_contact_content_company_detail {
+    display: flex;
+    gap: 10px;
+    font-size: 16px;
+    /* flex-wrap: wrap; */
+    /* line-height: 1.8; */
+}
+
+.footer_contact_content_company_button {
+    display: block;
+    text-align: center;
+    margin: 20px auto 0 auto;
+    width: 120px;
+    padding: 5px 10px;
+    background-color: #fff;
+    border: 2px solid #B8A36C;
+    color: #000;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+/* レスポンシブ */
+@media screen and (max-width: 768px) {
+    .footer_company {
+        width: 90%;
+        padding: 5px 10px 3% 10px;
+    }
+    .footer_company_title {
+        font-size: 20px;
+    }
+    .footer_company_content {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    .footer_company_content_imgdiv,
+    .footer_company_content_textdiv {
+        width: 90%;
+        font-size: 14px;
+    }
+    .footer_company_content_textdiv p {
+        font-size: 14px;
+    }
+    .footer_company_content_textdiv_button {
+        margin: 40px auto 0 auto;
+    }
+    .footer_map {
+        width: 90%;
+        padding: 10px 5px 1% 5px;
+    }
+    .footer_map_mapdiv {
+        flex-direction: column;
+        align-items: center;
+    }
+    .footer_map_mapdiv_text,
+    .footer_map_mapdiv_map {
+        width: 90%;
+        margin: 10px 0;
+        padding: 0;
+        height: auto;
+    }
+    .footer_map_text {
+        font-size: 16px;
+    }
+    .footer_contact {
+        width: 90%;
+        padding: 10px 5px;
+    }
+    .footer_contact_content_company {
+        width: 90%;
+        margin: 20px auto;
+        text-align: center;
+    }
+    .footer_contact_content_company_detail {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
+
+
+/************************************
+    Footer Nav Section
+*************************************/
+
+.footer_nav {
+    width: 90%;
+    /* background-color: #63173B; */
+    margin: 0 auto 40px auto;
+}
+.footer_nav ul{
+    width: 100%;
+    margin: 0 auto 20px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+
+/************************************
+    Footer Copyright Section
+*************************************/
+.footer_copyright {
+    text-align: center;
+    padding: 40px 0;
+}
