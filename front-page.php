@@ -8,9 +8,9 @@
             </div>
 
             <div class="morino-kuni-link">
-                <a href="<?php echo esc_url(home_url('/glasspage')); ?>">ガラス工房森のくに</a>
-                <a href="<?php echo esc_url(home_url('/restaurantpage')); ?>">レストランベルンドルフ</a>
-                <a href="<?php echo esc_url(home_url('/hotelpage')); ?>">ホテルベルンドルフ</a>
+                <a href="<?php echo esc_url(home_url('/glasspage/top')); ?>">ガラス工房森のくに</a>
+                <a href="<?php echo esc_url(home_url('/restaurantpage/top')); ?>">レストランベルンドルフ</a>
+                <a href="<?php echo esc_url(home_url('/hotelpage/top')); ?>">ホテルベルンドルフ</a>
             </div>
         </div>
     </section>
@@ -107,23 +107,23 @@
             <div class="purpose__contents">
 
                 <div class="purpose__item purpose__item--glass">
-                    <a class="purpose__link" href="<?php echo esc_url(home_url('/glasspage')); ?>">
+                    <a class="purpose__link" href="<?php echo esc_url(home_url('/glasspage/top')); ?>">
                         <img class="purpose__image_glass" src="<?php echo get_template_directory_uri(); ?>/assets/img/index/創作.png" alt="創作体験">
                     </a>
-                    <a class="purpose__label" href="<?php echo esc_url(home_url('/glasspage')); ?>">ガラス工房森のくに</a>
+                    <a class="purpose__label" href="<?php echo esc_url(home_url('/glasspage/top')); ?>">ガラス工房森のくに</a>
                 </div>
                 <div class="purpose__item purpose__item--restaurant">
-                    <a class="purpose__link" href="<?php echo esc_url(home_url('/restaurantpage')); ?>">
+                    <a class="purpose__link" href="<?php echo esc_url(home_url('/restaurantpage/top')); ?>">
                         <img class="purpose__image_restaurant" src="<?php echo get_template_directory_uri(); ?>/assets/img/index/食事.png" alt="レストラン">
                     </a>
-                    <a class="purpose__label" href="<?php echo esc_url(home_url('/restaurantpage')); ?>">レストラン ベルンドルフ</a>
+                    <a class="purpose__label" href="<?php echo esc_url(home_url('/restaurantpage/top')); ?>">レストラン ベルンドルフ</a>
                 </div>
 
                 <div class="purpose__item purpose__item--hotel">
-                    <a class="purpose__link" href="<?php echo esc_url(home_url('/hotelpage')); ?>">
+                    <a class="purpose__link" href="<?php echo esc_url(home_url('/hotelpage/top')); ?>">
                         <img class="purpose__image purpose_image_hotel" src="<?php echo get_template_directory_uri(); ?>/assets/img/index/宿泊.png" alt="ホテル">
                     </a>
-                    <a class="purpose__label" href="<?php echo esc_url(home_url('/hotelpage')); ?>">ホテル ベルンドルフ</a>
+                    <a class="purpose__label" href="<?php echo esc_url(home_url('/hotelpage/top')); ?>">ホテル ベルンドルフ</a>
                 </div>
 
             </div>
