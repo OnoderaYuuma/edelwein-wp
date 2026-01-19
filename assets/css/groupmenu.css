@@ -1,0 +1,157 @@
+/* 団体様ご予約メニュー */
+#groupmenu .section-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  font-weight: bold;
+  font-size: 26px;
+  text-align: center;
+  margin-bottom: 3%;
+}
+
+#groupmenu .section-title::before,
+#groupmenu .section-title::after {
+  content: "";
+  flex-grow: 1;
+  border-top: 5px double #B8A36C;
+}
+
+/* メニュー全体 */
+#groupmenu .menu-wrapper {
+    margin: 40px auto;
+    max-width: 900px;
+}
+
+/* 全体枠 */
+#groupmenu .menu-contents {
+    position: relative;
+    width: 100%;
+    background: 
+        linear-gradient(to right, 
+            #ffffff 0%, 
+            #ffffff calc(100% - 60px), 
+            #9C2A6E calc(100% - 60px), 
+            #9C2A6E 100%
+        );
+    border: 2px solid #B8A36C;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    padding: 1%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 3%;    /* ←丸みもそのまま使える */
+}
+
+
+/* 2列並び */
+#groupmenu .menu-row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
+}
+
+/* 各メニュー枠 */
+#groupmenu .menu-item {
+    width: 45%;
+    text-align: center;
+}
+
+#groupmenu .menu-title {
+    font-size: 35px !important;
+    font-weight: bold;
+    margin-bottom: 8px;
+    margin-left: 15%;
+    -webkit-text-stroke: 0.5px #B8A36C;
+}
+
+
+#groupmenu .menu-title-row {
+    display: flex;
+    align-items: center;            /* 縦を中央揃え */
+}
+
+
+#groupmenu .price {
+    margin-left: 5px;
+    font-size: 20px !important;
+    -webkit-text-stroke: 0.3px #B8A36C;
+    margin-left: 20%;
+}
+
+#groupmenu .menu-desc {
+    font-size: 16px !important;
+}
+
+#groupmenu .note {
+    font-size: 0.9rem;
+    margin-left: 20%;
+}
+
+#groupmenu .menu-item p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+#groupmenu .menu-item img {
+    width: 50%;
+    height: 65%;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+/* 下部説明文 */
+#groupmenu .menu-note {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 40px;
+    margin-bottom: 2%;
+    line-height: 1.6;
+}
+
+/* 線1 */
+#groupmenu #frame-line-1 {
+    width: 102%;
+    height: 1px;     /* 線の太さ */
+    background-color: #D9D9D9;
+    margin: 5% -1%;
+    padding: 0%;
+}
+
+#groupmenu {
+    position: relative;  /* 追加：帯の定位点 */
+}
+
+#groupmenu #frame-line-2 {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 3%;            /* ← ここがポイント！帯の幅と一致させる */
+    width: 1px;
+    background: #D9D9D9;
+    z-index: 1;
+}
+
+#groupmenu #phone {
+    color: #1B24FF;
+}
+
+#groupmenu .menu-notice {
+    margin-left: 15%;
+    margin-top: 8%;
+    margin-bottom: 10%;
+}
+
+#groupmenu #restaurant-top-link {
+    margin-left: 10%;
+}
+
+/* フッター */
+#groupmenu .footer #tel {
+    font-size: 20px;
+    margin-top: 20%;
+}
+
+#groupmenu .footer #tel-number {
+    font-size: 30px;
+}
