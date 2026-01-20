@@ -27,7 +27,6 @@
                         }
                     ?>
                     <?php if ( $slug === 'glass' ) : ?>
-                        <h3 class="menu-section-title">ガラス体験工房 森のくに</h3>
                         <?php 
                             $args_main = array(
                                 'post_type'      => 'footer_company', // ★カスタム投稿タイプを指定
@@ -151,7 +150,6 @@
                                 <?php endwhile; wp_reset_postdata(); ?>
                             <?php endif; ?>
                     <?php elseif ( $slug === 'hotelpage' ) : ?>
-                        <h3 class="menu-section-title">ホテル ベルンドルフ</h3>
                         <?php 
                             $args_main = array(
                                 'post_type'      => 'footer_company', // ★カスタム投稿タイプを指定
@@ -292,56 +290,143 @@
                 CONTACT
             </p>
             <div class="footer_contact_content">
-                <div class="footer_contact_content_company">
-                    <p class="footer_contact_content_company_title">ガラス体験工房 森のくに</p>
-                    <div class="footer_contact_content_company_detail">
-                        <div>
-                            <p>TEL</p>
-                            <p>営業時間</p>
-                        </div>
-                        <div>
-                            <p>0198-48-3009</p>
-                            <p>9:00～17:00</p>
-                            <p>（体験最終受付 16:00）</p>
-                        </div>
-                    </div>
-                    <p>※体験予約はお電話にてお願い致します。</p>
-                    <a class="footer_contact_content_company_button" href="<?php echo esc_url(home_url('/glasspage')); ?>">詳細はこちら</a>
-                </div>
-                <div class="footer_contact_content_company">
-                    <p class="footer_contact_content_company_title">レストラン ベルンドルフ</p>
-                    <div class="footer_contact_content_company_detail">
-                        <div>
-                            <p>TEL</p>
-                            <p>営業時間</p>
-                        </div>
-                        <div>
-                            <p>0198-48-2155</p>
-                            <p>ランチタイム 11:30～15:00</p>
-                            <p>ラストオーダー 14:30</p>
-                        </div>
-                    </div>
-                    <a class="footer_contact_content_company_button" href="<?php echo esc_url(home_url('/restaurantpage')); ?>">詳細はこちら</a>
-                </div>
-                <div class="footer_contact_content_company">
-                    <p class="footer_contact_content_company_title">ホテル ベルンドルフ</p>
-                    <div class="footer_contact_content_company_detail">
-                        <div>
-                            <p>TEL</p>
-                            <p>営業時間</p>
-                        </div>
-                        <div>
-                            <p>0198-48-4200</p>
-                            <p>「ぶどうの湯」14:00～20:00</p>
-                            <p>（最終受付 19:30）</p>
-                            <div>
-                                <p>ホテル チェックイン 15:00～</p>
-                                <p>　　　 チェックアウト 10:00</p>
+                <!-- ガラス -->
+                <?php 
+                            $args_main = array(
+                                'post_type'      => 'footer_company', // ★カスタム投稿タイプを指定
+                                'tax_query'      => array(             // ★タクソノミーで絞り込み
+                                    array(
+                                        'taxonomy' => 'company_category',
+                                        'field'    => 'slug',
+                                        'terms'    => 'glass',          // スラッグ: 
+                                    ),
+                                ),
+                                'posts_per_page' => -1,
+                                'order'          => 'ASC'
+                            );
+                            $query_main = new WP_Query($args_main);
+    
+                            if ($query_main->have_posts()):
+                                while ($query_main->have_posts()): $query_main->the_post();
+                                    
+                                    $img_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
+                                    if (!$img_url) {
+                                        $img_url = get_template_directory_uri() . '/assets/img/footer/edel-wein-support.png';
+                                    }
+                                    $store_name = get_field('store_name', get_the_ID());
+                                    $tel = get_field('tel', get_the_ID());
+                                    $businesshours = get_field('businesshours', get_the_ID());
+                        ?>
+                        <div class="footer_contact_content_company">
+                            <p class="footer_contact_content_company_title"><?php echo esc_html($store_name); ?></p>
+                            <div class="footer_contact_content_company_detail">
+                                <div>
+                                    <p>TEL</p>
+                                    <p>営業時間</p>
+                                </div>
+                                <div>
+                                    <p><?php echo esc_html($tel); ?></p>
+                                    <p><?php echo esc_html($businesshours); ?></p>
+                                </div>
                             </div>
+                            <p>※体験予約はお電話にてお願い致します。</p>
+                            <a class="footer_contact_content_company_button" href="<?php echo esc_url(home_url('/glasspage')); ?>">詳細はこちら</a>
                         </div>
-                    </div>
-                    <a class="footer_contact_content_company_button" href="<?php echo esc_url(home_url('/hotelpage')); ?>">詳細はこちら</a>
-                </div>
+                                <?php endwhile; wp_reset_postdata(); ?>
+                            <?php endif; ?>
+                <!-- レストラン -->
+                <?php 
+                            $args_main = array(
+                                'post_type'      => 'footer_company', // ★カスタム投稿タイプを指定
+                                'tax_query'      => array(             // ★タクソノミーで絞り込み
+                                    array(
+                                        'taxonomy' => 'company_category',
+                                        'field'    => 'slug',
+                                        'terms'    => 'restaurant',          // スラッグ: 
+                                    ),
+                                ),
+                                'posts_per_page' => -1,
+                                'order'          => 'ASC'
+                            );
+                            $query_main = new WP_Query($args_main);
+    
+                            if ($query_main->have_posts()):
+                                while ($query_main->have_posts()): $query_main->the_post();
+                                    
+                                    $img_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
+                                    if (!$img_url) {
+                                        $img_url = get_template_directory_uri() . '/assets/img/footer/edel-wein-support.png';
+                                    }
+                                    $store_name = get_field('store_name', get_the_ID());
+                                    $tel = get_field('tel', get_the_ID());
+                                    $businesshours = get_field('businesshours', get_the_ID());
+                        ?>
+                        <div class="footer_contact_content_company">
+                            <p class="footer_contact_content_company_title"><?php echo esc_html($store_name); ?></p>
+                            <div class="footer_contact_content_company_detail">
+                                <div>
+                                    <p>TEL</p>
+                                    <p>営業時間</p>
+                                </div>
+                                <div>
+                                    <p><?php echo esc_html($tel); ?></p>
+                                    <p><?php echo esc_html($businesshours); ?></p>
+                                </div>
+                            </div>
+                            <a class="footer_contact_content_company_button" href="<?php echo esc_url(home_url('/restaurantpage')); ?>">詳細はこちら</a>
+                        </div>
+                                <?php endwhile; wp_reset_postdata(); ?>
+                            <?php endif; ?>
+                <!-- ホテル -->
+                <?php 
+                            $args_main = array(
+                                'post_type'      => 'footer_company', // ★カスタム投稿タイプを指定
+                                'tax_query'      => array(             // ★タクソノミーで絞り込み
+                                    array(
+                                        'taxonomy' => 'company_category',
+                                        'field'    => 'slug',
+                                        'terms'    => 'hotel',          // スラッグ: 
+                                    ),
+                                ),
+                                'posts_per_page' => -1,
+                                'order'          => 'ASC'
+                            );
+                            $query_main = new WP_Query($args_main);
+    
+                            if ($query_main->have_posts()):
+                                while ($query_main->have_posts()): $query_main->the_post();
+                                    
+                                    $img_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
+                                    if (!$img_url) {
+                                        $img_url = get_template_directory_uri() . '/assets/img/footer/edel-wein-support.png';
+                                    }
+                                    $store_name = get_field('store_name', get_the_ID());
+                                    $tel = get_field('tel', get_the_ID());
+                                    $businesshours = get_field('businesshours', get_the_ID());
+                                    $checkin = get_field('checkin', get_the_ID());
+                                    $checkout = get_field('checkout', get_the_ID());
+                        ?>
+                        <div class="footer_contact_content_company">
+                            <p class="footer_contact_content_company_title">ホテル ベルンドルフ</p>
+                            <div class="footer_contact_content_company_detail">
+                                <div>
+                                    <p>TEL</p>
+                                    <p>営業時間</p>
+                                </div>
+                                <div>
+                                    <p><?php echo esc_html($tel); ?></p>
+                                    <p><?php echo esc_html($businesshours); ?></p>
+                                    <div>
+                                        <p>ホテル チェックイン <?php echo esc_html($checkin); ?></p>
+                                        <p>　　　 チェックアウト <?php echo esc_html($checkout); ?></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="footer_contact_content_company_button" href="<?php echo esc_url(home_url('/hotelpage')); ?>">詳細はこちら</a>
+                        </div>
+                                <?php endwhile; wp_reset_postdata(); ?>
+                            <?php endif; ?>
+                <!-- ワインシャトー大迫店 -->
                 <div class="footer_contact_content_company">
                     <p class="footer_contact_content_company_title">ワインシャトー大迫店</p>
                     <div class="footer_contact_content_company_detail">
@@ -354,8 +439,8 @@
                             <p>9:00～16:30</p>
                         </div>
                     </div>
-                    <a class="footer_contact_content_company_button" href="">詳細はこちら</a>
                 </div>
+                
             </div>
         </section>
 
