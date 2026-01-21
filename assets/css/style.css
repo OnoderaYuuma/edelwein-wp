@@ -1926,3 +1926,138 @@ body.page-template-page-contactpage {
     display: none;
   }
 }
+
+
+/* ==========================================================================
+   16. 会社概要ページ専用 (#company_info)
+   ========================================================================== */
+
+#company_info .main__ttl {
+  /* Positioning */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Box Model */
+  margin-bottom: 100px;
+  /* Typographic */
+  font-size: 65px;
+
+}
+
+#company_info .main__ttl::before,
+#company_info .main__ttl::after {
+  /* Positioning */
+  display: block;
+  flex: 1;
+
+  /* Box Model */
+  height: 10px;
+
+  /* Visual */
+  background-repeat: no-repeat;
+  background-position: center left;
+  background-size: 100% 100%;
+
+  /* Other */
+  content: "";
+
+  border-top: 1px solid #B8A36C;
+  border-bottom: 1px solid #B8A36C;
+}
+
+#company_info .main__ttl::before {
+  margin-right: 30px;
+}
+
+#company_info .main__ttl::after {
+  margin-left: 30px;
+}
+
+#company_info .spirit, #company_info .philosophy {
+  /* Box Model */
+  margin: 0 auto;
+  width: 70%;
+  max-width: 954px;
+}
+
+#company_info .spirit__ttl, #company_info .philosophy__ttl {
+  /* Typographic */
+  font-family: "Shippori Mincho B1", serif;
+  font-size: 32px;
+  margin-top: 30px;
+}
+
+#company_info .spirit__ttl::before, #company_info .philosophy__ttl::before {
+  /* Typographic (装飾文字) */
+  content: "◆";
+  /* Box Model */
+  margin-right: 10px;
+}
+
+#company_info .spirit__p, #company_info .philosophy__p {
+  /* Box Model */
+  margin-left: 93px;
+  /* Typographic */
+  font-family: "Sawarabi Mincho", serif;
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+#company_info .info__table {
+  /* Box Model */
+  margin: 56px auto 0;
+  width: 55%;
+  max-width: 910px;
+  /* Typographic */
+  text-align: left;
+  font-size: 20px;
+}
+
+#company_info .info__table, #company_info .info__th, #company_info .info__td {
+  /* Box Model */
+  padding: 10px 20px;
+  border: 2px solid #B8A36C;
+  border-collapse: collapse;
+}
+
+#company_info .info__th {
+  /* Visual */
+  background-color: #d9d9d9;
+  width: 25%;
+}
+
+#company_info .info__td {
+  /* Visual */
+  background-color: #ffffff;
+  width: 75%;
+}
+
+@media screen and (max-width: 768px) {
+  #company_info .main__ttl {
+    font-size: 30px;
+    margin-bottom: 60px;
+  }
+
+  #company_info .spirit__ttl, #company_info .philosophy__ttl {
+    font-size: 24px;
+  }
+
+  #company_info .spirit__p, #company_info .philosophy__p {
+    font-size: 20px;
+  }
+
+  #company_info .info__table {
+    margin: 40px auto 0;
+    width: 80%;
+  }
+
+  #company_info .info__table, #company_info .info__th, #company_info .info__td {
+    font-size: 14px;
+  }
+  
+  #company_info .main__ttl::before, #company_info .main__ttl::after {
+    border-top: 1px solid #B8A36C;
+    border-bottom: 1px solid #B8A36C;
+  }
+}
+
