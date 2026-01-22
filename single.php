@@ -84,11 +84,11 @@
                 <nav class="navPrev">
                     <!-- <<の表示 -->
                     <a href=<?php echo esc_url($prev_post_url); ?>>
-                        <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/restaurant/front-link.png" alt="前へ" class="links"><br>
+                        <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/img/archive/front-link.png" alt="前へ" class="links"><br>
                     </a>
                     <div>
                         <p class="prev-text">前のお知らせ</p>
-                        <div class="box-color" style="background-color: <?php echo esc_attr($under_color_prev); ?> ">
+                        <div class="box-color" style="--under-color: <?php echo esc_attr($under_color_prev); ?>;">
                             <div class="box">
                                 <?php if(has_post_thumbnail($prev_post->ID)): ?>
                                     <a href="<?php echo get_permalink($prev_post->ID); ?>">
@@ -146,11 +146,11 @@
                 <nav class="navNext">
                     <!-- >>の表示 -->
                     <a href=<?php echo esc_url($next_post_url); ?>>
-                        <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/restaurant/next-link.png" alt="次へ" class="links"><br>
+                        <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/img/archive/next-link.png" alt="次へ" class="links"><br>
                     </a>
                     <div>
                         <p class="next-text">次のお知らせ</p>
-                        <div class="box-color" style="background-color: <?php echo esc_attr($under_color_next); ?>">
+                        <div class="box-color" style="--under-color: <?php echo esc_attr($under_color_next); ?>;">
                             <div class="box">
                                 <?php if(has_post_thumbnail($next_post->ID)): ?>
                                     <a href="<?php echo get_permalink($next_post->ID); ?>">
