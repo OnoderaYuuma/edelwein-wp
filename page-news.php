@@ -106,11 +106,11 @@
                         <?php else : ?>
                             <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/img/top/noimage.png" alt="No Image" class="article-img">
                         <?php endif; ?>
-                        <!-- <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/restaurant/restaurant.png" alt="画像" class="article-img"> -->
                         <h2 class="article-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
                         <div class="article-info">
                             <time datetime="<?php echo get_the_date('Y-m-d'); ?>" class="article-time"><?php echo get_the_date('Y-m-d'); ?></time>
-                            <p class="category"><?php the_category(' '); ?></p>
+                            <form action=""></form>
+                            <p class="category"><?php $cat = get_the_category(); $cat = $cat[0]; { echo $cat->cat_name; } ?></p>
                         </div>
                     </div>
                 </div>
