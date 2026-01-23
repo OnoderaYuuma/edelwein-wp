@@ -7,9 +7,9 @@ get_header();
 
 <main id="banquet_plan">
     <h1 class="main__ttl">ご宴会プラン</h1>
-    
+
     <a href="<?php echo esc_url(home_url('/restaurantpage/top')); ?>" class="move_restaurant">＜ レストラン ベルンドルフ トップへ</a>
-    
+
     <div class="banquet__inner">
         <article class="banquet_intro">
             <section class="banquet_intro__lead">
@@ -48,22 +48,22 @@ get_header();
         <article class="banquet_fees">
             <h2 class="banquet_fees__ttl">大迫ふるさとセンター 会場利用料金</h2>
             <p class="banquet_fees__note">※使用料は、使用時間により徴収致します。</p>
-            
+
             <div class="banquet_fees__image-area">
-                <?php 
+                <?php
                 $fee_image = get_field('banquet_fee_image');
-                if( !empty($fee_image) ): ?>
+                if (!empty($fee_image)): ?>
                     <img src="<?php echo esc_url($fee_image['url']); ?>" alt="<?php echo esc_attr($fee_image['alt']); ?>" class="banquet_fees__img" />
                 <?php else: ?>
                     <p style="text-align:center;">料金表の画像が設定されていません。</p>
                 <?php endif; ?>
             </div>
-            
+
             <div class="banquet_contact">
                 <p>ご予約はこちら</p>
-                <?php 
+                <?php
                 $tel = get_field('banquet_tel');
-                if( $tel ): 
+                if ($tel):
                     // 電話番号リンク用にハイフン等を削除した番号を作成
                     $tel_link = str_replace(array('-', ' ', '(', ')'), '', $tel);
                 ?>
