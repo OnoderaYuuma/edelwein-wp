@@ -1,5 +1,28 @@
 <?php get_header(); ?>
 
+<?php
+// footer_companyから共通情報を取得（トップページ用）
+$top_info = [
+    'postcode' => '',
+    'address'  => '',
+];
+
+// デフォルトの店舗情報を取得（edelwein-supportまたは最初の1件）
+$args_info = [
+    'post_type'      => 'footer_company',
+    'posts_per_page' => 1,
+    'orderby'        => 'date',
+    'order'          => 'ASC'
+];
+$query_info = new WP_Query($args_info);
+if ($query_info->have_posts()) {
+    $query_info->the_post();
+    $top_info['postcode'] = get_field('postcode');
+    $top_info['address']  = get_field('address');
+    wp_reset_postdata();
+}
+?>
+
 <main class="page">
     <section class="morino-kuni">
         <div class="morino-kuni-content">
@@ -8,15 +31,15 @@
             </div>
 
             <div class="morino-kuni-link">
-                <a href="<?php echo esc_url(home_url('/glasspage/top')); ?>">ガラス工房森のくに</a>
-                <a href="<?php echo esc_url(home_url('/restaurantpage/top')); ?>">レストランベルンドルフ</a>
-                <a href="<?php echo esc_url(home_url('/hotelpage/top')); ?>">ホテルベルンドルフ</a>
+                <a href="<?php echo esc_url(home_url('/glasspage/top')); ?>">ガラス体験工房 森のくに</a>
+                <a href="<?php echo esc_url(home_url('/restaurantpage/top')); ?>">レストラン ベルンドルフ</a>
+                <a href="<?php echo esc_url(home_url('/hotel')); ?>">ホテル ベルンドルフ</a>
             </div>
         </div>
     </section>
 
     <p class="morino-kuni-address">
-        所在地：〒028-3203 岩手県花巻市大迫町 大迫10-16-1
+        所在地：<?php if ($top_info['postcode']) : ?>〒<?php echo esc_html($top_info['postcode']); ?> <?php endif; ?><?php echo esc_html($top_info['address']); ?>
     </p>
 
     <img src="<?php echo get_template_directory_uri(); ?>/assets/img/top/line.png" alt="線" class="section-line">
@@ -110,7 +133,7 @@
                     <a class="purpose__link" href="<?php echo esc_url(home_url('/glasspage/top')); ?>">
                         <img class="purpose__image_glass" src="<?php echo get_template_directory_uri(); ?>/assets/img/index/創作.png" alt="創作体験">
                     </a>
-                    <a class="purpose__label" href="<?php echo esc_url(home_url('/glasspage/top')); ?>">ガラス工房森のくに</a>
+                    <a class="purpose__label" href="<?php echo esc_url(home_url('/glasspage/top')); ?>">ガラス体験工房 森のくに</a>
                 </div>
                 <div class="purpose__item purpose__item--restaurant">
                     <a class="purpose__link" href="<?php echo esc_url(home_url('/restaurantpage/top')); ?>">
@@ -120,10 +143,10 @@
                 </div>
 
                 <div class="purpose__item purpose__item--hotel">
-                    <a class="purpose__link" href="<?php echo esc_url(home_url('/hotelpage/top')); ?>">
+                    <a class="purpose__link" href="<?php echo esc_url(home_url('/hotel')); ?>">
                         <img class="purpose__image purpose_image_hotel" src="<?php echo get_template_directory_uri(); ?>/assets/img/index/宿泊.png" alt="ホテル">
                     </a>
-                    <a class="purpose__label" href="<?php echo esc_url(home_url('/hotelpage/top')); ?>">ホテル ベルンドルフ</a>
+                    <a class="purpose__label" href="<?php echo esc_url(home_url('/hotel')); ?>">ホテル ベルンドルフ</a>
                 </div>
 
             </div>
@@ -143,9 +166,15 @@
     </section>
 
     <section class="insta-section">
-        <h2 class="section-title">ガラス工房森のくに<br>Instagram</h2>
-        <img class="insta-section__img" src="<?php echo get_template_directory_uri(); ?>/assets/img/index/森のくにインスタ.png" alt="ガラス工房森のくに Instagram紹介画像">
+        <div class="insta-wrapper">
+            <?php if (have_posts()) : ?>
+                <?php while (have_posts()) : the_post(); ?>
+                    <?php the_content(); ?>
+                <?php endwhile; ?>
+            <?php endif; ?>
+        </div>
     </section>
+
 
     <div class="grape">
         <img class="grape__img grape__img--fruit" src="<?php echo get_template_directory_uri(); ?>/assets/img/index/ぶどう.png" alt="">

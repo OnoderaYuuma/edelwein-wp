@@ -1,5 +1,36 @@
 <?php
 get_header();
+
+// footer_companyから共通情報を取得
+$glass_info = [
+    'businesshours' => '',
+    'regulerholiday' => '',
+    'tel' => '',
+    'postcode' => '',
+    'address' => '',
+];
+
+$args_info = [
+    'post_type'      => 'footer_company',
+    'tax_query'      => [
+        [
+            'taxonomy' => 'company_category',
+            'field'    => 'slug',
+            'terms'    => 'glass',
+        ],
+    ],
+    'posts_per_page' => 1,
+];
+$query_info = new WP_Query($args_info);
+if ($query_info->have_posts()) {
+    $query_info->the_post();
+    $glass_info['businesshours'] = get_field('businesshours');
+    $glass_info['regulerholiday'] = get_field('regulerholiday');
+    $glass_info['tel']            = get_field('tel');
+    $glass_info['postcode']       = get_field('postcode');
+    $glass_info['address']        = get_field('address');
+    wp_reset_postdata();
+}
 ?>
 
 <main id="glass">
@@ -17,8 +48,8 @@ get_header();
     </section>
 
     <p class="morino-kuni-address">
-        営業時間：9:00〜17:00(最終受付16:00) 定休日：火曜日(祝祭日は営業)
-        TEL：0198-48-3009 岩手県花巻市大迫町10-45-1
+        営業時間：<?php echo esc_html($glass_info['businesshours']); ?> 定休日：<?php echo esc_html($glass_info['regulerholiday']); ?><br />
+        TEL：<a href="tel:<?php echo esc_attr(str_replace('-', '', $glass_info['tel'])); ?>"><?php echo esc_html($glass_info['tel']); ?></a> <?php if ($glass_info['postcode']) : ?>〒<?php echo esc_html($glass_info['postcode']); ?> <?php endif; ?><?php echo esc_html($glass_info['address']); ?>
     </p>
 
     <img src="<?php echo get_template_directory_uri(); ?>/assets/img/top/line.png" alt="線" class="section-line">
@@ -153,7 +184,7 @@ get_header();
     if ($query_exp->have_posts()):
         $i = 0; // カウンター初期化
         while ($query_exp->have_posts()): $query_exp->the_post();
-            
+
             // カウンターを使ってスタイルを取得（4で割った余りを使うことでループさせる）
             $current_style = $style_list[$i % $style_count];
             $header_class  = $current_style[0];
@@ -190,7 +221,7 @@ get_header();
                 <?php
                 $args_notice = array(
                     'post_type'      => 'glass_menu',
-                    'name'           => 'reservation-info', 
+                    'name'           => 'reservation-info',
                     'posts_per_page' => 1
                 );
                 $query_notice = new WP_Query($args_notice);
@@ -233,7 +264,7 @@ get_header();
     if ($query_order->have_posts()):
         $i = 0; // カウンターリセット（受注生産も1色目からスタート）
         while ($query_order->have_posts()): $query_order->the_post();
-            
+
             // スタイル割り当てロジック
             $current_style = $style_list[$i % $style_count];
             $header_class  = $current_style[0];
