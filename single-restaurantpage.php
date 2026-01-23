@@ -1,5 +1,36 @@
 <?php
 get_header();
+
+// footer_companyから共通情報を取得
+$restaurant_info = [
+    'businesshours' => '',
+    'regulerholiday' => '',
+    'tel' => '',
+    'postcode' => '',
+    'address' => '',
+];
+
+$args_info = [
+    'post_type'      => 'footer_company',
+    'tax_query'      => [
+        [
+            'taxonomy' => 'company_category',
+            'field'    => 'slug',
+            'terms'    => 'restaurant',
+        ],
+    ],
+    'posts_per_page' => 1,
+];
+$query_info = new WP_Query($args_info);
+if ($query_info->have_posts()) {
+    $query_info->the_post();
+    $restaurant_info['businesshours'] = get_field('businesshours');
+    $restaurant_info['regulerholiday'] = get_field('regulerholiday');
+    $restaurant_info['tel']            = get_field('tel');
+    $restaurant_info['postcode']       = get_field('postcode');
+    $restaurant_info['address']        = get_field('address');
+    wp_reset_postdata();
+}
 ?>
 
 <main id="restaurant">
@@ -18,8 +49,8 @@ get_header();
     </section>
 
     <p class="morino-kuni-address">
-        営業時間：11:00〜15:00 ラストオーダー：14:30 定休日：火曜日<br />
-        TEL：0198-48-2155　岩手県花巻市大迫町18-12-5
+        営業時間：<?php echo esc_html($restaurant_info['businesshours']); ?> 定休日：<?php echo esc_html($restaurant_info['regulerholiday']); ?><br />
+        TEL：<a href="tel:<?php echo esc_attr(str_replace('-', '', $restaurant_info['tel'])); ?>"><?php echo esc_html($restaurant_info['tel']); ?></a>　<?php if ($restaurant_info['postcode']) : ?>〒<?php echo esc_html($restaurant_info['postcode']); ?> <?php endif; ?><?php echo esc_html($restaurant_info['address']); ?>
     </p>
 
     <img src="<?php echo get_template_directory_uri(); ?>/assets/img/top/line.png" alt="線" class="section-line" />
@@ -100,7 +131,7 @@ get_header();
     </section>
 
     <div class="restaurant-banners-wrapper">
-        <a href="#" class="restaurant-banner-link">
+        <a href="<?php echo esc_url(home_url('/groupmenu')); ?>" class="restaurant-banner-link">
             <img src="<?php echo get_template_directory_uri(); ?>/assets/img/restaurant/団体予約.png" alt="団体様ご予約メニューはこちら" />
         </a>
 
@@ -182,7 +213,7 @@ get_header();
             <?php endif; ?>
 
         <?php else: ?>
-            <p style="text-align:center; margin-bottom: 40px;">現在メニューの準備中です。</p>
+            <p class="menu-empty-message">現在メニューの準備中です。</p>
         <?php endif; ?>
 
     </section>
@@ -249,7 +280,7 @@ get_header();
             <?php endif; ?>
 
         <?php else: ?>
-            <p style="text-align:center; margin-bottom: 40px;">現在準備中です。</p>
+            <p class="menu-empty-message">現在準備中です。</p>
         <?php endif; ?>
 
         <div class="double-line"></div>
@@ -312,7 +343,7 @@ get_header();
                 wp_reset_postdata();
             else:
                 ?>
-                <p style="text-align:center;">現在ワインリストの準備中です。</p>
+                <p class="wine-empty-message">現在ワインリストの準備中です。</p>
             <?php endif; ?>
         </div>
     </section>
@@ -364,10 +395,9 @@ get_header();
                     wp_reset_postdata();
                 else:
                     ?>
-                    <p style="text-align:center;">現在ドリンクメニューの準備中です。</p>
+                    <p class="drink-empty-message">現在ドリンクメニューの準備中です。</p>
                 <?php endif; ?>
             </div>
-            <img class="drink-image" src="<?php echo get_template_directory_uri(); ?>/assets/img/restaurant/ワイングラス.png" alt="ワイングラス">
         </div>
     </section>
 </main>

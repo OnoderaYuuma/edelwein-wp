@@ -5,9 +5,6 @@
     <meta charset="<?php bloginfo('charset') ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="<?php bloginfo('description'); ?>">
-    
-
-    
     <title><?php bloginfo('name'); ?></title>
     <?php wp_head(); ?>
 </head>
@@ -17,256 +14,180 @@
     <footer class="footer">
         <p class="footer_title">EDEL WEIN support</p>
 
+        <?php
+
+        // 1. URL判定用の「スラッグリスト」を作成
+
+        $check_slugs = array();
+
+        if (is_front_page()) {
+            $check_slugs[] = 'front';
+        } elseif (is_home() || (is_archive() && get_post_type() === 'post')) {
+            $check_slugs[] = 'news';
+        } elseif (is_singular('hotel_detail')) {
+            $check_slugs[] = 'hotel'; // ホテル詳細CPTならホテル扱い
+        } else {
+            // 固定ページやその他の場合
+            global $post;
+            if (isset($post->ID)) {
+                // 自分自身のスラッグ
+                $check_slugs[] = get_post_field('post_name', $post->ID);
+
+                // 親ページ（先祖）のスラッグを全て取得して追加
+                $ancestors = get_post_ancestors($post->ID);
+                if ($ancestors) {
+                    foreach ($ancestors as $ancestor_id) {
+                        $check_slugs[] = get_post_field('post_name', $ancestor_id);
+                    }
+                }
+            }
+            // 投稿タイプアーカイブの場合なども考慮して投稿タイプ名も追加
+            $check_slugs[] = get_query_var('post_type');
+        }
+
+        // 2. 表示モードの決定
+        // 初期設定（デフォルト：本部・会社概要）
+        $target_term = 'edelwein-support';
+        $view_mode   = 'default';
+        $link_url    = home_url('/company/top');
+        $btn_text    = '会社概要はこちら';
+
+        // リスト内に特定のキーワードが含まれているかチェック（優先順位順）
+
+        // --- ガラス体験工房 (/glasspage/ を含む場合) ---
+        if (in_array('glasspage', $check_slugs, true)) {
+            $target_term = 'glass';
+            $view_mode   = 'glass';
+            $link_url    = home_url('/glasspage');
+            $btn_text    = '詳細はこちら';
+
+            // --- レストラン (/restaurantpage/ 等を含む場合) ---
+        } elseif (count(array_intersect(['restaurantpage', 'banquet_plan', 'groupmenu'], $check_slugs)) > 0) {
+            $target_term = 'restaurant';
+            $view_mode   = 'restaurant';
+            $link_url    = home_url('/restaurantpage');
+            $btn_text    = '詳細はこちら';
+
+            // --- ホテル (// 等を含む場合) ---
+        } elseif (in_array('hotel', $check_slugs, true) || is_singular('hotel_detail')) {
+            $target_term = 'hotel';
+            $view_mode   = 'hotel';
+            $link_url    = home_url('/hotel');
+            $btn_text    = '詳細はこちら';
+        }
+
+        // デバッグ用（表示されない場合は以下の // を外して確認してください）
+        // echo '<div style="background:#333;color:#fff;padding:10px;">Check: ' . implode(',', $check_slugs) . ' / Target: ' . $target_term . '</div>';
+        ?>
+
         <section class="footer_company">
-                <!-- wordpress -->
-                    <?php
-                        if ( is_front_page() ) {
-                            $slug = 'home'; // フロントページの場合のスラッグ
-                        } else {
-                            $slug = get_queried_object()->post_name; // 現在のページのスラッグを取得
-                        }
-                    ?>
-                    <?php if ( $slug === 'glass' ) : ?>
-                        <?php 
-                            $args_main = array(
-                                'post_type'      => 'footer_company', // ★カスタム投稿タイプを指定
-                                'tax_query'      => array(             // ★タクソノミーで絞り込み
-                                    array(
-                                        'taxonomy' => 'company_category',
-                                        'field'    => 'slug',
-                                        'terms'    => 'glass',          // スラッグ: 
-                                    ),
-                                ),
-                                'posts_per_page' => -1,
-                                'order'          => 'ASC'
-                            );
-                            $query_main = new WP_Query($args_main);
-    
-                            if ($query_main->have_posts()):
-                                while ($query_main->have_posts()): $query_main->the_post();
-                                    
-                                    $img_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
-                                    if (!$img_url) {
-                                        $img_url = get_template_directory_uri() . '/assets/img/footer/edel-wein-support.png';
-                                    }
-                                    $store_name = get_field('store_name', get_the_ID());
-                                    $tel = get_field('tel', get_the_ID());
-                                    $fax = get_field('fax', get_the_ID());
-                                    $postcode = get_field('postcode', get_the_ID());
-                                    $address = get_field('address', get_the_ID());
-                                    $businesshours = get_field('businesshours', get_the_ID());
-                                    $regulerholiday = get_field('regulerholiday', get_the_ID());
-                        ?>
-                        <p class="footer_company_title">◆<?php echo esc_html($store_name); ?></p>
-                            <div class="footer_company_content">
-                                <div class="footer_company_content_imgdiv">
-                                    <img class="footer_company_content_imgdiv_img" src="<?php echo esc_url($img_url); ?>" alt="<?php the_title(); ?>">
-                                </div>
-                                <div class="footer_company_content_textdiv">
-                                    <div class="footer_company_content_textdiv-flex">
-                                        <div>
-                                            <p>TEL</p>
-                                            <p>FAX</p>
-                                            <p>所在地</p>
-                                            <p></p>
+            <?php
+            // カスタム投稿「店舗情報」を取得
+            $args_main = array(
+                'post_type'      => 'footer_company',
+                'tax_query'      => array(
+                    array(
+                        'taxonomy' => 'company_category',
+                        'field'    => 'slug',
+                        'terms'    => $target_term, // 上記で決定したスラッグで絞り込み
+                    ),
+                ),
+                'posts_per_page' => 1,
+            );
+            $query_main = new WP_Query($args_main);
+
+            if ($query_main->have_posts()):
+                while ($query_main->have_posts()): $query_main->the_post();
+
+                    // 画像・共通フィールド取得
+                    $img_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
+                    if (!$img_url) {
+                        $img_url = get_template_directory_uri() . '/assets/img/footer/edel-wein-support.png';
+                    }
+                    $store_name = get_field('store_name');
+                    $tel        = get_field('tel');
+                    $fax        = get_field('fax');
+                    $postcode   = get_field('postcode');
+                    $address    = get_field('address');
+
+                    // 個別フィールド取得
+                    $businesshours  = get_field('businesshours');
+                    $regulerholiday = get_field('regulerholiday');
+                    $note_glass     = get_field('note');
+                    $checkin        = get_field('checkin');
+                    $checkout       = get_field('checkout');
+            ?>
+
+                    <p class="footer_company_title">◆<?php echo esc_html($store_name); ?></p>
+                    <div class="footer_company_content">
+                        <div class="footer_company_content_imgdiv">
+                            <img class="footer_company_content_imgdiv_img" src="<?php echo esc_url($img_url); ?>" alt="<?php the_title(); ?>">
+                        </div>
+
+                        <div class="footer_company_content_textdiv">
+                            <div class="footer_company_content_textdiv-flex">
+                                <div>
+                                    <p>TEL</p>
+                                    <p>FAX</p>
+                                    <p>所在地</p>
+                                    <p>&nbsp;</p> <?php if ($view_mode !== 'default'): ?>
+                                        <?php if ($view_mode !== 'hotel'): ?>
+                                            <p style="height: 1em;"></p>
                                             <p>営業時間</p>
                                             <p>定休日</p>
-                                        </div>
-                                        <div>
-                                            <p><?php echo esc_html($tel); ?></p>
-                                            <p><?php echo esc_html($fax); ?></p>
-                                            <p>〒<?php echo esc_html($postcode); ?></p>
-                                            <p><?php echo esc_html($address); ?></p>
-                                            <p><?php echo esc_html($businesshours); ?></p>
-                                            <p><?php echo esc_html($regulerholiday); ?></p>
-                                        </div>
-                                    </div>
-                                    <p style="color: red;">※体験予約はお電話までお願い致します。</p>
-                                    <a class="footer_company_content_textdiv_button" href=""><div>詳細はこちら<img class="footer_company_content_textdiv_button_img" src="<?php echo get_template_directory_uri(); ?>/assets/img/footer/link_arrow.png" alt=""></div></a>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                </div>
+
+                                <div>
+                                    <p><?php echo esc_html($tel); ?></p>
+                                    <p><?php echo esc_html($fax); ?></p>
+                                    <p>〒<?php echo esc_html($postcode); ?></p>
+                                    <p><?php echo esc_html($address); ?></p>
+
+                                    <?php if ($view_mode === 'glass' || $view_mode === 'restaurant'): ?>
+                                        <p style="height: 1em;"></p>
+                                        <p><?php echo esc_html($businesshours); ?></p>
+                                        <p><?php echo esc_html($regulerholiday); ?></p>
+                                    <?php endif; ?>
                                 </div>
                             </div>
-                        </p>
-                                <?php endwhile; wp_reset_postdata(); ?>
-                            <?php endif; ?>
-                    <?php elseif ( $slug === 'restaurantpage' ) : ?>
-                        <?php 
-                            $args_main = array(
-                                'post_type'      => 'footer_company', // ★カスタム投稿タイプを指定
-                                'tax_query'      => array(             // ★タクソノミーで絞り込み
-                                    array(
-                                        'taxonomy' => 'company_category',
-                                        'field'    => 'slug',
-                                        'terms'    => 'restaurant',          // スラッグ: 
-                                    ),
-                                ),
-                                'posts_per_page' => -1,
-                                'order'          => 'ASC'
-                            );
-                            $query_main = new WP_Query($args_main);
-    
-                            if ($query_main->have_posts()):
-                                while ($query_main->have_posts()): $query_main->the_post();
-                                    
-                                    $img_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
-                                    if (!$img_url) {
-                                        $img_url = get_template_directory_uri() . '/assets/img/footer/edel-wein-support.png';
-                                    }
-                                    $store_name = get_field('store_name', get_the_ID());
-                                    $tel = get_field('tel', get_the_ID());
-                                    $fax = get_field('fax', get_the_ID());
-                                    $postcode = get_field('postcode', get_the_ID());
-                                    $address = get_field('address', get_the_ID());
-                                    $businesshours = get_field('businesshours', get_the_ID());
-                                    $regulerholiday = get_field('regulerholiday', get_the_ID());
-                        ?>
-                        <p class="footer_company_title">◆<?php echo esc_html($store_name); ?></p>
-                            <div class="footer_company_content">
-                                <div class="footer_company_content_imgdiv">
-                                    <img class="footer_company_content_imgdiv_img" src="<?php echo esc_url($img_url); ?>" alt="<?php the_title(); ?>">
-                                </div>
-                                <div class="footer_company_content_textdiv">
-                                    <div class="footer_company_content_textdiv-flex">
-                                        <div>
-                                            <p>TEL</p>
-                                            <p>FAX</p>
-                                            <p>所在地</p>
-                                            <p></p>
-                                            <p>営業時間</p>
-                                            <p>定休日</p>
-                                        </div>
-                                        <div>
-                                            <p><?php echo esc_html($tel); ?></p>
-                                            <p><?php echo esc_html($fax); ?></p>
-                                            <p>〒<?php echo esc_html($postcode); ?></p>
-                                            <p><?php echo esc_html($address); ?></p>
-                                            <p><?php echo esc_html($businesshours); ?></p>
-                                            <p><?php echo esc_html($regulerholiday); ?></p>
-                                        </div>
-                                    </div>
-                                    <a class="footer_company_content_textdiv_button" href=""><div>詳細はこちら<img class="footer_company_content_textdiv_button_img" src="<?php echo get_template_directory_uri(); ?>/assets/img/footer/link_arrow.png" alt=""></div></a>
-                                </div>
-                            </div>
-                        </p>
-                                <?php endwhile; wp_reset_postdata(); ?>
-                            <?php endif; ?>
-                    <?php elseif ( $slug === 'hotelpage' ) : ?>
-                        <?php 
-                            $args_main = array(
-                                'post_type'      => 'footer_company', // ★カスタム投稿タイプを指定
-                                'tax_query'      => array(             // ★タクソノミーで絞り込み
-                                    array(
-                                        'taxonomy' => 'company_category',
-                                        'field'    => 'slug',
-                                        'terms'    => 'hotel',          // スラッグ: 
-                                    ),
-                                ),
-                                'posts_per_page' => -1,
-                                'order'          => 'ASC'
-                            );
-                            $query_main = new WP_Query($args_main);
-    
-                            if ($query_main->have_posts()):
-                                while ($query_main->have_posts()): $query_main->the_post();
-                                    
-                                    $img_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
-                                    if (!$img_url) {
-                                        $img_url = get_template_directory_uri() . '/assets/img/footer/edel-wein-support.png';
-                                    }
-                                    $store_name = get_field('store_name', get_the_ID());
-                                    $tel = get_field('tel', get_the_ID());
-                                    $fax = get_field('fax', get_the_ID());
-                                    $postcode = get_field('postcode', get_the_ID());
-                                    $address = get_field('address', get_the_ID());
-                                    $businesshours = get_field('businesshours', get_the_ID());
-                                    $checkin = get_field('checkin', get_the_ID());
-                                    $checkout = get_field('checkout', get_the_ID());
-                        ?>
-                        <p class="footer_company_title">◆<?php echo esc_html($store_name); ?></p>
-                            <div class="footer_company_content">
-                                <div class="footer_company_content_imgdiv">
-                                    <img class="footer_company_content_imgdiv_img" src="<?php echo esc_url($img_url); ?>" alt="<?php the_title(); ?>">
-                                </div>
-                                <div class="footer_company_content_textdiv">
-                                    <div class="footer_company_content_textdiv-flex">
-                                        <div>
-                                            <p>TEL</p>
-                                            <p>FAX</p>
-                                            <p>所在地</p>
-                                        </div>
-                                        <div>
-                                            <p><?php echo esc_html($tel); ?></p>
-                                            <p><?php echo esc_html($fax); ?></p>
-                                            <p>〒<?php echo esc_html($postcode); ?></p>
-                                            <p><?php echo esc_html($address); ?></p>
-                                        </div>
-                                    </div>
+
+                            <?php if ($view_mode === 'glass'): ?>
+                                <?php if ($note_glass): ?>
+                                    <p style="color: red; margin-top: 10px;"><?php echo esc_html($note_glass); ?></p>
+                                <?php else: ?>
+                                    <p style="color: red; margin-top: 10px;">※体験予約はお電話までお願い致します。</p>
+                                <?php endif; ?>
+
+                            <?php elseif ($view_mode === 'hotel'): ?>
+                                <div style="margin-top: 15px;">
                                     <p>日帰り入浴施設「ぶどうの湯」</p>
                                     <p>営業時間　<?php echo esc_html($businesshours); ?></p>
                                     <p>チェックイン <?php echo esc_html($checkin); ?></p>
                                     <p>チェックアウト <?php echo esc_html($checkout); ?></p>
-                                    <a class="footer_company_content_textdiv_button" href=""><div>詳細はこちら<img class="footer_company_content_textdiv_button_img" src="<?php echo get_template_directory_uri(); ?>/assets/img/footer/link_arrow.png" alt=""></div></a>
                                 </div>
-                            </div>
-                        </p>
-                                <?php endwhile; wp_reset_postdata(); ?>
                             <?php endif; ?>
-                    <?php else : ?>
-                        <?php 
-                            $args_main = array(
-                                'post_type'      => 'footer_company', // ★カスタム投稿タイプを指定
-                                'tax_query'      => array(             // ★タクソノミーで絞り込み
-                                    array(
-                                        'taxonomy' => 'company_category',
-                                        'field'    => 'slug',
-                                        'terms'    => 'edelwein-support',          // スラッグ: 
-                                    ),
-                                ),
-                                'posts_per_page' => -1,
-                                'order'          => 'ASC'
-                            );
-                            $query_main = new WP_Query($args_main);
-    
-                            if ($query_main->have_posts()):
-                                while ($query_main->have_posts()): $query_main->the_post();
-                                    
-                                    $img_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
-                                    if (!$img_url) {
-                                        $img_url = get_template_directory_uri() . '/assets/img/footer/edel-wein-support.png';
-                                    }
-                                    $store_name = get_field('store_name', get_the_ID());
-                                    $tel = get_field('tel', get_the_ID());
-                                    $fax = get_field('fax', get_the_ID());
-                                    $postcode = get_field('postcode', get_the_ID());
-                                    $address = get_field('address', get_the_ID());
-                        ?>
-                        <p class="footer_company_title">◆<?php echo esc_html($store_name); ?></p>
-                            <div class="footer_company_content">
-                                <div class="footer_company_content_imgdiv">
-                                    <img class="footer_company_content_imgdiv_img" src="<?php echo esc_url($img_url); ?>" alt="<?php the_title(); ?>">
-                                </div>
-                                <div class="footer_company_content_textdiv">
-                                    <div class="footer_company_content_textdiv-flex">
-                                        <div>
-                                            <p>TEL</p>
-                                            <p>FAX</p>
-                                            <p>所在地</p>
-                                        </div>
-                                        <div>
-                                            <p><?php echo esc_html($tel); ?></p>
-                                            <p><?php echo esc_html($fax); ?></p>
-                                            <p>〒<?php echo esc_html($postcode); ?></p>
-                                            <p><?php echo esc_html($address); ?></p>
-                                        </div>
-                                    </div>
-                                    <a class="footer_company_content_textdiv_button" href=""><div>詳細はこちら<img class="footer_company_content_textdiv_button_img" src="<?php echo get_template_directory_uri(); ?>/assets/img/footer/link_arrow.png" alt=""></div></a>
-                                </div>
-                            </div>
-                        </p>
-                                <?php endwhile; wp_reset_postdata(); ?>
-                            <?php endif; ?>
-                    <?php endif; ?>
 
+                            <a class="footer_company_content_textdiv_button" href="<?php echo esc_url($link_url); ?>">
+                                <div>
+                                    <?php echo esc_html($btn_text); ?>
+                                    <img class="footer_company_content_textdiv_button_img" src="<?php echo get_template_directory_uri(); ?>/assets/img/footer/link_arrow.png" alt="">
+                                </div>
+                            </a>
+                        </div>
+                    </div>
 
+                <?php
+                endwhile;
+                wp_reset_postdata();
+            else:
+                ?>
+                <p style="text-align:center; padding:20px;">
+                    店舗情報が見つかりません。<br>
+                    管理画面の「店舗情報」にて、カテゴリー「<?php echo esc_html($target_term); ?>」の記事が公開されているか確認してください。
+                </p>
+            <?php endif; ?>
         </section>
 
         <section class="footer_map">
@@ -286,147 +207,80 @@
         </section>
 
         <section class="footer_contact">
-            <p class="footer_contact_title">
-                CONTACT
-            </p>
+            <p class="footer_contact_title">CONTACT</p>
             <div class="footer_contact_content">
-                <!-- ガラス -->
-                <?php 
-                            $args_main = array(
-                                'post_type'      => 'footer_company', // ★カスタム投稿タイプを指定
-                                'tax_query'      => array(             // ★タクソノミーで絞り込み
-                                    array(
-                                        'taxonomy' => 'company_category',
-                                        'field'    => 'slug',
-                                        'terms'    => 'glass',          // スラッグ: 
-                                    ),
-                                ),
-                                'posts_per_page' => -1,
-                                'order'          => 'ASC'
-                            );
-                            $query_main = new WP_Query($args_main);
-    
-                            if ($query_main->have_posts()):
-                                while ($query_main->have_posts()): $query_main->the_post();
-                                    
-                                    $img_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
-                                    if (!$img_url) {
-                                        $img_url = get_template_directory_uri() . '/assets/img/footer/edel-wein-support.png';
-                                    }
-                                    $store_name = get_field('store_name', get_the_ID());
-                                    $tel = get_field('tel', get_the_ID());
-                                    $businesshours = get_field('businesshours', get_the_ID());
-                        ?>
-                        <div class="footer_contact_content_company">
-                            <p class="footer_contact_content_company_title"><?php echo esc_html($store_name); ?></p>
-                            <div class="footer_contact_content_company_detail">
-                                <div>
-                                    <p>TEL</p>
-                                    <p>営業時間</p>
-                                </div>
-                                <div>
-                                    <p><?php echo esc_html($tel); ?></p>
-                                    <p><?php echo esc_html($businesshours); ?></p>
-                                </div>
-                            </div>
-                            <p>※体験予約はお電話にてお願い致します。</p>
-                            <a class="footer_contact_content_company_button" href="<?php echo esc_url(home_url('/glasspage')); ?>">詳細はこちら</a>
-                        </div>
-                                <?php endwhile; wp_reset_postdata(); ?>
-                            <?php endif; ?>
-                <!-- レストラン -->
-                <?php 
-                            $args_main = array(
-                                'post_type'      => 'footer_company', // ★カスタム投稿タイプを指定
-                                'tax_query'      => array(             // ★タクソノミーで絞り込み
-                                    array(
-                                        'taxonomy' => 'company_category',
-                                        'field'    => 'slug',
-                                        'terms'    => 'restaurant',          // スラッグ: 
-                                    ),
-                                ),
-                                'posts_per_page' => -1,
-                                'order'          => 'ASC'
-                            );
-                            $query_main = new WP_Query($args_main);
-    
-                            if ($query_main->have_posts()):
-                                while ($query_main->have_posts()): $query_main->the_post();
-                                    
-                                    $img_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
-                                    if (!$img_url) {
-                                        $img_url = get_template_directory_uri() . '/assets/img/footer/edel-wein-support.png';
-                                    }
-                                    $store_name = get_field('store_name', get_the_ID());
-                                    $tel = get_field('tel', get_the_ID());
-                                    $businesshours = get_field('businesshours', get_the_ID());
-                        ?>
-                        <div class="footer_contact_content_company">
-                            <p class="footer_contact_content_company_title"><?php echo esc_html($store_name); ?></p>
-                            <div class="footer_contact_content_company_detail">
-                                <div>
-                                    <p>TEL</p>
-                                    <p>営業時間</p>
-                                </div>
-                                <div>
-                                    <p><?php echo esc_html($tel); ?></p>
-                                    <p><?php echo esc_html($businesshours); ?></p>
-                                </div>
-                            </div>
-                            <a class="footer_contact_content_company_button" href="<?php echo esc_url(home_url('/restaurantpage')); ?>">詳細はこちら</a>
-                        </div>
-                                <?php endwhile; wp_reset_postdata(); ?>
-                            <?php endif; ?>
-                <!-- ホテル -->
-                <?php 
-                            $args_main = array(
-                                'post_type'      => 'footer_company', // ★カスタム投稿タイプを指定
-                                'tax_query'      => array(             // ★タクソノミーで絞り込み
-                                    array(
-                                        'taxonomy' => 'company_category',
-                                        'field'    => 'slug',
-                                        'terms'    => 'hotel',          // スラッグ: 
-                                    ),
-                                ),
-                                'posts_per_page' => -1,
-                                'order'          => 'ASC'
-                            );
-                            $query_main = new WP_Query($args_main);
-    
-                            if ($query_main->have_posts()):
-                                while ($query_main->have_posts()): $query_main->the_post();
-                                    
-                                    $img_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
-                                    if (!$img_url) {
-                                        $img_url = get_template_directory_uri() . '/assets/img/footer/edel-wein-support.png';
-                                    }
-                                    $store_name = get_field('store_name', get_the_ID());
-                                    $tel = get_field('tel', get_the_ID());
-                                    $businesshours = get_field('businesshours', get_the_ID());
-                                    $checkin = get_field('checkin', get_the_ID());
-                                    $checkout = get_field('checkout', get_the_ID());
-                        ?>
-                        <div class="footer_contact_content_company">
-                            <p class="footer_contact_content_company_title">ホテル ベルンドルフ</p>
-                            <div class="footer_contact_content_company_detail">
-                                <div>
-                                    <p>TEL</p>
-                                    <p>営業時間</p>
-                                </div>
-                                <div>
-                                    <p><?php echo esc_html($tel); ?></p>
-                                    <p><?php echo esc_html($businesshours); ?></p>
+
+                <?php
+                // 表示するカテゴリーの順番
+                $contact_slugs = ['glass', 'restaurant', 'hotel'];
+
+                foreach ($contact_slugs as $c_slug):
+                    $args_contact = array(
+                        'post_type'      => 'footer_company',
+                        'tax_query'      => array(
+                            array(
+                                'taxonomy' => 'company_category',
+                                'field'    => 'slug',
+                                'terms'    => $c_slug,
+                            ),
+                        ),
+                        'posts_per_page' => 1,
+                    );
+                    $query_contact = new WP_Query($args_contact);
+
+                    if ($query_contact->have_posts()):
+                        while ($query_contact->have_posts()): $query_contact->the_post();
+                            // 値の取得
+                            $store_name_c   = get_field('store_name');
+                            $tel_c          = get_field('tel');
+                            $businesshours_c = get_field('businesshours');
+
+                            // リンク先の決定
+                            $contact_link = home_url('/');
+                            if ($c_slug === 'glass') $contact_link = home_url('/glasspage/top');
+                            if ($c_slug === 'restaurant') $contact_link = home_url('/restaurantpage/top');
+                            if ($c_slug === 'hotel') $contact_link = home_url('/hotel');
+
+                            // ホテル専用項目
+                            $checkin_c  = get_field('checkin');
+                            $checkout_c = get_field('checkout');
+                ?>
+                            <div class="footer_contact_content_company">
+                                <p class="footer_contact_content_company_title">
+                                    <?php echo ($c_slug === 'hotel') ? 'ホテル ベルンドルフ' : esc_html($store_name_c); ?>
+                                </p>
+
+                                <div class="footer_contact_content_company_detail">
                                     <div>
-                                        <p>ホテル チェックイン <?php echo esc_html($checkin); ?></p>
-                                        <p>　　　 チェックアウト <?php echo esc_html($checkout); ?></p>
+                                        <p>TEL</p>
+                                        <p>営業時間</p>
+                                    </div>
+                                    <div>
+                                        <p><?php echo esc_html($tel_c); ?></p>
+                                        <p><?php echo esc_html($businesshours_c); ?></p>
+
+                                        <?php if ($c_slug === 'hotel'): ?>
+                                            <div style="margin-top: 5px; font-size: 0.9em;">
+                                                <p>チェックイン <?php echo esc_html($checkin_c); ?></p>
+                                                <p>チェックアウト <?php echo esc_html($checkout_c); ?></p>
+                                            </div>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
+
+                                <?php if ($c_slug === 'glass'): ?>
+                                    <p style="font-size: 0.8rem; margin-top: 5px;">※体験予約はお電話にてお願い致します。</p>
+                                <?php endif; ?>
+
+                                <a class="footer_contact_content_company_button" href="<?php echo esc_url($contact_link); ?>">詳細はこちら</a>
                             </div>
-                            <a class="footer_contact_content_company_button" href="<?php echo esc_url(home_url('/hotelpage')); ?>">詳細はこちら</a>
-                        </div>
-                                <?php endwhile; wp_reset_postdata(); ?>
-                            <?php endif; ?>
-                <!-- ワインシャトー大迫店 -->
+                <?php
+                        endwhile;
+                        wp_reset_postdata();
+                    endif;
+                endforeach;
+                ?>
+
                 <div class="footer_contact_content_company">
                     <p class="footer_contact_content_company_title">ワインシャトー大迫店</p>
                     <div class="footer_contact_content_company_detail">
@@ -440,23 +294,32 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </section>
 
         <nav class="footer_nav">
             <ul>
-                <li><a href="<?php echo esc_url(home_url('/glasspage')); ?>">ガラス体験工房 森のくに</a></li>
-                <li><a href="<?php echo esc_url(home_url('/restaurantpage')); ?>">レストラン ベルンドルフ</a></li>
-                <li><a href="<?php echo esc_url(home_url('/hotelpage')); ?>">ホテル ベルンドルフ</a></li>
-                <li><a href="<?php echo esc_url(home_url('/noticepage')); ?>">お知らせ</a></li>
+                <li><a href="<?php echo esc_url(home_url('/glasspage/top')); ?>">ガラス体験工房 森のくに</a></li>
+                <li><a href="<?php echo esc_url(home_url('/restaurantpage/top')); ?>">レストラン ベルンドルフ</a></li>
+                <li><a href="<?php echo esc_url(home_url('/hotel')); ?>">ホテル ベルンドルフ</a></li>
+                <li><a href="<?php echo esc_url(home_url('/news')); ?>">お知らせ</a></li>
+                <li><a href="<?php echo esc_url(home_url('/company/top')); ?>">会社概要</a></li>
                 <li><a href="<?php echo esc_url(home_url('/contactpage')); ?>">お問い合わせ</a></li>
             </ul>
         </nav>
 
         <section class="footer_copyright">
-            <p>&copy; EDEL WEIN support. All Rights reserved.</p>
+            <p>© EDEL WEIN support. All Rights reserved.</p>
         </section>
+
+        <div id="page_top" class="back-to-top">
+            <a href="#">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/footer/pagetop.png" alt="PAGE TOP">
+            </a>
+        </div>
     </footer>
+    <?php wp_footer(); ?>
 </body>
+
 </html>
