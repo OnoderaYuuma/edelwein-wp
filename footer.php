@@ -169,12 +169,14 @@
                                 </div>
                             <?php endif; ?>
 
+                            <?php if ($target_term === "edelwein-support"): ?>
                             <a class="footer_company_content_textdiv_button" href="<?php echo esc_url($link_url); ?>">
                                 <div>
-                                    <?php echo esc_html($btn_text); ?>
+                                    詳細はこちら
                                     <img class="footer_company_content_textdiv_button_img" src="<?php echo get_template_directory_uri(); ?>/assets/img/footer/link_arrow.png" alt="">
                                 </div>
                             </a>
+                            <?php endif; ?>
                         </div>
                     </div>
 
@@ -194,7 +196,10 @@
             <div class="footer_map_mapdiv">
                 <div class="footer_map_mapdiv_text">
                     <img class="footer_map_mapdiv_text_icon" src="<?php echo get_template_directory_uri(); ?>/assets/img/footer/map-icon.png" alt="">
-                    <p><span class="footer_map_mapdiv_text_span">MAP</span><br>アクセスマップ</p>
+                    <p class="footer_map_mapdiv_text_p">
+                        <span class="footer_map_mapdiv_text_span">MAP</span><br>
+                        アクセスマップ
+                    </p>
                 </div>
                 <div class="footer_map_mapdiv_map">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3079.7866590650383!2d141.27937507437557!3d39.47414811247057!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5f858b7c69cd6787%3A0xdd8938fcb82adc2!2z44Ks44Op44K55L2T6aiT5bel5oi_IOajruOBruOBj-OBqw!5e0!3m2!1sja!2sjp!4v1764309442262!5m2!1sja!2sjp" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
