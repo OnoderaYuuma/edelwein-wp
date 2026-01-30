@@ -115,7 +115,7 @@ if ($query_info->have_posts()) {
     <section class="intro-section">
         <div class="intro-wrapper">
             <div class="intro-left">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/glass/ガラス体験工房様子.png" class="intro-img" alt="工房の様子">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/glass/glassWorkshopScene.png" class="intro-img" alt="工房の様子">
                 <div class="intro-paragraph">
                     <?php
                     if (have_posts()) :
@@ -127,9 +127,9 @@ if ($query_info->have_posts()) {
                 </div>
             </div>
             <div class="right-copy-wrapper">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/glass/透過ビー玉 3.png" class="glass-ball" alt="">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/glass/文字.png" class="copy-text" alt="">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/glass/三角形.png" class="copy-triangle" alt="">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/glass/marbles3.png" class="glass-ball" alt="">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/glass/character.png" class="copy-text" alt="">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/glass/triangle.png" class="copy-triangle" alt="">
             </div>
         </div>
     </section>
@@ -237,7 +237,7 @@ if ($query_info->have_posts()) {
                 <?php endif; ?>
             </div>
 
-            <img class="info-deco-image1" src="<?php echo get_template_directory_uri(); ?>/assets/img/glass/透過ビー玉 2.png" alt="">
+            <img class="info-deco-image1" src="<?php echo get_template_directory_uri(); ?>/assets/img/glass/marbles2.png" alt="">
         </div>
     </section>
 
@@ -295,7 +295,7 @@ if ($query_info->have_posts()) {
     endif;
     ?>
 
-    <img class="info-deco-image2" src="<?php echo get_template_directory_uri(); ?>/assets/img/glass/透明ビー玉.png" alt="">
+    <img class="info-deco-image2" src="<?php echo get_template_directory_uri(); ?>/assets/img/glass/marbles.png" alt="">
 
 </main>
 

@@ -38,7 +38,7 @@ if ($query_info->have_posts()) {
 
 <main id="hotel">
     <section class="morino-kuni">
-        <img src="<?php echo get_template_directory_uri(); ?>/assets/img/hotel/ホテルヘッダー背景.png" class="morino-kuni-bg" alt="ホテル背景" />
+        <img src="<?php echo get_template_directory_uri(); ?>/assets/img/hotel/hotelHeaderBackground.png" class="morino-kuni-bg" alt="ホテル背景" />
 
         <div class="morino-kuni-content">
             <div class="morino-kuni-title">
@@ -108,13 +108,13 @@ if ($query_info->have_posts()) {
     <section class="intro-section">
         <div class="intro-wrapper">
             <div class="intro-left">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/hotel/ホテル外観(半透明).png" class="intro-img" alt="ホテル外観" />
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/hotel/hotelExterior.png" class="intro-img" alt="ホテル外観" />
                 <div class="intro-paragraph">
                     <?php echo wp_kses_post(get_field('top_intro_text')); ?>
                 </div>
             </div>
             <div class="right-copy-wrapper">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/hotel/桶.png" class="glass-ball" alt="" />
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/hotel/bucket.png" class="glass-ball" alt="" />
                 <div class="intro__lead-bg"></div>
                 <p class="intro__lead">心も体も癒される<br>観光　ビジネス<br>レジャーの楽園</p>
             </div>
@@ -123,7 +123,8 @@ if ($query_info->have_posts()) {
 
     <section class="banner">
         <a href="#large_bath" class="banner__link">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/hotel/ぶどうの湯バナー背景.png" alt="ぶどうの湯バナー背景" class="banner__img">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/hotel/budonoyuBannerBackground
+            .png" alt="ぶどうの湯バナー背景" class="banner__img">
             <span class="banner__txt">大浴場ぶどうの湯はこちら</span>
         </a>
     </section>
@@ -155,7 +156,7 @@ if ($query_info->have_posts()) {
         ?>
                 <article class="menu__rooms">
                     <div class="room__ttl">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/img/hotel/部屋名 左.png" alt="部屋名" class="room__ttl-img">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/img/hotel/roomNameLeft.png" alt="部屋名" class="room__ttl-img">
                         <h3 class="room__ttl-text"><?php the_title(); ?></h3>
                     </div>
                     <div class="room__imgs">
@@ -197,7 +198,7 @@ if ($query_info->have_posts()) {
                         <div class="guide__list">
                             <?php echo wp_kses_post(get_field('guide_cancel_text')); ?>
                         </div>
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/img/hotel/ベッド.png" alt="ベッド" class="guide__deco">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/img/hotel/bed.png" alt="ベッド" class="guide__deco">
                     </div>
                 </div>
             </div>
@@ -273,7 +274,7 @@ if ($query_info->have_posts()) {
     <section id="large_bath">
         <h2 class="large_bath__ttl">大浴場</h2>
         <div class="budonoyu__ttl">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/hotel/部屋名 左.png" alt="部屋名（左）" class="room__ttl-img">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/hotel/roomNameLeft.png" alt="部屋名（左）" class="room__ttl-img">
             <h3 class="budonoyu__ttl--text">ぶどうの湯</h3>
         </div>
         <div class="budonoyu__wrapper">
