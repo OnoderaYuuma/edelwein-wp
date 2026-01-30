@@ -2367,7 +2367,7 @@ body.page-template-page-contactpage {
   color: grey;
 }
 
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 768px) {
   #single-article .back-to-list {
     width: 120px;
     margin: 0 10px;
@@ -3669,7 +3669,6 @@ body.page-template-page-contactpage {
    19. ホテル詳細ページ専用 (#hotel_detail)
    ========================================================================== */
 #hotel_detail body {
-  background-image: url(../img/hotel/background.png);
   width: 100%;
   overflow-x: hidden;
 }
@@ -3687,25 +3686,39 @@ body.page-template-page-contactpage {
   margin: 60px 0;
 }
 
-#hotel_detail .hotel_detail__ttl::before,
-#hotel_detail .hotel_detail__ttl::after {
-  display: block;
+#hotel_detail .hotel_detail__ttl::before, #hotel_detail .hotel_detail__ttl::after {
   flex: 1;
-  height: 10px;
   background-repeat: no-repeat;
-  background-position: center left;
-  background-size: 100% 100%;
-  content: "";
+
+  content: '';
+  display: block;
+  width: 100%;
+  height: 10px;
+  border-top: 1.5px solid #B8A36C;
+  border-bottom: 1.5px solid #B8A36C;
 }
 
 #hotel_detail .hotel_detail__ttl::before {
-  background-image: url(../img/hotel/ttl_left.png);
-  margin-right: 30px;
+  margin-right: 10%;
 }
 
 #hotel_detail .hotel_detail__ttl::after {
-  background-image: url(../img/hotel/ttl_right.png);
-  margin-left: 30px;
+  margin-left: 10%;
+}
+
+/* タイトル */
+@media screen and (max-width: 768px) {
+  #hotel_detail .hotel_detail__ttl {
+    font-size: 28px;
+    margin-bottom: 40px;
+  }
+
+  #hotel_detail .hotel_detail_ttl::before {
+    margin-right: 3%;
+  }
+  #hotel_detail .hotel_detail_ttl::after {
+    margin-left: 3%;
+  }
 }
 
 #hotel_detail .hotel_detail_ttl--text {
@@ -3714,64 +3727,189 @@ body.page-template-page-contactpage {
   margin: 20px;
 }
 
+/* トップへ戻るのボタン */
+@media screen and (max-width: 768px) {
+  #hotel_detail .hotel_detail_ttl--text {
+    font-size: 13px;
+  }
+
+}
+
 #hotel_detail .room_detail {
   width: 80%;
   margin: 30px auto;
 }
 
+@media screen and (max-width: 768px) {
+  #hotel_detail .room_detail {
+    width: 85%;
+  }
+}
+
 #hotel_detail .room_detail__card {
   font-family: "Sawarabi Mincho", serif;
   background-color: #ffffff;
-  border: 2px solid #b8a36d;
+  border: 4px solid #b8a36d;
   border-radius: 15px;
-  padding: 50px;
+  padding: 100px 80px;
   margin-bottom: 30px;
+}
+
+/* カードの幅調節 */
+@media screen and (max-width: 768px) {
+  #hotel_detail .room_detail__card {
+    padding: 50px 10%;
+  }
 }
 
 #hotel_detail .card__ttl {
   font-size: 40px;
 }
 
+@media screen and (max-width: 768px) {
+  #hotel_detail .card__ttl {
+    font-size: 24px;
+  }
+}
+
+
 #hotel_detail .room__gallery {
-  width: 90%;
+  width: 100%;
+  overflow: hidden;
   margin: 20px auto;
+  background-color: blue;
 }
 
 #hotel_detail .room__gallery img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
+  background-color: #00B3FF;
+}
+
+#hotel_detail .slick-track {
+  display: flex;
+  align-items: center;
 }
 
 #hotel_detail .slick-slider {
-  width: 80%;
+  width: 100%;
 }
 
 #hotel_detail .room__gallery .slick-slide {
   height: 500px;
+  color: white;
+}
+
+#hotel_detail .slick-dots li{
+  width: 5px;
+  bottom: 10px;
+}
+
+#hotel_detail .slick-dots li button:before{
+  color: white;
+}
+
+#hotel_detail .slick-dots {
+  bottom: 10px;
+  background-color: #00ff0000;
+}
+
+#hotel_detail .slick-prev::before, #hotel_detail .slick-next::before {
+  content: '';
+}
+
+#hotel_detail .slick-prev, #hotel_detail .slick-next {
+  width: 20px;
+  height: 20px;
+  z-index: 10;
+}
+
+/* 画像ボタン　左 */
+#hotel_detail .slick-prev {
+  border-top: 2px solid white;
+  border-left: 2px solid white;
+  transform: rotate(-45deg);
+  left: 5%;
+}
+
+/* 画像ボタン　右 */
+#hotel_detail .slick-next {
+  border-top: 2px solid white;
+  border-left: 2px solid white;
+  transform: rotate(135deg);
+  right: 5%;
+}
+
+@media screen and (max-width: 768px) {
+  #hotel_detail .room__gallery {
+    width: 100%;
+    aspect-ratio: 16 / 11;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  #hotel_detail .room__gallery .slick-slide {
+    align-items: center;
+    width: 300px;
+  }
+  #hotel_detail .slick-dots li button:before{
+    color: white;
+  }
+
+  #hotel_detail .slick-prev::before, #hotel_detail .slick-next::before {
+    content: '';
+  }
+
+  #hotel_detail .slick-prev, #hotel_detail .slick-next {
+    width: 20px;
+    height: 20px;
+    z-index: 10;
+  }
+
+  #hotel_detail .slick-prev {
+    border-top: 2px solid white;
+    border-left: 2px solid white;
+    transform: rotate(-45deg);
+    left: 10%;
+  }
+
+  #hotel_detail .slick-next {
+    border-top: 2px solid white;
+    border-left: 2px solid white;
+    transform: rotate(135deg);
+    right: 10%;
+  }
 }
 
 #hotel_detail .slick-next.slick-arrow:before,
 #hotel_detail .slick-prev.slick-arrow:before {
-  color: #000000;
+  color: white;
 }
 
 #hotel_detail .card__table {
   width: 100%;
+  margin-top: 40px;
 }
 
 #hotel_detail .table__th {
   border: 1px solid #00000080;
   background-color: #b8a36d80;
   padding: 20px;
+  font-weight: 520;
   vertical-align: middle;
 }
 
 #hotel_detail .table__td {
+  background-color: white;
   border: 1px solid #00000080;
-  vertical-align: middle;
   padding: 20px;
+  font-weight: 520;
   vertical-align: middle;
+}
+
+#hotel_detail .table__td dt {
+  font-weight: 520;
 }
 
 #hotel_detail .ul_grid {
@@ -3786,9 +3924,34 @@ body.page-template-page-contactpage {
   content: "・";
 }
 
+/* テーブルのレスポンシブ */
+@media screen and (max-width: 768px) {
+  #hotel_detail .table__th:not(:first-child),
+  #hotel_detail .table__td:not(:first-child) {
+    border-top: none;
+  }
+
+  #hotel_detail .table__td, #hotel_detail .table__th {
+    /* これで縦にしてる */
+    display: block;
+    padding: 10px;
+  }
+
+  #hotel_detail .table__td {
+    padding: 20px;
+    
+  }
+  #hotel_detail .ul_grid {
+    padding: 10px;
+    grid-auto-flow: row;
+    grid-template-rows:none;
+  }
+}
+
 #hotel_detail .aside {
   width: 80%;
-  margin: 30px auto;
+  margin: 20px auto;
+  padding: 25px 7%;
   font-family: "Sawarabi Mincho", serif;
 }
 

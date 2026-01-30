@@ -40,7 +40,7 @@ jQuery(function ($) {
                 dots: true,
                 infinite: true,
                 autoplay: false,
-                adaptiveHeight: false, // 高さを揃える
+                adaptiveHeight: true, // 高さを揃える
                 slidesToShow: 1,
                 slidesToScroll: 1,
                 prevArrow: '<button type="button" class="slick-prev">Previous</button>',
