@@ -2493,7 +2493,7 @@ body.page-template-page-contactpage {
 .footer_company_title {
   font-size: 24px;
   color: black;
-  margin: 10px 0;
+  margin: 20px 0;
   font-family: 'Sawarabi Mincho', serif;
 }
 
@@ -2622,7 +2622,6 @@ body.page-template-page-contactpage {
 
 .footer_map_mapdiv_text {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 0;
@@ -2631,6 +2630,7 @@ body.page-template-page-contactpage {
 }
 
 .footer_map_mapdiv_text_icon {
+  display: block;
   width: 30px;
   height: 30px;
   margin-bottom: 10px;
@@ -2639,6 +2639,11 @@ body.page-template-page-contactpage {
 .footer_map_mapdiv_text p {
   margin: 0;
   line-height: 1.4;
+}
+
+.footer_map_mapdiv_text_p {
+  display: block;
+  text-align: left;
 }
 
 .footer_map_mapdiv_text_span {
@@ -2666,6 +2671,7 @@ body.page-template-page-contactpage {
   font-size: 32px;
   text-align: center;
   margin-bottom: 30px;
+  letter-spacing: 0.2em;
   font-family: 'Sawarabi Mincho', serif;
 }
 
@@ -2703,7 +2709,7 @@ body.page-template-page-contactpage {
 .footer_contact_content_company_button {
   display: inline-block;
   text-align: center;
-  margin: 15px auto 0 0;
+  margin: 15px auto 0 auto;
   width: auto;
   min-width: 120px;
   padding: 5px 15px;
@@ -2789,8 +2795,10 @@ body.page-template-page-contactpage {
   }
 
   .footer_company_title {
-    font-size: 20px;
-    text-align: center;
+    font-size: 24px;
+    color: black;
+    margin: 20px 0;
+    font-family: 'Sawarabi Mincho', serif;
   }
 
   .footer_company_content {
@@ -2832,10 +2840,29 @@ body.page-template-page-contactpage {
   }
 
   .footer_map_mapdiv_text {
-    width: 100%;
-    flex-direction: row;
-    gap: 10px;
-    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    width: 20%;
+    text-align: center;
+  }
+
+  .footer_map_mapdiv_text_icon {
+    display: block;
+    width: 30px;
+    height: 30px;
+    margin-bottom: 10px;
+  }
+
+  .footer_map_mapdiv_text p {
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .footer_map_mapdiv_text_p {
+    display: block;
+    text-align: left;
   }
 
   .footer_map_mapdiv_map {
@@ -2853,6 +2880,14 @@ body.page-template-page-contactpage {
   .footer_contact {
     width: 90%;
     padding: 20px 15px;
+  }
+
+  .footer_contact_title {
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 30px;
+    letter-spacing: 0.2em;
+    font-family: 'Sawarabi Mincho', serif;
   }
 
   .footer_contact_content {
