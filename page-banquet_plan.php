@@ -49,7 +49,7 @@ get_header();
             <h2 class="banquet_fees__ttl">大迫ふるさとセンター 会場利用料金</h2>
             <p class="banquet_fees__note">※使用料は、使用時間により徴収致します。</p>
 
-<div class="banquet_fees__table-area">
+            <div class="banquet_fees__table-area">
                 <?php
                 // カスタム投稿タイプ 'banquet_fee' の記事を取得
                 $args = array(
@@ -73,26 +73,26 @@ get_header();
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php while ($the_query->have_posts()): $the_query->the_post(); 
+                                <?php while ($the_query->have_posts()): $the_query->the_post();
                                     // ACFの値を取得
                                     $price_day = get_field('price_day');
                                     $price_night = get_field('price_night');
                                     $room_remarks = get_field('room_remarks');
                                 ?>
-                                <tr>
-                                    <td class="cell-name"><?php the_title(); ?></td>
-                                    <td class="cell-price"><?php echo esc_html($price_day); ?></td>
-                                    <td class="cell-price"><?php echo esc_html($price_night); ?></td>
-                                    <td class="cell-remarks"><?php echo nl2br(esc_html($room_remarks)); ?></td>
-                                </tr>
+                                    <tr>
+                                        <td class="cell-name"><?php the_title(); ?></td>
+                                        <td class="cell-price"><?php echo esc_html($price_day); ?></td>
+                                        <td class="cell-price"><?php echo esc_html($price_night); ?></td>
+                                        <td class="cell-remarks"><?php echo nl2br(esc_html($room_remarks)); ?></td>
+                                    </tr>
                                 <?php endwhile; ?>
                             </tbody>
                         </table>
                     </div>
-                <?php 
+                <?php
                     // 投稿データのリセット
-                    wp_reset_postdata(); 
-                else: 
+                    wp_reset_postdata();
+                else:
                 ?>
                     <p style="text-align:center;">現在料金表の準備中です。</p>
                 <?php endif; ?>
@@ -116,4 +116,3 @@ get_header();
 </main>
 
 <?php get_footer(); ?>
-
