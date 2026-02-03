@@ -79,3 +79,30 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+// --- ハンバーガーメニュー ---
+document.addEventListener('DOMContentLoaded', function() {
+    const hamburger = document.getElementById('hamburger');
+    const hamburgerButton = document.querySelector('.hamburger__button');
+    const hamburgerMenu = document.querySelector('.hamburger__menu');
+    const hamburgerArrow = document.querySelector('.hamburger__arrow');
+
+    // ボタンが存在する場合のみ実行（エラー防止）
+    if (hamburgerButton) {
+        // 開閉の切り替え関数
+        function toggleMenu() {
+            // 要素が存在するか確認してからクラスを切り替え
+            if(hamburger) hamburger.classList.toggle('is-active');
+            if(hamburgerButton) hamburgerButton.classList.toggle('is-active');
+            if(hamburgerMenu) hamburgerMenu.classList.toggle('is-active');
+        }
+
+        // ハンバーガーボタンクリック時
+        hamburgerButton.addEventListener('click', toggleMenu);
+
+        // メニュー内の「→（閉じる）」ボタンクリック時
+        if(hamburgerArrow) {
+            hamburgerArrow.addEventListener('click', toggleMenu);
+        }
+    }
+});
