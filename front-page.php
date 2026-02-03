@@ -108,7 +108,7 @@ if ($query_info->have_posts()) {
     </section>
 
     <div id="grape">
-        <img class="grape__img grape__img--fruit" src="<?php echo get_template_directory_uri(); ?>/assets/img/index/ぶどう.png" alt="">
+        <img class="grape__img grape__img--fruit" src="<?php echo get_template_directory_uri(); ?>/assets/img/index/grapes.png" alt="">
     </div>
 
     <section class="frame-group">
@@ -131,20 +131,20 @@ if ($query_info->have_posts()) {
 
                 <div class="purpose__item purpose__item--glass">
                     <a class="purpose__link" href="<?php echo esc_url(home_url('/glasspage/top')); ?>">
-                        <img class="purpose__image_glass" src="<?php echo get_template_directory_uri(); ?>/assets/img/index/創作.png" alt="創作体験">
+                        <img class="purpose__image_glass" src="<?php echo get_template_directory_uri(); ?>/assets/img/index/creation.png" alt="創作体験">
                     </a>
                     <a class="purpose__label" href="<?php echo esc_url(home_url('/glasspage/top')); ?>">ガラス体験工房 森のくに</a>
                 </div>
                 <div class="purpose__item purpose__item--restaurant">
                     <a class="purpose__link" href="<?php echo esc_url(home_url('/restaurantpage/top')); ?>">
-                        <img class="purpose__image_restaurant" src="<?php echo get_template_directory_uri(); ?>/assets/img/index/食事.png" alt="レストラン">
+                        <img class="purpose__image_restaurant" src="<?php echo get_template_directory_uri(); ?>/assets/img/index/meal.png" alt="レストラン">
                     </a>
                     <a class="purpose__label" href="<?php echo esc_url(home_url('/restaurantpage/top')); ?>">レストラン ベルンドルフ</a>
                 </div>
 
                 <div class="purpose__item purpose__item--hotel">
                     <a class="purpose__link" href="<?php echo esc_url(home_url('/hotel')); ?>">
-                        <img class="purpose__image purpose_image_hotel" src="<?php echo get_template_directory_uri(); ?>/assets/img/index/宿泊.png" alt="ホテル">
+                        <img class="purpose__image purpose_image_hotel" src="<?php echo get_template_directory_uri(); ?>/assets/img/index/stay.png" alt="ホテル">
                     </a>
                     <a class="purpose__label" href="<?php echo esc_url(home_url('/hotel')); ?>">ホテル ベルンドルフ</a>
                 </div>
@@ -177,8 +177,8 @@ if ($query_info->have_posts()) {
 
 
     <div class="grape">
-        <img class="grape__img grape__img--fruit" src="<?php echo get_template_directory_uri(); ?>/assets/img/index/ぶどう.png" alt="">
-        <img class="grape__img grape__img--leaf" src="<?php echo get_template_directory_uri(); ?>/assets/img/index/ぶどうの葉.png" alt="">
+        <img class="grape__img grape__img--fruit" src="<?php echo get_template_directory_uri(); ?>/assets/img/index/grapes.png" alt="">
+        <img class="grape__img grape__img--leaf" src="<?php echo get_template_directory_uri(); ?>/assets/img/index/grapeLeaves.png" alt="">
     </div>
 
 </main>

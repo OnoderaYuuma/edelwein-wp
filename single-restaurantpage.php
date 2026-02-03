@@ -132,11 +132,11 @@ if ($query_info->have_posts()) {
 
     <div class="restaurant-banners-wrapper">
         <a href="<?php echo esc_url(home_url('/groupmenu')); ?>" class="restaurant-banner-link">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/restaurant/団体予約.png" alt="団体様ご予約メニューはこちら" />
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/restaurant/groupReservation.png" alt="団体様ご予約メニューはこちら" />
         </a>
 
         <a href="<?php echo esc_url(home_url('/banquet_plan')); ?>" class="restaurant-banner-link">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/restaurant/宴会プラン.png" alt="ご宴会プランはこちら" />
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/restaurant/banquetPlan.png" alt="ご宴会プランはこちら" />
         </a>
     </div>
 
@@ -177,7 +177,7 @@ if ($query_info->have_posts()) {
             while ($query_main->have_posts()): $query_main->the_post();
 
                 $img_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
-                if (!$img_url) $img_url = get_template_directory_uri() . '/assets/img/restaurant/料理.png';
+                if (!$img_url) $img_url = get_template_directory_uri() . '/assets/img/restaurant/dish.png';
                 $price = get_field('price', get_the_ID());
                 $info  = get_field('info', get_the_ID()); // ★注釈取得
 
@@ -244,7 +244,7 @@ if ($query_info->have_posts()) {
             while ($query_side->have_posts()): $query_side->the_post();
 
                 $img_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
-                if (!$img_url) $img_url = get_template_directory_uri() . '/assets/img/restaurant/料理.png';
+                if (!$img_url) $img_url = get_template_directory_uri() . '/assets/img/restaurant/dish.png';
                 $price = get_field('price', get_the_ID());
                 $info  = get_field('info', get_the_ID()); // ★注釈取得
 
@@ -289,7 +289,7 @@ if ($query_info->have_posts()) {
     <section class="wine-header-section">
         <div class="wine-header">
             <p id="wine-title">WEIN</p>
-            <img class="wine-icon-small" src="<?php echo get_template_directory_uri(); ?>/assets/img/restaurant/ワイングラス.png" alt="ワイングラス">
+            <img class="wine-icon-small" src="<?php echo get_template_directory_uri(); ?>/assets/img/restaurant/weinGlass.png" alt="ワイングラス">
         </div>
     </section>
 

@@ -29,15 +29,15 @@ get_header();
             <h2 class="banquet_rooms__ttl">大迫ふるさとセンター</h2>
             <section class="banquet_rooms__list">
                 <figure class="banquet_rooms__room">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/img/banquet_plan/大ホール.png" alt="大ホール">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/img/banquet_plan/largeHall.png" alt="大ホール">
                     <figcaption class="banquet_rooms__name">大ホール</figcaption>
                 </figure>
                 <figure class="banquet_rooms__room">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/img/banquet_plan/大会議室.png" alt="大会議室">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/img/banquet_plan/largeMeetingRoom.png" alt="大会議室">
                     <figcaption class="banquet_rooms__name">大会議室</figcaption>
                 </figure>
                 <figure class="banquet_rooms__room">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/img/banquet_plan/小会議室.png" alt="小会議室">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/img/banquet_plan/smallMeetingRoom.png" alt="小会議室">
                     <figcaption class="banquet_rooms__name">小会議室</figcaption>
                 </figure>
             </section>

@@ -3118,7 +3118,7 @@ body.page-template-page-contactpage {
 }
 
 #hotel .header {
-  background-image: url(../img/hotel/ホテルヘッダー背景.png);
+  background-image: url(../img/hotel/hotelHeaderBackground.png);
   aspect-ratio: 1440 / 652;
   width: 100%;
   background-size: cover;
@@ -3283,7 +3283,7 @@ body.page-template-page-contactpage {
   bottom: 0;
   width: 90%;
   height: 100%;
-  background-image: url("../img/hotel/ホテルリード文△.png");
+  background-image: url("../img/hotel/hotelLeadPhrase.png");
   background-repeat: no-repeat;
   background-position: right bottom;
   background-size: contain;
