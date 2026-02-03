@@ -1816,6 +1816,78 @@ body.page-template-page-banquet_plan {
     gap: 10px;
   }
 }
+/* 料金表エリア全体のスタイル */
+#banquet_plan .banquet_fees__table-area {
+    width: 100%;
+    margin: 0 auto 40px;
+    font-size: 16px;
+    color: #333;
+}
+
+/* 横スクロール対応（スマホ用） */
+#banquet_plan .fee-table-scroll {
+    overflow-x: auto;
+    width: 100%;
+}
+
+#banquet_plan .fee-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-top: 1px solid #ddd;
+    min-width: 600px; /* スマホでもこれ以下の幅には潰さない */
+}
+
+/* ヘッダー（ベージュ背景） */
+#banquet_plan .fee-table th {
+    background-color: #EFE9DB; /* 画像のベージュ色 */
+    padding: 15px 10px;
+    border-bottom: 1px solid #EFE9DB;
+    border-right: 1px solid #ddd;
+    text-align: center;
+    font-weight: normal;
+    vertical-align: middle;
+    line-height: 1.4;
+}
+
+#banquet_plan .fee-table th span {
+    font-size: 0.85em;
+}
+
+#banquet_plan .fee-table th:last-child {
+    border-right: none;
+}
+
+/* データ行 */
+#banquet_plan .fee-table td {
+    padding: 20px 15px;
+    border-bottom: 1px solid #EFE9DB;
+    border-right: 1px solid #EFE9DB;
+    vertical-align: middle;
+    background-color: #fff;
+}
+
+#banquet_plan .fee-table td:last-child {
+    border-right: none;
+}
+
+/* 各セルの調整 */
+#banquet_plan .fee-table .cell-name {
+    text-align: center;
+    font-weight: bold;
+    white-space: nowrap; /* 室名が改行されないようにする */
+}
+
+#banquet_plan .fee-table .cell-price {
+    text-align: center;
+    font-family: "Times New Roman", serif; /* 数字を少し明朝体に */
+    font-size: 1.1em;
+}
+
+#banquet_plan .fee-table .cell-remarks {
+    text-align: left;
+    font-size: 0.9em;
+    line-height: 1.6;
+}
 
 /* ==========================================================================
    12. お問い合わせページ専用 (#contact)
@@ -4038,7 +4110,7 @@ body.page-template-page-contactpage {
     z-index: 100;
   }
 }
-.hamburger {
+ .hamburger {
   display: none;
 }
 
@@ -4177,4 +4249,5 @@ body.page-template-page-contactpage {
   .header h1 a:hover {
     opacity: 0.6;
   }
-}
+
+

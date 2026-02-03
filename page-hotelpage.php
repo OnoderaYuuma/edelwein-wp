@@ -123,8 +123,7 @@ if ($query_info->have_posts()) {
 
     <section class="banner">
         <a href="#large_bath" class="banner__link">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/hotel/budonoyuBannerBackground
-            .png" alt="ぶどうの湯バナー背景" class="banner__img">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/hotel/budonoyuBannerBackground.png" alt="ぶどうの湯バナー背景" class="banner__img">
             <span class="banner__txt">大浴場ぶどうの湯はこちら</span>
         </a>
     </section>
