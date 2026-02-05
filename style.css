@@ -5,12 +5,6 @@ Description: Edelwein_support のテーマファイルです
 Version: 1.0
 */
 
-/*
-Theme Name: Edelwein_support Theme
-Author: the edelwein_support WordPress team
-Description: Edelwein_support のテーマファイルです
-Version: 1.0
-*/
 @media screen and (max-width: 768px) {
  #top .purpose__contents {
     flex-direction: column;
