@@ -110,9 +110,7 @@
                                                 <?php
                                                 $categorys = get_the_category($prev_post->ID);
                                                 foreach ($categorys as $category) {
-                                                    echo '<br><a href="' . get_category_link($category->term_id) . '" class="nav_category_text">';
-                                                    echo esc_html($category->name);
-                                                    echo '</a>';
+                                                    echo '<br><p class="nav_category_text">'.esc_html($category->name).'</p>';
                                                 }
                                                 ?>
                                             </div>
@@ -172,9 +170,7 @@
                                                 <?php
                                                 $categorys = get_the_category($next_post->ID);
                                                 foreach ($categorys as $category) {
-                                                    echo '<br><a href="' . get_category_link($category->term_id) . '" class="nav_category_text">';
-                                                    echo esc_html($category->name);
-                                                    echo '</a>';
+                                                    echo '<br><p class="nav_category_text">'.esc_html($category->name).'</p>';
                                                 }
                                                 ?>
                                             </div>
