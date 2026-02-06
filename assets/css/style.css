@@ -3315,11 +3315,11 @@ body.page-template-page-contactpage {
   }
 }
 
-.info_bar--sp {
+#hotel .info_bar--sp {
   display: none;
 }
 
-.info_bar--pc {
+#hotel .info_bar--pc {
   display: flex;
   width: 100%;
   min-width: 0;
@@ -3359,27 +3359,27 @@ body.page-template-page-contactpage {
   align-self: center;
 }
 
-.info_bar__tel {
+#hotel .info_bar__tel {
   grid-template-rows: none;
   align-self: center;
 }
 
-.info_bar--pc address {
+#hotel .info_bar--pc address {
   font-style: normal;
 }
 
 @media screen and (max-width: 768px) {
-  .info_bar--pc {
+  #hotel .info_bar--pc {
     display: none;
   }
 
-  .info_bar--sp {
+  #hotel .info_bar--sp {
     display: block;
     row-gap: 10px;
     margin: 10px;
   }
 
-  .info_bar__item {
+  #hotel .info_bar__item {
     display: grid;
     grid-template-columns: auto 1fr;
     row-gap: 8px;
@@ -3390,12 +3390,12 @@ body.page-template-page-contactpage {
     margin-bottom: 10px;
   }
 
-  .info_bar__item-dt::after {
+  #hotel .info_bar__item-dt::after {
     content: "：";
     color: #868686;
   }
 
-  .info_bar--sp address {
+  #hotel .info_bar--sp address {
     font-family: "Sawarabi Mincho", serif;
     font-size: 18px;
     font-style: normal;
@@ -3471,38 +3471,38 @@ body.page-template-page-contactpage {
 }
 
 @media screen and (max-width: 768px) {
-  .news {
+  #hotel .news {
     margin: 20px;
     gap: 15px;
     display: block;
     text-align: center;
   }
 
-  .news__header {
+  #hotel .news__header {
     display: flex;
     margin: 10px;
     justify-content: space-between;
   }
 
-  .news__ttl {
+  #hotel .news__ttl {
     font-size: 24px;
     margin: 0;
   }
 
-  .news__move {
+  #hotel .news__move {
     font-size: 14px;
     padding: 4px 8px;
   }
 
-  .news__card {
+  #hotel .news__card {
     display: inline-block;
     box-sizing: border-box;
     min-width: 45%;
     text-align: left;
   }
 
-  .news__card h3,
-  .news__card p {
+  #hotel .news__card h3,
+  #hotel .news__card p {
     font-size: 14px;
     margin: 8px;
   }
@@ -3518,11 +3518,11 @@ body.page-template-page-contactpage {
   width: 70%;
 }
 
-.intro__lead--sp {
+#hotel .intro__lead--sp {
   display: none;
 }
 
-.intro__img {
+#hotel .intro__img {
   width: 100%;
 }
 
@@ -3570,36 +3570,36 @@ body.page-template-page-contactpage {
 }
 
 @media screen and (max-width: 768px) {
-  .intro {
+  #hotel .intro {
     display: flex;
     flex-direction: column;
     margin: 20px;
   }
 
-  .intro__left {
+  #hotel .intro__left {
     width: 100%;
     align-items: center;
     position: relative;
   }
 
-  .intro__img {
+  #hotel .intro__img {
     width: 100%;
     height: auto;
     display: block;
   }
 
-  .intro__p {
+  #hotel .intro__p {
     font-size: clamp(14px 2vw 20px);
     font-family: "Sawarabi Mincho", serif;
     margin-top: 20px;
     line-height: 140%;
   }
 
-  .intro__right {
+  #hotel .intro__right {
     display: none;
   }
 
-  .intro__lead--sp {
+  #hotel .intro__lead--sp {
     display: block;
     position: absolute;
     right: auto;
@@ -3619,13 +3619,13 @@ body.page-template-page-contactpage {
   min-height: 400px;
 }
 
-.menu-empty-message {
+#hotel .menu-empty-message {
   text-align: center;
   margin-bottom: 40px;
 }
 
-.wine-empty-message,
-.drink-empty-message {
+#hotel .wine-empty-message,
+#hotel .drink-empty-message {
   text-align: center;
 }
 
@@ -3764,28 +3764,28 @@ body.page-template-page-contactpage {
   border-radius: 10px 10px;
 }
 
-.room__detail--link::after {
+#hotel .room__detail--link::after {
   content: " ＞";
 }
 
 @media screen and (max-width: 768px) {
-  .menu__rooms {
+  #hotel .menu__rooms {
     margin: 20px auto;
     text-align: center;
   }
 
-  .room__ttl {
+  #hotel .room__ttl {
     width: 100%;
     display: inline-block;
     margin: 20px;
   }
 
-  .room__ttl-img {
+  #hotel .room__ttl-img {
     width: 50%;
     display: inline-block;
   }
 
-  .room__ttl-text {
+  #hotel .room__ttl-text {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -3793,19 +3793,19 @@ body.page-template-page-contactpage {
     transform: translate(-50%, -50%);
   }
 
-  .room__imgs {
+  #hotel .room__imgs {
     display: block;
     width: 100%;
     margin: 0 auto;
     text-align: center;
   }
 
-  .room__img1 {
+  #hotel .room__img1 {
     width: 90%;
     max-width: 90%;
   }
 
-  .room__img-small {
+  #hotel .room__img-small {
     display: block;
     width: 100%;
     max-width: none;
@@ -3814,8 +3814,8 @@ body.page-template-page-contactpage {
     text-align: center;
   }
 
-  .room__img2,
-  .room__img3 {
+  #hotel .room__img2,
+  #hotel .room__img3 {
     width: 90%;
     max-width: 90%;
     height: auto;
@@ -3824,11 +3824,11 @@ body.page-template-page-contactpage {
     margin-bottom: 10px;
   }
 
-  .room__info {
+  #hotel .room__info {
     font-size: 20px;
   }
 
-  .room__detail--link {
+  #hotel .room__detail--link {
     margin-bottom: 40px;
   }
 }
@@ -3879,23 +3879,23 @@ body.page-template-page-contactpage {
 }
 
 @media screen and (max-width: 768px) {
-  .menu__guide {
+  #hotel .menu__guide {
     font-size: 20px;
     gap: none;
   }
 
-  .guide__content {
+  #hotel .guide__content {
     display: block;
     gap: none;
   }
 
-  .guide__left,
-  .guide__right {
+  #hotel .guide__left,
+  #hotel .guide__right {
     max-width: 100%;
     margin: 0 20px;
   }
 
-  .guide__list ul {
+  #hotel .guide__list ul {
     margin-top: 15px;
   }
 }
@@ -3990,22 +3990,22 @@ body.page-template-page-contactpage {
 }
 
 @media screen and (max-width: 768px) {
-  .amenities__table {
+  #hotel .amenities__table {
     display: block;
     width: 90%;
     margin: 20px auto;
     border: none;
   }
 
-  .amenities__th,
-  .amenities__td {
+  #hotel .amenities__th,
+  #hotel .amenities__td {
     display: block;
     width: 100%;
     margin: 0 auto;
     font-size: 16px;
   }
 
-  .ul_grid {
+  #hotel .ul_grid {
     display: block;
     grid-auto-flow: none;
     grid-auto-rows: none;
@@ -4013,7 +4013,7 @@ body.page-template-page-contactpage {
     gap: none;
   }
 
-  .ul_grid li {
+  #hotel .ul_grid li {
     margin-bottom: 10px;
   }
 }
@@ -4072,7 +4072,7 @@ body.page-template-page-contactpage {
   gap: 3%;
 }
 
-.budonoyu__wrapper img {
+#hotel .budonoyu__wrapper img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -4084,43 +4084,43 @@ body.page-template-page-contactpage {
   grid-row: 1 / 3;
 }
 
-.budonoyu__info {
+#hotel .budonoyu__info {
   grid-column: 2 / 4;
   grid-row: 1 / 2;
   font-family: "Sawarabi Micho", serif;
   margin-left: 4%;
 }
 
-.info__ttl {
+#hotel .info__ttl {
   font-size: 32px;
 }
 
-.info__dl {
+#hotel .info__dl {
   margin-top: 10px;
   font-size: 24px;
 }
 
-.info__dtdd {
+#hotel .info__dtdd {
   display: flex;
 
 }
 
-.budonoyu__img2 {
+#hotel .budonoyu__img2 {
   grid-column: 2 / 3;
   grid-row: 2 / 3;
 }
 
-.budonoyu__img3 {
+#hotel .budonoyu__img3 {
   grid-column: 3 / 4;
   grid-row: 2 / 3;
 }
 
 @media screen and (max-width: 768px) {
-  .budonoyu__ttl {
+  #hotel .budonoyu__ttl {
     text-align: center;
   }
 
-  .budonoyu__ttl--text {
+  #hotel .budonoyu__ttl--text {
     position: none;
     top: 50%;
     left: 50%;
@@ -4128,7 +4128,7 @@ body.page-template-page-contactpage {
     font-size: 32px;
   }
 
-  .budonoyu__wrapper {
+  #hotel .budonoyu__wrapper {
     display: flex;
     flex-wrap: wrap;
     width: 90%;
@@ -4136,41 +4136,41 @@ body.page-template-page-contactpage {
     gap: 20px;
   }
 
-  .budonoyu__info {
+  #hotel .budonoyu__info {
     order: 1;
     width: 100%;
     margin: 0 auto;
     text-align: center;
   }
 
-  .info__ttl {
+  #hotel .info__ttl {
     text-align: center;
   }
 
-  .info__dl {
+  #hotel .info__dl {
     display: inline-block;
     text-align: left;
     margin: 10px auto;
   }
 
-  .info__dtdd {
+  #hotel .info__dtdd {
     display: flex;
     gap: 24px;
     align-items: center;
   }
 
-  .budonoyu__img1 {
+  #hotel .budonoyu__img1 {
     order: 2;
     width: 100%;
     flex: 0 0 100%;
   }
 
-  .budonoyu__img2 {
+  #hotel .budonoyu__img2 {
     order: 3;
     flex: 1;
   }
 
-  .budonoyu__img3 {
+  #hotel .budonoyu__img3 {
     order: 4;
     flex: 1;
   }
